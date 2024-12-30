@@ -1,0 +1,7 @@
+.header{
+    height: 100px;
+    font-size: 30px;
+    width: 100%;
+    background-color: green;
+    border: 2px solid white;
+}
