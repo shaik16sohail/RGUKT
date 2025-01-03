@@ -4,11 +4,18 @@
   font-family: "Open Sans", serif;
   box-sizing: border-box;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.overall-head{
+  width: 100%;
+  background-color: #75b9be;
+}
 .header{
   width: 100%;
   height: 5rem;
-  background-color: #75b9be;
-  border: 1px solid #75b9be;
+  /* background-color: #75b9be; */
+  /* border: 1px solid #75b9be; */
   color: white;
   border-end-end-radius: 6px;
   border-end-start-radius: 6px;
@@ -24,14 +31,17 @@
   align-items: center;
 }
 .header-logo{
-  margin-left: 5rem;
+  /* margin-left: 5rem; */
   display: flex;
   gap: 1rem;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
 }
 .header-links{
   display: flex;
   gap: 3.5rem;
-  margin-right: 5rem;
+  /* margin-right: 5rem; */
 }
 .header-links ul{
   display: flex;
@@ -51,19 +61,80 @@
   text-decoration: none;
   color: black;
 }
+.header-links a.active-link {
+  border-bottom-width: 4px ; /* Add an underline for active links */
+  border-bottom-style: solid;
+  border-bottom-left-radius:2px ;
+  border-bottom-right-radius: 2px;
+  border-bottom-color: black;
+  padding-bottom: 7px;
+  /* color: #007bff;  */
+}
 .homepage{
   min-height: 100vh;
 }
 .footer{
   width: 100%;
-  height:7rem;
-  border: 1px solid #B3D6C6;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  background-color: #B3D6C6;
+  /* height:15rem; */
+  border: 1px solid #171e27;
+  /* border-top-left-radius: 7px; */
+  /* border-top-right-radius: 7px; */
+  background-color: #4d4f52;
+}
+.footer {
+  /* background-color: #333; Dark background */
+  color: #e6dcdc; /* White text */
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.footer-content p{
+  font-size: 14px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.footer-links li {
+  display: inline;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #ece0e0;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #007bff; /* Change to blue on hover */
+}
+/* responsiveness */
+@media only screen and (max-width: 1120px) {
+  .first{
+    display: none;
+  }
+  .header-logo img{
+    display:none;
+  }
+}
+@media only screen and (min-width: 1120px) {
+  .header .bars{
+    display: none;
+  }
+  
 }
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+
