@@ -39,16 +39,18 @@ function Header () {
         {/* <div className='m'> */}
         <div className='header-logo'>
         <div className="bars" onClick={toggleDiv}>
-            <i className="fa-solid fa-bars" style={{ cursor: "pointer" }}></i>
+        {/* <i class="fa-regular fa-user"></i> */}
+            <i className="fa-solid fa-bars text-white" style={{ cursor: "pointer" }}></i>
           </div>
-          <img
+          <a href='#'><img
             src='/rguktLogo.png'
             style={{
               width: '60px',
               height: '60px'
             }}
-          ></img>
-          <h1>FREEGO</h1>
+          ></img></a>
+          
+          <h1 style={{color:"rgb(137, 24, 26)"}}>Stay Master</h1>
         </div>
         {/* New Div */}
       {isDivVisible && (
@@ -139,9 +141,9 @@ function Header () {
           </div>
           <div className='profile' onClick={handleDivClick}>
             <img
-              src='/profile-user.png'
+              src='/virat kohli.jpg'
               alt='Profile Icon'
-              style={{ height: '1.8rem', cursor: 'pointer' }}
+              style={{ height: '1.8rem', cursor: 'pointer',height:'36px',width:'36px',borderRadius:'50%' }}
             />
           </div>
           {isBoxVisible && (
@@ -149,21 +151,34 @@ function Header () {
               ref={popupRef} // Attach the reference to the popup
               style={{
                 position: 'fixed',
-                top: '70px',
-                right: '20px',
-                padding: '10px',
-                borderRadius: '15px',
-                width: '150px',
-                backgroundColor: '#E0E0E0',
+                top: '80px',
+                right: '30px',
+                padding: '2rem',
+                borderRadius: '20px',
+                color:"white",
+                width: '12.5rem',
+                height:"17rem",
+                backgroundColor: '#3B3B3B',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                textAlign:"center",
                 zIndex: 1000 // Ensures the dialog is above other elements
               }}
             >
-              <p style={{ fontSize: '15px' }}>user@example.com</p>
+               <img
+              src='/virat kohli.jpg'
+              alt='Profile Icon'
+              style={{ height: '1.8rem', cursor: 'pointer',height:'72px',width:'72px',borderRadius:'50%',marginLeft:"2rem",marginBottom:'1rem' }}
+            />
+            
+
+              <h1 style={{fontSize:"1.8rem"}}> Hi Shaik !</h1>
+              <p style={{ fontSize: '15px' }}>rr200088@rguktrkv.ac.in</p>
+              <br></br>
+              <p>Profile Details</p>
               <button
                 onClick={() => setIsBoxVisible(false)}
                 style={{
-                  backgroundColor: '#FF4D4D',
+                  backgroundColor: 'rgb(137, 24, 26)',
                   color: 'white',
                   border: 'none',
                   padding: '5px 10px',

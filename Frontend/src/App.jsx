@@ -4,6 +4,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
+import LoginForm from './components/forms/LoginForm';
 // import Header from './components/Header/Header'
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,8 @@ function App() {
       <Header/>
         <Routes>
           <Route path='/' element={<HomePage/>}></Route>
+          <Route path='/login' element={<LoginForm/>}></Route>
+
         </Routes>
         <Footer/>
       </BrowserRouter>
