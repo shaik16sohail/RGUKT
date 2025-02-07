@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import '../index.css'
+import { Link } from 'react-router-dom';
 
-function Header () {
+function Header ({ toggleTheme, darkMode }) {
   const [activeLink, setActiveLink] = useState('') // Track the active link
   const handleLinkClick = link => {
     setActiveLink(link) // Set the clicked link as active
@@ -48,6 +49,7 @@ function Header () {
               width: '60px',
               height: '60px'
             }}
+            className="rotating-image"
           ></img></a>
           
           <h1 style={{color:"rgb(137, 24, 26)"}}>Stay Master</h1>
@@ -139,6 +141,7 @@ function Header () {
             </li>
           </ul>
           </div>
+          
           <div className='profile' onClick={handleDivClick}>
             <img
               src='/virat kohli.jpg'
@@ -175,20 +178,23 @@ function Header () {
               <p style={{ fontSize: '15px' }}>rr200088@rguktrkv.ac.in</p>
               <br></br>
               <p>Profile Details</p>
-              <button
-                onClick={() => setIsBoxVisible(false)}
-                style={{
-                  backgroundColor: 'rgb(137, 24, 26)',
-                  color: 'white',
-                  border: 'none',
-                  padding: '5px 10px',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  width: '100%'
-                }}
-              >
-                Logout
-              </button>
+              <Link to="/" >
+                  <button
+                    onClick={() => setIsBoxVisible(false)}
+                    style={{
+                      backgroundColor: 'rgb(137, 24, 26)',
+                      color: 'white',
+                      border: 'none',
+                      padding: '5px 10px',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                      width: '100%'
+                    }}
+                  >
+                    Logout
+                  </button>
+              </Link>
+             
             </div>
           )}
         </div>

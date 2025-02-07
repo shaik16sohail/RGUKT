@@ -73,7 +73,7 @@
   color: #fff;
 }
 
-.header-links a.active-link  {
+/* .header-links a.active-link  { */
   /* border-bottom-width: 4px ;  */
   /* border-bottom-style: solid;
   border-bottom-left-radius:2px ;
@@ -81,7 +81,7 @@
   border-bottom-color: white;
   padding-bottom: 7px; */
   /* opacity: 1; */
-}
+/* } */
 
 .header-links a:hover{
   background-color: white;
@@ -164,6 +164,25 @@
   
 
 }
+@keyframes vertical-rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  80% {
+    transform: rotateY(360deg); /* Complete rotation at 80% of the time */
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.rotating-image {
+  animation-delay:3s;
+  animation: vertical-rotate 4s linear  infinite ; /* 2s is the duration, linear for smooth rotation, infinite for continuous rotation */
+  width: 60px; /* Set the desired width */
+  height: 60px; /* Set the desired height */
+}
+
 /* responsiveness */
 @media only screen and (max-width: 1120px) {
   .first{
