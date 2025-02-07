@@ -198,6 +198,10 @@
     font-size: 0.9rem;
     color: gray;
   }
+  .announcements{
+    width: 100%;
+    height: 1.7rem;
+  }
   .image-container{
     position: relative;
     width: 100%;
@@ -325,7 +329,7 @@
     flex-direction: column;
     gap: 0px;
     justify-content: center;
-    width: 70%;
+    width: 79%;
     align-items: center;
     align-content: center;
     /* height: 200px;
@@ -376,7 +380,7 @@ th {
     border-bottom: 1px solid white;
 }
 tr{
-  border: 2px solid white;
+  border: 1px solid white;
 }
 td {
     text-align: center;

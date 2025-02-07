@@ -10,7 +10,7 @@ export default function Section(){
   
     const sections = [
         {
-          title: "Men's Hostel",
+          title: "Boys Hostel-I",
           details: [
             {
               role: "Director, Men's Hostel",
@@ -27,7 +27,7 @@ export default function Section(){
           ],
         },
         {
-            title: "Men's Hostel",
+            title: "Boys Hostel-II",
             details: [
               {
                 role: "Director, Men's Hostel",
@@ -44,7 +44,7 @@ export default function Section(){
             ],
           },
           {
-            title: "Men's Hostel",
+            title: "Girls Hostel-I",
             details: [
               {
                 role: "Director, Men's Hostel",
@@ -61,7 +61,7 @@ export default function Section(){
             ],
           },
         {
-          title: "Ladies Hostel",
+          title: "Girls Hostel-II",
           details: [
             {
               role: "Director, Ladies Hostel",

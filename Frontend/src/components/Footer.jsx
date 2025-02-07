@@ -3,13 +3,18 @@ import '../index.css';
 
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        <p>© {new Date().getFullYear()} Freego. All Rights Reserved.</p>
-        <ul className="footer-links">
-          <li>
-            <a href="#about-us">About Us</a>
-          </li>
+    <div className='footer-overall'>
+      <div className='footer-icons'>
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-x-twitter"></i>
+      <i class="fa-brands fa-linkedin"></i>
+      <i class="fa-brands fa-youtube"></i>
+      <i class="fa-brands fa-discord"></i>
+      </div>
+      
+      
+      <div className="footer-center footer-content">
+      <ul className="footer-links">
           <li>
             <a href="#privacy-policy">Privacy Policy</a>
           </li>
@@ -20,8 +25,12 @@ function Footer() {
             <a href="#contact">Contact</a>
           </li>
         </ul>
+        <p>© {new Date().getFullYear()} Stay Master. All Rights Reserved.</p>
+        
       </div>
-    </footer>
+    
+    </div>
+    
   );
 }
 

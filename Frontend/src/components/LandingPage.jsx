@@ -3,6 +3,8 @@ import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Gallery from './LandingPage/Gallery';
 import Section from './LandingPage/Section';
+import ScrollingAnnouncements from './LandingPage/ScrollingAnnouncements';
+import DataAnalytics from './LandingPage/DataAnalytics';
 
 const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,7 +30,7 @@ const LandingPage = () => {
 
   
 </header>
-
+   <ScrollingAnnouncements/>
     <div className='image-container'>
         <img style={{width:"100%",opacity:"0.3"}} src='/two.png'></img>
         {/* <div class="image-text"> */}
@@ -61,7 +63,7 @@ const LandingPage = () => {
       
 
       {/* Analytics Section */}
-      <div className="analytics">
+      {/* <div className="analytics">
         <div className="card">
           <h2>📅 Weekly Outpasses</h2>
           <p>120</p>
@@ -74,8 +76,10 @@ const LandingPage = () => {
           <h2>📊 Yearly Outpasses</h2>
           <p>5400</p>
         </div>
-      </div>
-
+      </div> */}
+       <div className="flex justify-center items-center min-h-screen ">
+      <DataAnalytics/>
+    </div>
       {/* Footer */}
       
     </div>
@@ -84,13 +88,15 @@ const LandingPage = () => {
     </br>
     
     <br></br>
-    <h1>Men's and ladies hostel administration</h1>
+    <h1 style={{fontWeight:"500",fontSize:"1.7rem",textAlign:"center"}}>Boys and Girls Hostel Contact Numbers</h1>
     <br></br>
     <div className='landingpage-contacts'>
       
       <Section/>
+      
     </div>
-    
+    <br></br>
+      <br></br>
 
     </>
 
