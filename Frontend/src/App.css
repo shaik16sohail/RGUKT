@@ -35,6 +35,7 @@
   /* Hero Section */
   .hero {
     margin-top: 50px;
+    
   }
   
   @media only screen and (min-width: 700px) {
@@ -202,6 +203,9 @@
     width: 100%;
     height: 1.7rem;
   }
+  .scroll-announce{
+    color: #8c181c;
+  }
   .image-container{
     position: relative;
     width: 100%;
@@ -288,9 +292,58 @@
     font-weight: bold;
     transition: 0.3s;
   }
-  
+  .landing-features{
+    padding: 5rem 2.5rem;
+    background-color: rgb(17, 16, 16);
+    /* color:orange; */
+  }
+  .landing-features h2{
+    font-size: 1.5rem;
+    font-weight: 650;
+
+  }
+  .feature{
+    padding: 2.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    /* gap: 2rem; */
+
+  }
+  .feature-text{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .feature-text h4{
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+
+  }
+  .feature-lists{
+    margin-top: 2rem;
+  }
+  .feature-lists li{
+    font-size: 18px;
+  }
+  .feature-someheading p{
+    font-size: 19px;
+    text-align: justify;
+    
+  }
+  .feature-img{
+    width: 45%;
+  }
+  .feature-img img{
+    
+    /* margin: 1rem; */
+    border-radius: 10px;
+    
+  }
   .nav-links a:hover {
-    color: #ffcc00;
+    color: #8c181c;
+    border-bottom: 3px solid #8c181c;
   }
   
   /* Mobile Menu Button */
@@ -384,4 +437,17 @@ tr{
 }
 td {
     text-align: center;
+}
+.landing-steps{
+  margin: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+
+}
+.landing-sub{
+  width: 50%;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: rgb(17, 16, 16);
+  border-radius: 0.8rem;
 }

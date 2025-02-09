@@ -8,7 +8,7 @@ export default function ScrollingAnnouncements(){
       ]);
     return(
         <>
-        <div style={{backgroundColor:"black"}} className="w-full overflow-hidden  text-white font-semibold p-2">
+        <div style={{backgroundColor:"black"}} className="w-full  scroll-announce overflow-hidden   font-semibold p-2">
       <div className="flex space-x-10 animate-scroll">
         {announcements.map((announcement, index) => (
           <span key={index} className="whitespace-nowrap">

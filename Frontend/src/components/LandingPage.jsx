@@ -5,32 +5,39 @@ import Gallery from './LandingPage/Gallery';
 import Section from './LandingPage/Section';
 import ScrollingAnnouncements from './LandingPage/ScrollingAnnouncements';
 import DataAnalytics from './LandingPage/DataAnalytics';
+import Features from './LandingPage/Features';
+import Carousel from './LandingPage/Carousel';
 
 const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>
-    <header class="landing-header">
-      <div className='header-img-left'>
+    {/* <header class="landing-header"> */}
+      {/* <div className='header-img-left'>
         <img src="/rguktLogo.png" alt="Logo"></img>
         <div className='left-text'>Stay Master</div>
-      </div>
-       {/* Mobile Menu Icon */}
-       <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+      </div> */}
+       
+       {/* <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
         ☰
-      </div>
+      </div> */}
 
       {/* Right Section (Nav Links) */}
-      <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+      {/* <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
         <a href="#">Home</a>
         <a href="#">Features</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
-      </nav>
+      </nav> */}
 
   
-</header>
+{/* </header> */}
+
+
    <ScrollingAnnouncements/>
+   {/* <div className="flex justify-center items-center min-h-screen bg-gray-100"> */}
+        <Carousel/>
+    {/* </div> */}
     <div className='image-container'>
         <img style={{width:"100%",opacity:"0.3"}} src='/two.png'></img>
         {/* <div class="image-text"> */}
@@ -79,10 +86,36 @@ const LandingPage = () => {
       </div> */}
        <div className="flex justify-center items-center min-h-screen ">
       <DataAnalytics/>
+      <DataAnalytics/>
     </div>
-      {/* Footer */}
+    
+      
       
     </div>
+    <Features/>
+    <div style={{height:"500px",display:"flex"}} className='landing-steps'>
+        {/* <div style={{width:"50%",backgroundColor:"#8b1b1b"}}></div> */}
+        <div  className='landing-sub'>
+          <h1>How And When To Apply?</h1>
+          <ul>
+            <li>Application for admission to the hostel for the first year and renewal for subsequent years should be made online through https://sp.srmist.edu.in only.</li>
+            <li>Application for admission to the hostel for the first year and renewal for subsequent years should be made online through https://sp.srmist.edu.in only.</li>
+            <li>Application for admission to the hostel for the first year and renewal for subsequent years should be made online through https://sp.srmist.edu.in only.</li>
+          </ul>
+        </div>
+        <div  className='landing-sub'>
+        <h1>How And When To Apply?</h1>
+          <ul>
+            <li>Application for admission to the hostel for the first year and renewal for subsequent years should be made online through https://sp.srmist.edu.in only.</li>
+            <li>Application for admission to the hostel for the first year and renewal for subsequent years should be made online through https://sp.srmist.edu.in only.</li>
+            <li>Application for admission to the hostel for the first year and renewal for subsequent years should be made online through https://sp.srmist.edu.in only.</li>
+          </ul>
+        </div>
+    </div>
+    {/* <br></br>
+    <br></br> */}
+    
+    <br></br>
     <Gallery/>
     <br>
     </br>

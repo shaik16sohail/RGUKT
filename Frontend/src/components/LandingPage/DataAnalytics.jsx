@@ -11,7 +11,7 @@ const DataAnalytics = () => {
       {
         label: "Boys",
         data: [1200, 1900, 3000, 5000, 2400],
-        backgroundColor: "white",
+        backgroundColor: "#8b181b",
         borderColor: "#8b181b",
         borderWidth: 1,
       },
@@ -20,6 +20,8 @@ const DataAnalytics = () => {
         data: [1500, 2500, 2800, 4800, 3000],
         backgroundColor: "rgba(255, 99, 132, 0.6)",
         borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "#8b181b",
+        borderColor: "#8b181b",
         borderWidth: 1,
       },
     ],
