@@ -171,13 +171,66 @@
 .footer-links a:hover {
   color: #007bff; /* Change to blue on hover */
 }
-.login-form{
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
 
+.login-page{
+  color: whitesmoke;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* backgrear-gradient(to right, #434343, #000000); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: black;
+  background: hsla(351, 100%, 25%, 1);
+
+background: linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+
+background: -moz-linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+
+background: -webkit-linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F0012", endColorstr="#1B0A07", GradientType=1 );
 }
+.login-main{
+  background-color:#1b1b1b93 ;
+
+  min-height:500px ;
+  box-sizing: border-box;
+  width:550px;
+  border-radius: 15px;
+}
+.signup-main{
+  background-color:#1b1b1b93 ;
+
+  min-height:500px ;
+  box-sizing: border-box;
+  width:550px;
+  border-radius: 15px;
+  margin: 100px;
+}
+.login-heading{
+  padding: 30px 30px;
+  padding-bottom:10px ;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  /* justify-content: space-around; */
+}
+.form-label{
+  padding: 30px;
+  /* color: black; */
+}
+.form-label input{
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: black;
+}
+.form-buttons {
+  /* color: #8b181b; */
+  display: flex;
+  justify-content: space-between;
+}
+
 @keyframes vertical-rotate {
   0% {
     transform: rotateY(0deg);

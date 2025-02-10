@@ -36,7 +36,7 @@ const LandingPage = () => {
 
    <ScrollingAnnouncements/>
    {/* <div className="flex justify-center items-center min-h-screen bg-gray-100"> */}
-        <Carousel/>
+        
     {/* </div> */}
     <div className='image-container'>
         <img style={{width:"100%",opacity:"0.3"}} src='/two.png'></img>
