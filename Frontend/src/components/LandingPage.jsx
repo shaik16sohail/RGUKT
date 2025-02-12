@@ -62,7 +62,7 @@ const LandingPage = () => {
         <br></br>
         
         <p style={{fontSize:"20px"}}>Making Hostel Management and Outpass Approvals Effortless</p>
-        <Link to="/home" className="cta-button">Get Started</Link>
+        <Link to="/login" className="cta-button">Get Started</Link>
       </div>
      
       <br></br>
