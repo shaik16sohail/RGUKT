@@ -28,18 +28,28 @@ const ChartComponent = () => {
     ],
   };
 
+  // Chart Options for Scaling
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false, // Allows manual size control
+  };
+
   return (
-    <div className="flex flex-wrap justify-center  p-6">
+    <div className="flex flex-wrap justify-around items-center p-6">
       {/* Pie Chart */}
-      <div className=" p-4 rounded-lg shadow-md  sm:w-1/2">
+      <div className=" p-6 rounded-lg shadow-md w-full sm:w-1/3 h-80 w-40">
         <h2 className="text-xl font-semibold text-center mb-4">Outpasses Distribution</h2>
-        <Pie data={pieData} />
+        <div className="h-80"> {/* Adjust chart height */}
+          <Pie data={pieData} options={chartOptions} />
+        </div>
       </div>
 
       {/* Bar Graph */}
-      <div className=" p-4 rounded-lg shadow-md w-full sm:w-1/2">
+      <div className=" p-6 rounded-lg shadow-md w-full sm:w-1/3 h-80 w-40">
         <h2 className="text-xl font-semibold text-center mb-4">Outpasses Summary</h2>
-        <Bar data={barData} />
+        <div className="h-80"> {/* Adjust chart height */}
+          <Bar data={barData} options={chartOptions} />
+        </div>
       </div>
     </div>
   );

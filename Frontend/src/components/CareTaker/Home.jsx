@@ -74,9 +74,14 @@ export default function Home(){
                     </div>
 
                 </div>
-                <div className='home-stats'>
+                {/* <div className='home-stats'> */}
                     <ChartComponent/>
-                </div>
+                {/* </div> */}
+
+                <br>
+                </br>
+                <br></br>
+                <br></br>
             </div>
         </>
       );
