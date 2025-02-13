@@ -54,3 +54,15 @@
         /* cursor: pointer; */
     }
   }
+  /* outpasses */
+  .outpasses{
+    padding: 3rem 4rem;
+    background-color: #111010;
+  }
+  .outpasses-table{
+    /* padding-top: 2rem; */
+  }
+  .outpasses-table-body{
+    /* background-color: #111010; */
+    background-color: #3d3d3d73;
+  }

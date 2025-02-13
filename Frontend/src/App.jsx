@@ -8,6 +8,7 @@ import LoginForm from './components/forms/LoginForm';
 import LandingPage from './components/LandingPage';
 import SignupForm from './components/forms/SignupForm';
 import Home from './components/CareTaker/Home';
+import Outpasses from './components/CareTaker/Outpasses';
 // import Header from './components/Header/Header'
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
           <Route path='/login' element={<><LoginForm/><Footer/></>}></Route>
           <Route path='/signup' element={<><SignupForm/><Footer></Footer></>}></Route>
           <Route path='/caretaker/home' element={<><Home/><Footer></Footer></>}></Route>
+          <Route path='/caretaker/outpasses' element={<><Outpasses/></>}></Route>
         </Routes>
         
       </BrowserRouter>
