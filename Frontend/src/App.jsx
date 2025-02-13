@@ -9,6 +9,8 @@ import LandingPage from './components/LandingPage';
 import SignupForm from './components/forms/SignupForm';
 import Home from './components/CareTaker/Home';
 import Outpasses from './components/CareTaker/Outpasses';
+import OutpassDetails from './components/CareTaker/OutpassDetails';
+import Issues from './components/CareTaker/Issues';
 // import Header from './components/Header/Header'
 function App() {
   const [count, setCount] = useState(0)
@@ -23,10 +25,12 @@ function App() {
         
           <Route path='/home' element={<><Header/><HomePage/><Footer/></>}></Route>
           
-          <Route path='/login' element={<><LoginForm/><Footer/></>}></Route>
-          <Route path='/signup' element={<><SignupForm/><Footer></Footer></>}></Route>
-          <Route path='/caretaker/home' element={<><Home/><Footer></Footer></>}></Route>
-          <Route path='/caretaker/outpasses' element={<><Outpasses/></>}></Route>
+          <Route path='/login' element={<><Header></Header><LoginForm/><Footer/></>}></Route>
+          <Route path='/signup' element={<><Header></Header><SignupForm/><Footer></Footer></>}></Route>
+          <Route path='/caretaker/home' element={<><Header></Header><Home/><Footer></Footer></>}></Route>
+          <Route path='/caretaker/outpasses' element={<><Header></Header><Outpasses/><Footer></Footer></>}></Route>
+          <Route path='/caretaker/outpasses/:id' element={<><Header></Header><OutpassDetails/><Footer></Footer></>}></Route>
+          <Route path='/caretaker/issues/' element={<><Header></Header><Issues/> <Footer></Footer></>}></Route>
         </Routes>
         
       </BrowserRouter>

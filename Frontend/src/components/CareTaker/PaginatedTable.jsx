@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import '../../style/caretaker.css';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import navigate hook
+
+
 const outpassesData = [
   { id: "R200088", name: "John Doe", type: "Regular", status: "Pending", date: "2024-02-12" },
   { id: "R200088", name: "Jane Smith", type: "Emergency", status: "Approved", date: "2024-02-11" },
@@ -13,15 +17,44 @@ const outpassesData = [
   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
   { id: "R200088", name: "Mia Moore", type: "Emergency", status: "Approved", date: "2024-02-01" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
+  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
+  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
+  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
+  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
 ];
 
-const PaginatedTableWithFilters = () => {
+const PaginatedTable = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [filterType, setFilterType] = useState(""); // Emergency / Regular
   const [filterStatus, setFilterStatus] = useState(""); // Pending / Approved / Rejected
   const [filterDate, setFilterDate] = useState(""); // Date filter
   const [sortOrder, setSortOrder] = useState("newest"); // Sort by date
-  const itemsPerPage = 10;
+  const [itemsPerPage,setItemsPerPage]=useState(10);
 
   // Temporary filter states (not applied instantly)
   const [selectedType, setSelectedType] = useState("");
@@ -105,6 +138,15 @@ const PaginatedTableWithFilters = () => {
         </select>
         <button className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" style={{backgroundColor:"#8b181b"}}
            onClick={buttonClick}>Search</button>
+           <select
+          className="p-2 border bg-black rounded-md"
+          value={itemsPerPage}
+          onChange={(e) => setItemsPerPage(e.target.value)}
+        >
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
       </div>
       
 
@@ -112,7 +154,8 @@ const PaginatedTableWithFilters = () => {
       <div className="overflow-x-auto">
         <table className="min-w-full bg-black border border-white-200 shadow-md rounded-lg">
           <thead>
-            <tr className="bg-gray-100 outpasses-table-head text-gray-600 uppercase text-sm leading-normal">
+            <tr className=" outpasses-table-head text-gray-600 uppercase text-sm leading-normal">
+            <th className="py-3 px-6 text-center">SNO</th>
               <th className="py-3 px-6 text-center">ID</th>
               <th className="py-3 px-6 text-center">Student Name</th>
               <th className="py-3 px-6 text-center">Type</th>
@@ -120,9 +163,13 @@ const PaginatedTableWithFilters = () => {
               <th className="py-3 px-6 text-center">Date</th>
             </tr>
           </thead>
+          <Link></Link>
           <tbody className=" outpasses-table-body text-white text-m font-light">
-            {currentItems.map((outpass) => (
-              <tr key={outpass.id} className="border-b border-gray-200 hover:bg-gray-50">
+            {currentItems.map((outpass,index) => (
+                
+              <tr key={outpass.id} className=" outpasses-body-tr border-b border-gray-200 "   onClick={() => navigate(`${index}`, { state: outpass })} >
+                
+                <td className="py-3 px-6 text-center">{indexOfFirstItem+index+1}</td>
                 <td className="py-3 px-6 text-center">{outpass.id}</td>
                 <td className="py-3 px-6 text-center">{outpass.name}</td>
                 <td className="py-3 px-6 text-center">{outpass.type}</td>
@@ -160,4 +207,4 @@ const PaginatedTableWithFilters = () => {
   );
 };
 
-export default PaginatedTableWithFilters;
+export default PaginatedTable;

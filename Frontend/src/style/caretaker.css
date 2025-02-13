@@ -59,10 +59,119 @@
     padding: 3rem 4rem;
     background-color: #111010;
   }
-  .outpasses-table{
-    /* padding-top: 2rem; */
-  }
+  
   .outpasses-table-body{
     /* background-color: #111010; */
     background-color: #3d3d3d73;
   }
+  .outpasses-body-tr:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* outpass details page */
+
+  .outpass-details{
+    padding: 3rem 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .outpass-detailsIn{
+    background-color: rgb(20, 19, 19);
+    border-radius: 25px;
+    width: 60%;
+    padding: 3rem 5rem;
+    min-height: 500px;
+  }
+  .outpass-detailsIn h1{
+    color: #8b181b;    
+  }
+  .outpass-detailsIn:hover{
+    border: 2px solid white;
+  }
+  .outpass-reason{
+    margin: 1rem 0.3rem;
+    border: 1px solid wheat;
+    padding: 1rem;
+    text-align: justify;
+    border-radius:10px ;
+  }
+  .outpass-reason:hover{
+    border: 1px solid black;
+  }
+  .outpass-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .outpass-call{
+    padding: 0.9rem 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .outpass-call button{
+    background-color: black;
+    padding: 9px 8px;
+    border: 1px solid white;
+    border-radius: 9px;
+  }
+  .outpass-final{
+    padding: 0.9rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  /* .outpass-final button{
+
+  } */
+  @media only screen and (max-width: 1100px) {
+    .outpass-details{
+        padding: 3rem 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .outpass-detailsIn{
+        background-color: rgb(20, 19, 19);
+        border-radius: 25px;
+        width: 75%;
+        padding: 3rem 5rem;
+        
+      }
+  }
+  @media only screen and (max-width: 900px) {
+    .outpass-call{
+        padding: 0.9rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        /* justify-content: space-evenly; */
+      }
+      .outpass-call button{
+        background-color: black;
+        padding: 9px 8px;
+        border: 1px solid white;
+        border-radius: 9px;
+      }
+      .outpass-final{
+        padding: 0.9rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 20px
+      }
+  }
+  @media only screen and (max-width: 800px) {
+    .outpass-detailsIn{
+        background-color: rgb(20, 19, 19);
+        border-radius: 25px;
+        width: 90%;
+        padding: 3rem 2rem;
+        min-height: 500px;
+      }
+  }
+  
+  
+  
