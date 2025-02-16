@@ -7,6 +7,7 @@ function Header ({ toggleTheme, darkMode }) {
   const handleLinkClick = link => {
     setActiveLink(link) // Set the clicked link as active
   }
+  const [typeUser,setTypeUser]=useState(true);
   const [isBoxVisible, setIsBoxVisible] = useState(false)
   const popupRef = useRef(null)
   const handleDivClick = event => {
@@ -68,40 +69,76 @@ function Header ({ toggleTheme, darkMode }) {
             backgroundColor: "white", // Black background
             zIndex: 2000, // Higher than other elements
           }}
-        >
+        >{typeUser==false?
           <ul>
-            <li>
-              <a
-                href='#'
-                onClick={() => handleLinkClick('home')}
-                className={activeLink === 'home' ? 'active-link' : ''}
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href='#'
-                onClick={() => handleLinkClick('request-outpass')}
-                className={
-                  activeLink === 'request-outpass' ? 'active-link' : ''
-                }
-              >
-                Request a Outpass
-              </a>
-            </li>
-            <li>
-              <a
-                href='#'
-                onClick={() => handleLinkClick('raise-complaint')}
-                className={
-                  activeLink === 'raise-complaint' ? 'active-link' : ''
-                }
-              >
-                Raise a Complaint
-              </a>
-            </li>
-          </ul>
+          <li>
+            <a
+              href='#'
+              onClick={() => handleLinkClick('home')}
+              className={activeLink === 'home' ? 'active-link' : ''}
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href='#'
+              onClick={() => handleLinkClick('request-outpass')}
+              className={
+                activeLink === 'request-outpass' ? 'active-link' : ''
+              }
+            >
+              Outpasses
+            </a>
+          </li>
+          <li>
+            <a
+              href='#'
+              onClick={() => handleLinkClick('raise-complaint')}
+              className={
+                activeLink === 'raise-complaint' ? 'active-link' : ''
+              }
+            >
+              Issues
+            </a>
+          </li>
+        </ul>
+        
+        :
+        <ul>
+        <li>
+          <a
+            href='#'
+            onClick={() => handleLinkClick('home')}
+            className={activeLink === 'home' ? 'active-link' : ''}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            href='#'
+            onClick={() => handleLinkClick('request-outpass')}
+            className={
+              activeLink === 'request-outpass' ? 'active-link' : ''
+            }
+          >
+            Request a Outpass
+          </a>
+        </li>
+        <li>
+          <a
+            href='#'
+            onClick={() => handleLinkClick('raise-complaint')}
+            className={
+              activeLink === 'raise-complaint' ? 'active-link' : ''
+            }
+          >
+            Raise a Complaint
+          </a>
+        </li>
+      </ul>}
+         
         </div>
       )}
 

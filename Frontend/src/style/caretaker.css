@@ -173,5 +173,26 @@
       }
   }
   
-  
+
+  .issues-leftbar{
+    width: 36%;
+  }
+  .issue-card{
+    background-color: #111010;
+    /* border: 2px solid none;
+     */
+     border-radius: 18px;
+     padding-bottom: 50px;
+
+  }
+  .issue-card:hover{
+    border: 2px solid white;
+
+  }
+  .issue-main{
+    background-color: black;
+    padding:24px 0 ;
+    /* flex-direction: column; */
+
+  }
   
