@@ -175,7 +175,12 @@
   
 
   .issues-leftbar{
-    width: 36%;
+    width: 42%;
+  }
+  @media only screen and (max-width: 900px) {
+    .issues-leftbar{
+      width: 70%;
+    }
   }
   .issue-card{
     background-color: #111010;
@@ -192,7 +197,51 @@
   .issue-main{
     background-color: black;
     padding:24px 0 ;
+    min-height: 100vh;
     /* flex-direction: column; */
 
   }
-  
+  .filters-btn{
+    background-color: #8b181b;
+  }
+  .text-area{
+    display: flex;
+    justify-content: center;
+    margin:17px 0px ;
+    color: black;
+
+  }
+  .text-area textarea{
+    width: 70%;
+    height: 100px;
+    padding: 0.5rem;
+  }
+  .leftbar-btns{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    /* width: 39%; */
+    justify-content: space-between;
+    margin-bottom: 14px;
+    
+  }
+  /* .issues-leftbar {
+    overflow: scroll;
+    scrollbar-color: black;
+    scrollbar-width: thin;
+  } */
+  .issues-leftbar::-webkit-scrollbar {
+    width: 10px;
+    /* color: white; */
+    border-radius: 10px;
+  }
+  /* .issues-leftbar::-webkit-scrollbar-track {
+    background-color: #111010;
+    outline: 1px solid #111010;
+  } */
+  .issues-leftbar::-webkit-scrollbar-thumb {
+    background-color: whitesmoke;
+    border-radius: 15px;
+  }
+
+   
