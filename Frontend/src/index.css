@@ -274,6 +274,10 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F0012", en
   }
   
 }
+.nope{
+  min-height: 100vh;
+  padding: 3rem;
+}
 
 
 

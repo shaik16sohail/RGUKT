@@ -12,6 +12,10 @@ import Outpasses from './components/CareTaker/Outpasses';
 import OutpassDetails from './components/CareTaker/OutpassDetails';
 import Issues from './components/CareTaker/Issues';
 import StudentHome from './components/Student/Home';
+import RequestOutpass from './components/Student/RequestOutpass';
+import Nope from './components/Nope';
+import GeneralOutpass from './components/Student/GeneralOutpass';
+import EmergencyOutpass from './components/Student/EmergencyOutpass';
 // import Header from './components/Header/Header'
 function App() {
   const [count, setCount] = useState(0)
@@ -34,6 +38,10 @@ function App() {
           <Route path='/caretaker/issues/' element={<><Header></Header><Issues/> <Footer></Footer></>}></Route>
 
           <Route path='/student/home' element={<><Header></Header><StudentHome></StudentHome><Footer></Footer></>}></Route>
+          <Route path='/student/request' element={<><Header></Header><RequestOutpass></RequestOutpass><Footer></Footer></>}></Route>
+          <Route path='/student/general-outpass' element={<><Header></Header><GeneralOutpass></GeneralOutpass><Footer></Footer></>}></Route>
+          <Route path='/student/emergency-outpass' element={<><Header></Header><EmergencyOutpass></EmergencyOutpass><Footer></Footer></>}></Route>
+          <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>
         </Routes>
         
       </BrowserRouter>
