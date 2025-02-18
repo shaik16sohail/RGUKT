@@ -1,3 +1,23 @@
 .student-home{
-    height: 100vh;
+    min-height: 100vh;
+    padding: 2rem 3rem;
+}
+.home-h1{
+    color:white;
+}
+.table-heading{
+    height: 40px;
+}
+.table-body{
+    background-color: #111010;
+}
+tr:hover{
+    background-color: black;
+}
+.student-outpasses{
+    padding: 0.4rem 1rem;
+}
+.student-issues{
+    margin: 2rem 0px;
+    padding: 0.4rem 1rem;
 }

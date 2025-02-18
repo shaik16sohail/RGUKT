@@ -163,7 +163,7 @@ const PaginatedTable = () => {
               <th className="py-3 px-6 text-center">Date</th>
             </tr>
           </thead>
-          <Link></Link>
+          
           <tbody className=" outpasses-table-body text-white text-m font-light">
             {currentItems.map((outpass,index) => (
                 

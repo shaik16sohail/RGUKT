@@ -7,7 +7,7 @@ function Header ({ toggleTheme, darkMode }) {
   const handleLinkClick = link => {
     setActiveLink(link) // Set the clicked link as active
   }
-  const [typeUser,setTypeUser]=useState(true);
+  const [typeUser,setTypeUser]=useState(false);
   const [isBoxVisible, setIsBoxVisible] = useState(false)
   const popupRef = useRef(null)
   const handleDivClick = event => {
