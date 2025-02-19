@@ -35,3 +35,32 @@ tr:hover{
     background-color:#111010;
     border-radius: 20px;
 }
+
+.general-outpass{
+    padding: 2rem;
+    min-height: 100vh;
+    background: hsla(351, 100%, 25%, 1);
+
+background: linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+
+background: -moz-linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+
+background: -webkit-linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F0012", endColorstr="#1B0A07", GradientType=1 );
+}
+.general-outpassIn{
+    background-color: #1b1b1b93;
+    color: white;
+    padding: 3.5rem 5rem;
+}
+
+.outpass-box{
+    background-color: black;
+}
+.outpass-button{
+    background-color: black;
+    /* padding: ; */
+    /* margin: 0 auto; */
+    width: 40%;
+}
