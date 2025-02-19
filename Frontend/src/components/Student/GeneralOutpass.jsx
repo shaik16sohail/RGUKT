@@ -2,6 +2,9 @@
 import '../../style/student.css';
 import React, { useState } from 'react';
 const GeneralOutpass=()=>{
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleThat = () => setIsChecked(!isChecked);
     const [formData, setFormData] = useState({
         destination: '',
         reason: '',
@@ -110,7 +113,27 @@ const GeneralOutpass=()=>{
               </div>
             </div>
     
-           
+            <div className="mt-4">
+      <label className="flex items-start space-x-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleThat}
+          className="w-5 h-4 mt-1 bg-black border-gray-300 rounded text-white"
+        />
+        <span className="text-sm text-white">
+          Please On the Location in your mobile after the approval of the outpass
+          {/* <a
+            href="/terms"
+            className="text-blue-500 underline hover:text-blue-700"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Terms and Conditions
+          </a> */}
+        </span>
+      </label>
+    </div>
     
             
     
