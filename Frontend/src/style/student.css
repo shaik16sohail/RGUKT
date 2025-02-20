@@ -64,3 +64,6 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F0012", en
     /* margin: 0 auto; */
     width: 40%;
 }
+.student-issue{
+    min-height: 100vh;
+}
