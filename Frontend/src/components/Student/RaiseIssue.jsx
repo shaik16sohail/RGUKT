@@ -17,28 +17,29 @@ const RaiseIssue=()=>{
     
       const handleSubmit = (e) => {
         e.preventDefault();
+        alert("form submitted succesfully");
         console.log("Form Data:", formData);
         // Add submission logic here (API call, validation, etc.)
       };
     
       return (
-        <div className="flex justify-center items-center min-h-screen bg-red-700 p-4">
+        <div className="flex justify-center items-center min-h-screen  student-issue">
           <form
             onSubmit={handleSubmit}
-            className="bg-black shadow-2xl rounded-2xl p-8 w-full max-w-lg space-y-6"
+            className="shadow-2xl rounded-2xl p-8 w-full max-w-lg space-y-6 student-issueIn"
           >
             <h2 className="text-2xl font-bold text-center text-white-800">
-              Report an Issue
+              Raise a Complaint
             </h2>
     
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">Category</label>
+              <label className="block text-white-700 font-semibold mb-2">Category</label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-black"
               >
                 <option value="" disabled>
                   Select Category
@@ -51,7 +52,7 @@ const RaiseIssue=()=>{
             </div>
     
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">Description</label>
+              <label className="block text-white-700 font-semibold mb-2">Description</label>
               <textarea
                 name="description"
                 value={formData.description}
@@ -59,24 +60,24 @@ const RaiseIssue=()=>{
                 placeholder="Describe the issue in detail..."
                 rows="4"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-black text-white"
               ></textarea>
             </div>
     
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">Upload Photo</label>
+              <label className="block text-white-700 font-semibold mb-2">Upload Photo</label>
               <input
                 type="file"
                 name="photo"
                 accept="image/*"
                 onChange={handleChange}
-                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:bg-gray-50 hover:file:bg-gray-100"
+                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:bg-gray-50 hover:file:bg-gray-100 bg-black"
               />
             </div>
     
             <button
               type="submit"
-              className="w-2/5 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-200 block"
+              className="w-2/5 p-2 bg-black-600 text-white font-bold rounded-lg hover:bg-black-700 transition duration-200 block mx-auto outpass-button"
             >
               Submit Issue
             </button>

@@ -66,4 +66,18 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F0012", en
 }
 .student-issue{
     min-height: 100vh;
+    padding: 5rem 0px;
+    background: hsla(351, 100%, 25%, 1);
+
+    background: linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+    
+    background: -moz-linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+    
+    background: -webkit-linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%);
+    
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F0012", endColorstr="#1B0A07", GradientType=1 );
+    /* margin: 5rem 0px; */
+}
+.student-issueIn{
+    background-color: #1b1b1b93;
 }
