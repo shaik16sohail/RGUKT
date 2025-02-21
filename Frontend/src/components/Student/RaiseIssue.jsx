@@ -39,7 +39,7 @@ const RaiseIssue=()=>{
                 value={formData.category}
                 onChange={handleChange}
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-black"
+                className="w-full p-3  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-black"
               >
                 <option value="" disabled>
                   Select Category
@@ -60,7 +60,7 @@ const RaiseIssue=()=>{
                 placeholder="Describe the issue in detail..."
                 rows="4"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-black text-white"
+                className="w-full p-3  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-black text-white"
               ></textarea>
             </div>
     
@@ -77,7 +77,7 @@ const RaiseIssue=()=>{
     
             <button
               type="submit"
-              className="w-2/5 p-2 bg-black-600 text-white font-bold rounded-lg hover:bg-black-700 transition duration-200 block mx-auto outpass-button"
+              className="w-2/5 p-2 py-3 bg-black-600 text-white font-bold rounded-lg hover:bg-black-700 transition duration-200 block mx-auto outpass-button"
             >
               Submit Issue
             </button>

@@ -17,6 +17,7 @@ import Nope from './components/Nope';
 import GeneralOutpass from './components/Student/GeneralOutpass';
 import EmergencyOutpass from './components/Student/EmergencyOutpass';
 import RaiseIssue from './components/Student/RaiseIssue';
+import WardenHome from './components/Warden/Home';
 // import Header from './components/Header/Header'
 function App() {
   const [count, setCount] = useState(0)
@@ -43,6 +44,7 @@ function App() {
           <Route path='/student/general-outpass' element={<><Header></Header><GeneralOutpass></GeneralOutpass><Footer></Footer></>}></Route>
           <Route path='/student/emergency-outpass' element={<><Header></Header><EmergencyOutpass></EmergencyOutpass><Footer></Footer></>}></Route>
           <Route path='/student/issue' element={<><Header></Header><RaiseIssue></RaiseIssue><Footer></Footer></>}></Route>
+          <Route path='/warden/home' element={<><Header></Header><WardenHome></WardenHome><Footer></Footer></>}></Route>
           <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>
         </Routes>
         
