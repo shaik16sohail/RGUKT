@@ -1,0 +1,12 @@
+const mongoose = require("mongoose");
+
+const issueSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", required: true },
+  category: { type: String, required: true }, // Example: "Electricity", "Plumbing", "WiFi"
+  description: { type: String, required: true },
+  photo: { type: String }, // Store image URL if uploaded
+  status: { type: String, enum: ["pending", "in-progress", "resolved"], default: "pending" },
+  createdAt: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model("Issue", issueSchema);
