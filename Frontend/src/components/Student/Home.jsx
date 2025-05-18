@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../style/student.css';
-
+import axios from 'axios';
 const Home=()=>{
-    const dummyData=[
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-        { type: "Emergency", status: "Approved", date: "2024-02-12" },
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-        { type: "Emergency", status: "Approved", date: "2024-02-12" },
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-        { type: "Emergency", status: "Approved", date: "2024-02-12" },
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-    ];
-    const dummyIssues=[
-        {type:"Maintainance",status:"Solved",date:"2024-02-12"},
-        {type:"Electricity",status:"Pending",date:"2024-02-12"},
-        {type:"Sanitation",status:"solved",date:"2024-02-12"},
-        {type:"Mess",status:"solved",date:"2024-02-12"},
-        
-    ];
+    const [outpasses,setOutpasses]=useState([]);
+    const [issues,setIssues]=useState([]);
+    
+    useEffect(()=>{
+        const fetchData=async()=>{
+            try{
+                const response=await axios.get('http://localhost:8080/student/home',{
+                    withCredentials: true // Important if cookies are involved
+                });
+                const data = response.data;
+                console.log(data.message);
+                setOutpasses(data.Outpasses);
+                setIssues(data.Issues);
+
+            }catch(err){
+                console.log('error',err);
+            }
+        };
+        fetchData();
+    },[]);
 
     return(
         <div className='student-home'>
@@ -36,7 +40,7 @@ const Home=()=>{
                     </tr>
                 </thead>
                 <tbody className='table-body text-white text-m font-light'>
-                   {dummyData.map((outpass,index)=>{
+                   {outpasses.map((outpass,index)=>{
                     return(
                         <tr className='border-b border-gray-200'>
                             <td className="py-3 px-6 text-center">{index+1}</td>
@@ -65,7 +69,7 @@ const Home=()=>{
                     </tr>
                 </thead>
                 <tbody className='table-body text-white text-m font-light'>
-                   {dummyIssues.map((outpass,index)=>{
+                   {issues.map((outpass,index)=>{
                     return(
                         <tr className='border-b border-gray-200'>
                             <td className="py-3 px-6 text-center">{index+1}</td>
