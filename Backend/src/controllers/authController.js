@@ -1,63 +1,87 @@
-const User = require("../models/User");
-const Warden=require('../models/Warden');
-const Student=require('../models/Student');
-const Caretaker=require('../models/Caretaker');
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const Otp=require("../models/Otp");
+const User=require('../models/User');
+const nodemailer=require('nodemailer');
+const bcrypt=require('bcrypt');
 
-// Signup Controller
-exports.signup = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
-    const newUser = new User({ name, email, password: hashedPassword });
-    await newUser.save();
-
-    res.status(201).json({ message: "Signup successful" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS,
   }
-};
+});
 
-// Login Controller
-exports.login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Check if user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    // Compare passwords
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
-
-    // Generate JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES });
-
-    // Send token in HTTP-only cookie
-    res.cookie("authToken", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Set true in production
-      sameSite: "strict",
+const sendOtp=async (req,res)=>{
+  const {email}=req.body;
+  const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+  try{
+    await Otp.deleteMany({ email }); // clear old OTPs
+    await Otp.create({ email, otp: otpCode });
+    console.log(email,otpCode);
+    await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Your OTP Code",
+      html: `<h3>Your OTP is ${otpCode}</h3>`
     });
 
-    res.json({ message: "Login successful", user: { id: user._id, name: user.name, email: user.email } });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(200).json({ message: "OTP sent successfully" });
+  }catch(err){
+    res.status(500).json({ error: "Failed to send OTP" });
   }
 };
+
+const verifyOtp=async (req,res)=>{
+  const {email,otp}=req.body;
+  const validOtp=await Otp.findOne({email,otp});
+
+  if(!validOtp){
+    return res.status(400).json({ error: "Invalid or expired OTP" });
+
+  }
+  await Otp.deleteMany({email});
+  res.status(200).json({message:"Otp Verified"});
+}
+
+const register=async (req,res)=>{
+  try {
+  const { name, email, password } = req.body;
+
+  const existing = await User.findOne({ email });
+  if (existing) {
+    return res.status(400).json({ error: "User already exists" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = await User.create({ name, email, password: hashedPassword });
+
+  console.log("User created:", newUser);
+  res.status(201).json({ message: "User created successfully" });
+
+} catch (err) {
+  console.error("Registration error:", err);
+  res.status(500).json({ error: err.message });
+}
+
+};
+
+// /api/auth/login
+const loginUser = async (req, res) => {
+  const { email, password } = req.body
+  const user = await User.findOne({ email })
+  console.log("user",user);
+  if (!user) return res.status(404).json({ message: 'User not found' })
+
+  const isMatch = await bcrypt.compare(password, user.password)
+  console.log(isMatch);
+  if (!isMatch) return res.status(401).json({ message: 'Incorrect password' })
+
+  // proceed with generating JWT or setting session
+  res.status(200).json({ message: 'Login successful', user })
+}
+
+
+
+
+
+module.exports={sendOtp,verifyOtp,register,loginUser};

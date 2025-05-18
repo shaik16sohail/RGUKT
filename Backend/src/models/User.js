@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const userSchema=new mongoose({
+const userSchema=new mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -15,7 +15,7 @@ const userSchema=new mongoose({
     },userType: { 
         type: String, 
         enum: ["student", "caretaker", "warden", "security", "admin"], 
-        required: true 
+        // required: true 
       },
       hostelName: { type: String },
       createdAt: { type: Date, default: Date.now }

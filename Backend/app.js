@@ -8,6 +8,7 @@ const authRoutes = require("./src/routes/authRoutes");
 const port=process.env.PORT|| 8080;
 const cookieParser = require("cookie-parser");
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 app.use(cors({
   origin: "http://localhost:5173", // React frontend URL
@@ -16,7 +17,7 @@ app.use(cors({
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
 }
-app.use("/api/auth", authRoutes);
+
 
 
 main()
@@ -25,6 +26,7 @@ main()
      })
     .catch((err) => console.log(err));
 
+app.use("/api/auth",authRoutes);
 
 
 app.listen(port,()=>{
