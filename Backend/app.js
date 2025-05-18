@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app=express();
 const authRoutes = require("./src/routes/authRoutes");
+const studentRoutes=require('./src/routes/studentRoutes');
 const port=process.env.PORT|| 8080;
 const cookieParser = require("cookie-parser");
 app.use(express.json());
@@ -27,6 +28,7 @@ main()
     .catch((err) => console.log(err));
 
 app.use("/api/auth",authRoutes);
+app.use("/student",studentRoutes);
 
 
 app.listen(port,()=>{

@@ -2,6 +2,7 @@ const Otp=require("../models/Otp");
 const User=require('../models/User');
 const nodemailer=require('nodemailer');
 const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -75,13 +76,33 @@ const loginUser = async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password)
   console.log(isMatch);
   if (!isMatch) return res.status(401).json({ message: 'Incorrect password' })
+  
+    //Generate JWT
+    const token=jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRES});
+
+    //set Cookie
+    res.cookie('authToken',token,{
+      httpOnly:true,
+      sameSite:'Lax',
+      maxAge:7*24*60*60*1000
+    });
+
 
   // proceed with generating JWT or setting session
-  res.status(200).json({ message: 'Login successful', user })
+  res.status(200).json({ message: 'Login successful', user:{email:user.email,id:user._id} });
 }
 
+const logoutUser=async(req,res)=>{
+  res.clearCookie('authToken',{
+    httpOnly:true,
+    sameSite:'Lax',
+  });
+  res.status(200).json({ message: 'Logout successful'});
+
+};
 
 
 
 
-module.exports={sendOtp,verifyOtp,register,loginUser};
+
+module.exports={sendOtp,verifyOtp,register,loginUser,logoutUser};
