@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import '../../index.css'
 import axios from 'axios'
+import { useAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm () {
+  const {login}=useAuth();
+  const navigate=useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [otp, setOtp] = useState('')
@@ -32,9 +36,10 @@ export default function LoginForm () {
         const loginRes = await axios.post('http://localhost:8080/api/auth/login', {
           email:email,
           password:password
-        })
-
-        alert(loginRes.data.message);
+        }, { withCredentials: true });
+        login(loginRes.data.user);
+        navigate('/student/home');
+        // alert(loginRes.data);
         setEmail("");
         setPassword("");
         setOtp("");
