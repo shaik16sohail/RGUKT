@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import "../../style/caretaker.css";
+import {useEffect} from 'react';
 
-const issuesData = Array.from({ length: 20 }, (_, i) => ({
-  id: i + 1,
-  name: `R20008${i + 1}`,
-  type: ["Maintenance", "Electricity", "Sanitation"][i % 3],
-  summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  image: "/one.png",
-  date: new Date(2024, 1, i + 1).toISOString().split("T")[0], // Random dates in Feb 2024
-}));
 
-const IssuesPage = () => {
+const IssuesPage = ({issuesData}) => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [issueType, setIssueType] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
   const [filteredIssues, setFilteredIssues] = useState(issuesData);
-
+   useEffect(() => {
+    setFilteredIssues(issuesData);
+  }, [issuesData]);
   const applyFilters = () => {
     let filtered = [...issuesData];
   
