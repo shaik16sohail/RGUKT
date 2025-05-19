@@ -3,6 +3,9 @@ const User=require('../models/User');
 const nodemailer=require('nodemailer');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
+const Student = require("../models/Student");
+const Warden = require("../models/Warden");
+const Caretaker = require("../models/Caretaker");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -52,9 +55,33 @@ const register=async (req,res)=>{
   if (existing) {
     return res.status(400).json({ error: "User already exists" });
   }
+  const data={
+    phone:'',
+    userType:'',
+    hostelName:'',
+  };
+  const student=await Student.findOne({email});
+  const warden=await Warden.findOne({email});
+  const caretaker=await Caretaker.findOne({email});
+  if(student){
+    data.phone=student.phone;
+    data.userType="student";
+    data.hostelName=student.hostelName;
+  }else if(warden){
+    data.phone=warden.phone;
+    data.userType="warden";
+    data.hostelName=warden.hostelName;
+  }else if(caretaker){
+    data.phone=caretaker.phone;
+    data.userType="caretaker";
+    data.hostelName=caretaker.hostelName;
+  }else{
+    let a=5;
+  }
+
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({ name, email, password: hashedPassword });
+  const newUser = await User.create({ name, email, password: hashedPassword ,...data});
 
   console.log("User created:", newUser);
   res.status(201).json({ message: "User created successfully" });
