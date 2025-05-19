@@ -38,7 +38,7 @@ export default function LoginForm () {
           password:password
         }, { withCredentials: true });
         login(loginRes.data.user);
-        navigate('/student/home');
+        navigate(`/${loginRes.data.user.userType}/home/`);
         // alert(loginRes.data);
         setEmail("");
         setPassword("");
