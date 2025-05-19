@@ -97,7 +97,7 @@ function Header () {
           {isLoggedIn ? (
             <div className='header-links'>
               <div className='first'>
-                {typeUser ? (
+                {user.userType=='caretaker' ? (
                   <ul>
                     <li>
                       <a
@@ -213,8 +213,8 @@ function Header () {
                     }}
                   />
 
-                  <h1 style={{ fontSize: '1.8rem' }}> Hi Shaik !</h1>
-                  <p style={{ fontSize: '15px' }}>rr200088@rguktrkv.ac.in</p>
+                  <h1 style={{ fontSize: '1.1rem' }}> Hi {user.name} !</h1>
+                  <p style={{ fontSize: '15px' }}>{user.email}</p>
                   <br></br>
                   <p>Profile Details</p>
                   <Link to='/'>

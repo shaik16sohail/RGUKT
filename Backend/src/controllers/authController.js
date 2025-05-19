@@ -57,7 +57,7 @@ const register=async (req,res)=>{
   }
   const data={
     phone:'',
-    userType:'',
+    userType:'admin',
     hostelName:'',
   };
   const student=await Student.findOne({email});
@@ -116,7 +116,7 @@ const loginUser = async (req, res) => {
 
 
   // proceed with generating JWT or setting session
-  res.status(200).json({ message: 'Login successful', user:{email:user.email,id:user._id} });
+  res.status(200).json({ message: 'Login successful', user:{email:user.email,id:user._id,name:user.name,phone:user.phone,userType:user.userType,hostelName:user.hostelName} });
 }
 
 const logoutUser=async(req,res)=>{

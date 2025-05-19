@@ -9,8 +9,8 @@ export default function LoginForm () {
   const navigate=useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [otp, setOtp] = useState('')
-  const [otpEnabled, setOtpEnabled] = useState(false)
+  // const [otp, setOtp] = useState('')
+  // const [otpEnabled, setOtpEnabled] = useState(false)
 
   const sendOtp = async () => {
     try {
@@ -26,12 +26,12 @@ export default function LoginForm () {
   const handleSubmit = async () => {
     try {
       // First verify OTP
-      const verifyRes = await axios.post('http://localhost:8080/api/auth/verify-otp', {
-        email:email,
-        otp:otp
-      })
-      console.log(verifyRes.data);
-      if (verifyRes.data.message=="Otp Verified") {
+      // const verifyRes = await axios.post('http://localhost:8080/api/auth/verify-otp', {
+      //   email:email,
+      //   otp:otp
+      // })
+      // console.log(verifyRes.data);
+      // if (verifyRes.data.message=="Otp Verified") {
         // Now login
         const loginRes = await axios.post('http://localhost:8080/api/auth/login', {
           email:email,
@@ -42,12 +42,12 @@ export default function LoginForm () {
         // alert(loginRes.data);
         setEmail("");
         setPassword("");
-        setOtp("");
-        setOtpEnabled(false);
+        // setOtp("");
+        // setOtpEnabled(false);
         // Add navigation or localStorage logic here if needed
-      } else {
-        alert('Invalid OTP')
-      }
+      // } else {
+      //   alert('Invalid OTP')
+      // }
     } catch (err) {
       console.error(err)
       alert(err);
@@ -80,18 +80,18 @@ export default function LoginForm () {
           <br />
           <br />
           <div className='text-sm form-buttons'>
-            <button onClick={sendOtp}>Send Otp</button>
+            <button>Send Otp</button>
             <button>forgot Password</button>
           </div>
           <br />
-          <input
+          {/* <input
             type='number'
             placeholder='Enter the Otp'
             name='otp'
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
             disabled={!otpEnabled}
-          />
+          /> */}
           <br />
         </div>
         <div className='text-center text-xl'>
