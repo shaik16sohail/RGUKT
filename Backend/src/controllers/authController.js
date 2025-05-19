@@ -105,7 +105,7 @@ const loginUser = async (req, res) => {
   if (!isMatch) return res.status(401).json({ message: 'Incorrect password' })
   
     //Generate JWT
-    const token=jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRES});
+    const token=jwt.sign({id:user._id,userType:user.userType},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRES});
 
     //set Cookie
     res.cookie('authToken',token,{
