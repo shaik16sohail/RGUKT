@@ -3,14 +3,22 @@ import '../../index.css'
 import axios from 'axios'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function LoginForm () {
-  const {login}=useAuth();
+  const {login,isLoggedIn,user}=useAuth();
   const navigate=useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   // const [otp, setOtp] = useState('')
   // const [otpEnabled, setOtpEnabled] = useState(false)
+
+  useEffect(()=>{
+    if(isLoggedIn){
+      console.log("you are already loggedIn");
+      navigate(`/${user.userType}/home/`);
+    }
+  },[]);
 
   const sendOtp = async () => {
     try {
