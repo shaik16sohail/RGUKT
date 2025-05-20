@@ -1,6 +1,7 @@
 const Student = require("../models/Student");
 const User = require("../models/User");
 const Issue=require("../models/Issue");
+const Outpass = require("../models/Outpass");
 const getHomePage=(req,res)=>{
     const Outpasses=[
         { type: "Regular", status: "Pending", date: "2024-02-12" },
@@ -55,4 +56,38 @@ const addIssue=async(req,res)=>{
         res.status(500).json({ message: "Server error while adding issue" });
     }
 };
-module.exports={getHomePage,addIssue};
+
+const addOutpass=async(req,res)=>{
+    try{
+        const userData=await User.findOne({_id:req.userId});
+        if (!userData) return res.status(404).json({ message: "User not found" });
+
+        const email=userData.email;
+        const studentData=await Student.findOne({email});
+
+        const studentUserId=studentData._id;
+        if (!studentData) return res.status(404).json({ message: "Student not found" });
+
+        const {reason,destination,mobileNo,parentMobileNo,date,type}=req.body;
+        const hostelName=studentData.hostelName;
+
+        const newOutpass=new Outpass({
+            studentId:studentUserId,
+            reason,
+            destination,
+            mobileNo,
+            parentMobileNo,
+            date,
+            type,
+            hostelName
+        });
+        await newOutpass.save();
+        console.log(newOutpass);
+        res.status(201).json({ message: "Outpass added successfully", outpass: newOutpass });
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ message: "Server error while adding outpass" });
+    }
+};
+
+module.exports={getHomePage,addIssue,addOutpass};

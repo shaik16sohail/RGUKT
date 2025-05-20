@@ -1,4 +1,5 @@
 // import React from 'react'
+import axios from 'axios';
 import '../../style/student.css';
 import React, { useState } from 'react';
 const GeneralOutpass=()=>{
@@ -8,9 +9,10 @@ const GeneralOutpass=()=>{
     const [formData, setFormData] = useState({
         destination: '',
         reason: '',
-        parentMobile: '',
-        studentMobile: '',
-        leaveDate: '',
+        mobileNo: '',
+        parentMobileNo: '',
+        date: '',
+        type:'normal',
         returnDate: '',
         notes: '',
       });
@@ -23,10 +25,29 @@ const GeneralOutpass=()=>{
         });
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log('Form Data:', formData);
+        try{
+          const response=await axios.post("http://localhost:8080/student/outpass",formData,{
+            //  headers: {
+            //   'Content-Type': 'multipart/form-data',
+            //  },
+            withCredentials:true,
+          });
+          console.log(response.data);
         alert('Outpass request submitted successfully!');
+        setFormData({destination: '',
+          reason: '',
+          mobileNo: '',
+          parentMobileNo: '',
+          date: '',
+          type:'normal',
+          returnDate: '',
+          notes: '',});
+        }catch(err){
+          console.log(err);
+        }
+        
       };
     
       return (
@@ -64,8 +85,8 @@ const GeneralOutpass=()=>{
                 <label className="block font-semibold">Parent's Mobile No</label>
                 <input
                   type="tel"
-                  name="parentMobile"
-                  value={formData.parentMobile}
+                  name="parentMobileNo"
+                  value={formData.parentMobileNo}
                   onChange={handleChange}
                   className="w-full p-2  rounded-lg focus:ring-2 focus:ring-blue-400 outpass-box"
                   placeholder="Enter parent's mobile number"
@@ -77,8 +98,8 @@ const GeneralOutpass=()=>{
                 <label className="block font-semibold">Your Mobile No</label>
                 <input
                   type="tel"
-                  name="studentMobile"
-                  value={formData.studentMobile}
+                  name="mobileNo"
+                  value={formData.mobileNo}
                   onChange={handleChange}
                   className="w-full p-2  rounded-lg focus:ring-2 focus:ring-blue-400 outpass-box"
                   placeholder="Enter your mobile number"
@@ -91,9 +112,9 @@ const GeneralOutpass=()=>{
               <div>
                 <label className="block font-semibold">Date & Time of Leaving</label>
                 <input
-                  type="datetime-local"
-                  name="leaveDate"
-                  value={formData.leaveDate}
+                  type="date"
+                  name="date"
+                  value={formData.date}
                   onChange={handleChange}
                   className="w-full p-2 r rounded-lg focus:ring-2 focus:ring-blue-400 outpass-box"
                   required
@@ -103,7 +124,7 @@ const GeneralOutpass=()=>{
               <div>
                 <label className="block font-semibold">Expected Return Date & Time</label>
                 <input
-                  type="datetime-local"
+                  type="date"
                   name="returnDate"
                   value={formData.returnDate}
                   onChange={handleChange}
@@ -123,14 +144,7 @@ const GeneralOutpass=()=>{
         />
         <span className="text-sm text-white">
           Please On the Location in your mobile after the approval of the outpass
-          {/* <a
-            href="/terms"
-            className="text-blue-500 underline hover:text-blue-700"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Terms and Conditions
-          </a> */}
+          
         </span>
       </label>
     </div>
