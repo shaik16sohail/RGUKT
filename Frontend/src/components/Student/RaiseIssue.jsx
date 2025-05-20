@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import '../../style/student.css';
+import axios from 'axios';
 const RaiseIssue=()=>{
     const [formData, setFormData] = useState({
         category: "",
@@ -15,11 +16,30 @@ const RaiseIssue=()=>{
         }));
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async(e) => {
         e.preventDefault();
-        alert("form submitted succesfully");
-        console.log("Form Data:", formData);
-        // Add submission logic here (API call, validation, etc.)
+        
+        try{
+          const data = new FormData();
+          data.append('category', formData.category);
+          data.append('description', formData.description);
+          if (formData.photo) {
+            data.append('image', formData.photo); // name 'image' must match your backend parser.single('image')
+          }
+          const response=await axios.post("http://localhost:8080/student/issue",data,{
+              headers: {
+            'Content-Type': 'multipart/form-data',
+            },
+            withCredentials: true, // if your backend requires cookies/auth
+          });
+           alert('Form submitted successfully');
+           console.log(response.data);
+      setFormData({ category: '', description: '', photo: null });
+        }catch(err){
+            console.error('Error submitting form:', error);
+        alert('Failed to submit issue. Please try again.');
+        }
+       
       };
     
       return (
@@ -44,10 +64,10 @@ const RaiseIssue=()=>{
                 <option value="" disabled>
                   Select Category
                 </option>
-                <option value="Maintenance">Maintenance</option>
-                <option value="Facility">Facility</option>
-                <option value="Technical">Technical</option>
-                <option value="Other">Other</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Sanitation">Sanitation</option>
+                <option value="Drinking_Water">Drinking_Water</option>
+                <option value="Others">Others</option>
               </select>
             </div>
     
