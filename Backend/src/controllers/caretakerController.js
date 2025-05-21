@@ -28,6 +28,20 @@ const getOneOutpass=async(req,res)=>{
     res.json(500).json({message:"server side error"});
   }
 };
+const updateOutpass=async(req,res)=>{
+  try{
+    const {id}=req.params;
+    console.log(id);
+    const {status}=req.body;
+    const response=await Outpass.findByIdAndUpdate(id,{$set:{status:status}},{new:true});
+    console.log(response);
+    res.status(200).json({message:"success",response});
+
+  }catch(err){
+    console.log(err);
+    res.json(500).json({message:"server side error"});
+  }
+};
 const getAllIssues=(req,res)=>{
     //here we need to take the hostelName from user(req) and 
     //search from database of outpasses table to get retrieve the only issues related to
@@ -42,4 +56,4 @@ const getAllIssues=(req,res)=>{
     }));
     res.status(200).json({issuesData});
 };
-module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass};
+module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass,updateOutpass};
