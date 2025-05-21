@@ -26,13 +26,14 @@ import WardenHome from './components/Warden/Home';
 import Nope from './components/Nope';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './utils/ScrollToTop';
 // import Header from './components/Header/Header'
 function App() {
   
   return (
     <>
       <BrowserRouter>
-      
+        <ScrollToTop/>
         <Routes>
           <Route path='/' element={<><LandingPage/><Footer/></>}></Route>
         
