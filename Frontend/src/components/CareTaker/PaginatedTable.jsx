@@ -3,50 +3,6 @@ import '../../style/caretaker.css';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"; // Import navigate hook
 
-
-// const outpassesData = [
-//   { id: "R200088", name: "John Doe", type: "Regular", status: "Pending", date: "2024-02-12" },
-//   { id: "R200088", name: "Jane Smith", type: "Emergency", status: "Approved", date: "2024-02-11" },
-//   { id: "R200088", name: "Alex Johnson", type: "Regular", status: "Rejected", date: "2024-02-10" },
-//   { id: "R200088", name: "Emily Brown", type: "Emergency", status: "Pending", date: "2024-02-09" },
-//   { id: "R200088", name: "Michael Lee", type: "Regular", status: "Approved", date: "2024-02-08" },
-//   { id: "R200088", name: "Sarah Wilson", type: "Regular", status: "Pending", date: "2024-02-07" },
-//   { id: "R200088", name: "Daniel Martinez", type: "Emergency", status: "Approved", date: "2024-02-06" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Mia Moore", type: "Emergency", status: "Approved", date: "2024-02-01" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-//   { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-//   { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-//   { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-//   { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-// ];
-
 const PaginatedTable = ({outpasses:outpassesData}) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,6 +26,12 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
       (filterDate ? item.date === filterDate : true)
     );
   });
+
+  const handleRowClick=(outpass)=>{
+    navigate(`${outpass._id}`);
+    // window.scrollTo(0, 0);
+  };
+
 
   // **Sorting Logic**
   filteredData.sort((a, b) => {
@@ -103,8 +65,8 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
           onChange={(e) => setSelectedType(e.target.value)}
         >
           <option value="">All Types</option>
-          <option value="Regular">Regular</option>
-          <option value="Emergency">Emergency</option>
+          <option value="regular">regular</option>
+          <option value="emergency">emergency</option>
         </select>
 
         {/* Status Filter */}
@@ -114,9 +76,9 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
           onChange={(e) => setSelectedStatus(e.target.value)}
         >
           <option value="">All Status</option>
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
+          <option value="pending">pending</option>
+          <option value="approved">approved</option>
+          <option value="rejected">rejected</option>
         </select>
 
         {/* Date Filter */}
@@ -167,11 +129,11 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
           <tbody className=" outpasses-table-body text-white text-m font-light">
             {currentItems.map((outpass,index) => (
                 
-              <tr key={outpass.id} className=" outpasses-body-tr border-b border-gray-200 "   onClick={() => navigate(`${index}`, { state: outpass })} >
+              <tr key={outpass.id} className=" outpasses-body-tr border-b border-gray-200 "   onClick={()=>handleRowClick(outpass)} >
                 
                 <td className="py-3 px-6 text-center">{indexOfFirstItem+index+1}</td>
-                <td className="py-3 px-6 text-center">{outpass.id}</td>
-                <td className="py-3 px-6 text-center">{outpass.name}</td>
+                <td className="py-3 px-6 text-center">{outpass.studentId.email.substring(1,2).toUpperCase()+outpass.studentId.email.substring(2,8)}</td>
+                <td className="py-3 px-6 text-center">{outpass.studentId.name}</td>
                 <td className="py-3 px-6 text-center">{outpass.type}</td>
                 <td className={`py-3 px-6 text-center ${outpass.status === "Pending" ? "text-yellow-500" : outpass.status === "Approved" ? "text-green-500" : "text-red-500"}`}>
                   {outpass.status}
