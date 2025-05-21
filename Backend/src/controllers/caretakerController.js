@@ -1,53 +1,32 @@
+const User=require("../models/User");
+const Outpass=require("../models/Outpass");
 const getHomeData=()=>{
 
 };
-const getAllOutpasses=(req,res)=>{
+const getAllOutpasses=async(req,res)=>{
     //here we need to take the hostelName from user(req) and 
     //search from database of outpasses table to get retrieve the only outpasses related to
     //that hostel
-    const outpassesData = [
-  { id: "R200089", name: "John Doe", type: "Regular", status: "Pending", date: "2024-02-12" },
-  { id: "R200069", name: "Jane Smith", type: "Emergency", status: "Approved", date: "2024-02-11" },
-  { id: "R200088", name: "Alex Johnson", type: "Regular", status: "Rejected", date: "2024-02-10" },
-  { id: "R200088", name: "Emily Brown", type: "Emergency", status: "Pending", date: "2024-02-09" },
-  { id: "R200088", name: "Michael Lee", type: "Regular", status: "Approved", date: "2024-02-08" },
-  { id: "R200088", name: "Sarah Wilson", type: "Regular", status: "Pending", date: "2024-02-07" },
-  { id: "R200088", name: "Daniel Martinez", type: "Emergency", status: "Approved", date: "2024-02-06" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Mia Moore", type: "Emergency", status: "Approved", date: "2024-02-01" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-  { id: "R200088", name: "Sophia Garcia", type: "Regular", status: "Rejected", date: "2024-02-05" },
-  { id: "R200088", name: "James Anderson", type: "Emergency", status: "Pending", date: "2024-02-04" },
-  { id: "R200088", name: "Olivia Thomas", type: "Regular", status: "Approved", date: "2024-02-03" },
-  { id: "R200088", name: "William Taylor", type: "Regular", status: "Pending", date: "2024-02-02" },
-];
-res.status(200).json({outpassesData});
+    const userData=await User.findOne({_id:req.userId});
+    const hostelName=userData.hostelName;
+    const outpassesData = await Outpass.find({ hostelName })
+    .populate('studentId', 'name email') // only include name and email from Student
+    .exec();
+  res.status(200).json({outpassesData});
+};
+const getOneOutpass=async(req,res)=>{
+  try{
+    const {id}=req.params;
+    console.log(id);
+    const outpassData = await Outpass.findOne({ _id: id })
+  .populate('studentId', 'name email'); // Only fetch name and email from Student
+
+// console.log(outpassData);
+    res.status(200).json({message:"success",outpassData});
+  }catch(err){
+    console.log(err);
+    res.json(500).json({message:"server side error"});
+  }
 };
 const getAllIssues=(req,res)=>{
     //here we need to take the hostelName from user(req) and 
@@ -63,4 +42,4 @@ const getAllIssues=(req,res)=>{
     }));
     res.status(200).json({issuesData});
 };
-module.exports={getHomeData,getAllOutpasses,getAllIssues};
+module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass};
