@@ -16,31 +16,41 @@ const RaiseIssue=()=>{
         }));
       };
     
-      const handleSubmit = async(e) => {
-        e.preventDefault();
-        
-        try{
-          const data = new FormData();
-          data.append('category', formData.category);
-          data.append('description', formData.description);
-          if (formData.photo) {
-            data.append('image', formData.photo); // name 'image' must match your backend parser.single('image')
-          }
-          const response=await axios.post("http://localhost:8080/student/issue",data,{
-              headers: {
-            'Content-Type': 'multipart/form-data',
-            },
-            withCredentials: true, // if your backend requires cookies/auth
-          });
-           alert('Form submitted successfully');
-           console.log(response.data);
-      setFormData({ category: '', description: '', photo: null });
-        }catch(err){
-            console.error('Error submitting form:', error);
-        alert('Failed to submit issue. Please try again.');
-        }
-       
-      };
+      const handleSubmit = async (e) => {
+  e.preventDefault(); // stop form from refreshing
+
+  try {
+    const data = new FormData();
+    data.append('category', formData.category);
+    data.append('description', formData.description);
+    if (formData.photo) {
+      data.append('image', formData.photo); // must match `parser.single('image')`
+    }
+
+    const response = await axios.post(
+      "http://localhost:8080/student/issue",
+      data,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    alert('Form submitted successfully');
+    console.log(response.data);
+
+    // Reset form
+    setFormData({ category: '', description: '', photo: null });
+    e.target.reset(); // Optional: resets actual HTML form
+
+  } catch (err) {
+    console.error('Error submitting form:', err);
+    alert('Failed to submit issue. Please try again.');
+  }
+};
+
     
       return (
         <div className="flex justify-center items-center min-h-screen  student-issue">
