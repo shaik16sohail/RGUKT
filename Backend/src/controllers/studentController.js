@@ -2,24 +2,33 @@ const Student = require("../models/Student");
 const User = require("../models/User");
 const Issue=require("../models/Issue");
 const Outpass = require("../models/Outpass");
-const getHomePage=(req,res)=>{
-    const Outpasses=[
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-        { type: "Emergency", status: "Approved", date: "2024-02-12" },
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-        { type: "Emergency", status: "Approved", date: "2024-02-12" },
-        { type: "Regular", status: "Pending", date: "2024-02-12" },
-        { type: "Emergency", status: "Approved", date: "2024-02-12" },
-        { type: "sohail", status: "Pending", date: "2024-02-12" },
-    ];
-    const Issues=[
-        {type:"Maintainance",status:"Solved",date:"2024-02-12"},
-        {type:"Electricity",status:"Pending",date:"2024-02-12"},
-        {type:"Sanitation",status:"solved",date:"2024-02-12"},
-        {type:"Mess",status:"solved",date:"2024-02-12"},
-        
-    ];
+const getHomePage=async(req,res)=>{
+    try{
+        const userData=await User.findOne({_id:req.userId});
+        const studentData=await Student.findOne({email:userData.email});
+        const studentId=studentData._id;
+        const outpasses=await Outpass.find({studentId});
+        // console.log(outpasses);
+        const Outpasses=outpasses.map(outpass=>({
+            type:outpass.type,
+            status:outpass.status,
+            date:outpass.date,
+            id:outpass._id
+        }));
+        const issues=await Issue.find({studentId});
+        // console.log(issues);
+        const Issues=issues.map(issue=>({
+            type:issue.category,
+            status:issue.status,
+            date:issue.createdAt,
+            id:issue._id,
+        }));
     res.status(200).json({Outpasses,Issues});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"server failed"});
+    }
+    
 }
 const addIssue=async(req,res)=>{
     try{
