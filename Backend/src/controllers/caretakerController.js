@@ -1,5 +1,6 @@
 const User=require("../models/User");
 const Outpass=require("../models/Outpass");
+const Issue = require("../models/Issue");
 const getHomeData=()=>{
 
 };
@@ -42,18 +43,34 @@ const updateOutpass=async(req,res)=>{
     res.json(500).json({message:"server side error"});
   }
 };
-const getAllIssues=(req,res)=>{
+const getAllIssues=async(req,res)=>{
     //here we need to take the hostelName from user(req) and 
     //search from database of outpasses table to get retrieve the only issues related to
     //that hostel
-    const issuesData = Array.from({ length: 20 }, (_, i) => ({
-      id: i + 1,
-      name: `R20008${i + 1}`,
-      type: ["Maintenance", "Electricity", "Sanitation"][i % 3],
-      summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      image: "/one.png",
-      date: new Date(2024, 1, i + 1).toISOString().split("T")[0], // Random dates in Feb 2024
+    const userData=await User.findOne({_id:req.userId});
+    const hostelName=userData.hostelName;
+    const iss=await Issue.find({hostelName})
+      .populate('studentId','name email')
+      .exec();
+    // console.log(iss);
+
+    const transformData=iss.map(doc=>({
+      name:doc.studentId.name,
+      id:doc.studentId.email.substring(0,1).toUpperCase()+doc.studentId.email.substring(2,8),
+      type:doc.category,
+      summary:doc.description,
+      image:doc.photo,
+      date:doc.createdAt,
     }));
-    res.status(200).json({issuesData});
+    console.log(transformData);
+    // const issuesData = Array.from({ length: 20 }, (_, i) => ({
+    //   id: i + 1,
+    //   name: `R20008${i + 1}`,
+    //   type: ["Maintenance", "Electricity", "Sanitation"][i % 3],
+    //   summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    //   image: "/one.png",
+    //   date: new Date(2024, 1, i + 1).toISOString().split("T")[0], // Random dates in Feb 2024
+    // }));
+    res.status(200).json({issuesData:transformData});
 };
 module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass,updateOutpass};
