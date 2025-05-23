@@ -9,11 +9,13 @@ const caretakerRoutes=require('./src/routes/caretakerRoutes');
 const port=process.env.PORT|| 8080;
 const cookieParser = require("cookie-parser");
 const connectDB = require("./src/config/db");
+const mongoose=require('mongoose');
+const Outpass = require("./src/models/Outpass");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:5173", // React frontend URL
+  origin: ["http://localhost:5173","http://localhost:5174","https://security-v5vz.vercel.app"], // React frontend URL
   credentials: true // Allow cookies to be sent
 }));
 connectDB();
@@ -21,6 +23,27 @@ connectDB();
 app.use("/api/auth",authRoutes);
 app.use("/student",studentRoutes);
 app.use("/caretaker",caretakerRoutes);
+app.post("/api/scan/",async(req,res)=>{
+  try{
+    const {outpassId}=req.body;
+    const objectId = new mongoose.Types.ObjectId(outpassId);
+    // console.log(objectId);
+    const outpassData=await Outpass.findOne({_id:objectId});
+    // console.log(outpassData);
+    if(outpassData && outpassData.status=='approved'){
+      const some=await Outpass.findOneAndDelete({_id:objectId});
+      console.log(some);
+      res.status(200).json({message:"success"});
+    }else{
+      res.status(201).json({message:"outpass is not approved"});
+    }
+    
+  }catch(err){
+    console.log(err);
+    res.status(500).json({message:"error"});
+  }
+  
+});
 
 
 app.listen(port,()=>{
