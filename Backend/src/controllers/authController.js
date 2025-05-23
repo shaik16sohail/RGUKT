@@ -1,19 +1,13 @@
 const Otp=require("../models/Otp");
 const User=require('../models/User');
-const nodemailer=require('nodemailer');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const Student = require("../models/Student");
 const Warden = require("../models/Warden");
 const Caretaker = require("../models/Caretaker");
+const { transporter } = require("../utils/transporter");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_PASS,
-  }
-});
+
 
 const sendOtp=async (req,res)=>{
   const {email}=req.body;
