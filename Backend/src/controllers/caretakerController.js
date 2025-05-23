@@ -1,6 +1,9 @@
 const User=require("../models/User");
 const Outpass=require("../models/Outpass");
 const Issue = require("../models/Issue");
+const QRCode = require('qrcode');
+const generateQRCode = require("../utils/qrGenerator");
+const  transporter  = require("../utils/transporter");
 const getHomeData=()=>{
 
 };
@@ -34,13 +37,39 @@ const updateOutpass=async(req,res)=>{
     const {id}=req.params;
     console.log(id);
     const {status}=req.body;
+    let mailOptions={
+      from:process.env.MAIL,
+      to:'shaik16sohail@gmail.com',
+      subject:'',
+      html:'',
+    };
+    if(status=='approved'){
+      const qrCodeUrl=await generateQRCode(id.toString());
+      console.log(qrCodeUrl);
+      const qrBuffer=await QRCode.toBuffer(id.toString());
+      mailOptions.subject='Your Outpass request is Approved Successfully';
+      mailOptions.html=`<p>Your Outpass QR Code:</p><img src="${qrCodeUrl}" alt="QR Code" />`;
+      mailOptions.attachments = [
+        {
+          filename: 'qrcode.png',
+          content: qrBuffer,
+          cid: 'qrcode'
+        }
+      ];
+      await transporter.sendMail(mailOptions);
+
+    }else{
+      mailOptions.subject='Your Outpass request is Rejected';
+      mailOptions.html=`<p>Please Contact Warden Office or Raise new Outpass Request</p>`;
+      await transporter.sendMail(mailOptions);
+    }
     const response=await Outpass.findByIdAndUpdate(id,{$set:{status:status}},{new:true});
     console.log(response);
     res.status(200).json({message:"success",response});
 
   }catch(err){
     console.log(err);
-    res.json(500).json({message:"server side error"});
+    res.status(500).json({message:"server side error"});
   }
 };
 const getAllIssues=async(req,res)=>{
