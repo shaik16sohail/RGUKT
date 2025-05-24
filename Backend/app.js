@@ -15,9 +15,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173","http://localhost:5174","https://security-v5vz.vercel.app"], // React frontend URL
-  credentials: true // Allow cookies to be sent
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://security-v5vz.vercel.app"
+    ];
+
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 connectDB();
 
 app.use("/api/auth",authRoutes);
@@ -44,6 +58,11 @@ app.post("/api/scan/",async(req,res)=>{
   }
   
 });
+app.post("/api/location",(req,res)=>{
+   const { latitude, longitude } = req.body;
+  console.log(`📍 Received location - Latitude: ${latitude}, Longitude: ${longitude}`);
+  res.json({ message: 'Location received successfully' });
+})
 
 
 app.listen(port,()=>{
