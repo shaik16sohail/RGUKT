@@ -10,7 +10,10 @@ const outpassSchema=new mongoose.Schema({
     date: { type: Date, required: true },
     type: { type: String, enum: ["normal", "emergency"], required: true,default:"normal" },
     status: { type: String, enum: ["pending", "approved", "rejected", "completed"], default: "pending" },
-    raisedAt: { type: Date, default: Date.now }
+    raisedAt: { type: Date, default: Date.now },
+    completedAt: { type: Date, default: null},
 
 });
+
+outpassSchema.index({ completedAt: 1 }, { expireAfterSeconds: 86400 }); // 86400 = 24 hrs
 module.exports=mongoose.model("Outpass",outpassSchema);

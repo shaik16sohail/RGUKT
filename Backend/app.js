@@ -45,8 +45,11 @@ app.post("/api/scan/",async(req,res)=>{
     const outpassData=await Outpass.findOne({_id:objectId});
     // console.log(outpassData);
     if(outpassData && outpassData.status=='approved'){
-      const some=await Outpass.findOneAndDelete({_id:objectId});
-      console.log(some);
+      // const some=await Outpass.findOneAndDelete({_id:objectId});
+      // console.log(some);
+       outpassData.status = "completed";
+      outpassData.completedAt = new Date(); // Add this field in your schema
+      await outpassData.save();
       res.status(200).json({message:"success"});
     }else{
       res.status(201).json({message:"outpass is not approved"});
