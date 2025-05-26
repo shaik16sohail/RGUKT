@@ -5,8 +5,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 const Issues=()=>{
     const [issues,setIssues]=useState([]);
-    useEffect(()=>{
-        const fetchData=async()=>{
+    const fetchData=async()=>{
             try{
                 const response=await axios.get("http://localhost:8080/caretaker/issues",{
                     withCredentials:true
@@ -19,11 +18,13 @@ const Issues=()=>{
                 console.log(err);
             }
         };
+    useEffect(()=>{
+        
         fetchData();
     },[]);
     return(
         <>
-            <IssuesPage issuesData={issues}/>
+            <IssuesPage issuesData={issues} fetchData={fetchData}/>
         </>
     );
 }

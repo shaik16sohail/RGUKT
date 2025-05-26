@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "../../style/caretaker.css";
 import {useEffect} from 'react';
+import axios from 'axios';
 
-
-const IssuesPage = ({issuesData}) => {
+const IssuesPage = ({issuesData,fetchData}) => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [issueType, setIssueType] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
   const [filteredIssues, setFilteredIssues] = useState(issuesData);
+  const [comment, setComment] = useState("");
    useEffect(() => {
     setFilteredIssues(issuesData);
   }, [issuesData]);
@@ -32,7 +33,26 @@ const IssuesPage = ({issuesData}) => {
   
     setFilteredIssues(filtered);
   };
-  
+  const handleSubmit=async(status)=>{
+    if(!selectedIssue)
+      return;
+    try{
+      const response=await axios.patch(`http://localhost:8080/caretaker/issues/${selectedIssue._id}`,{
+        status,comment
+      },{
+        withCredentials:true,
+      });
+      alert("Issue updated");
+      setSelectedIssue(null);
+      setComment("");
+      if(fetchData)
+          fetchData();
+    }catch(err){
+      console.log(err);
+      alert("Failed to update the issue");
+
+    }
+  }
   
   
 
@@ -85,6 +105,7 @@ const IssuesPage = ({issuesData}) => {
           >
             <img src={issue.image} alt={issue.name} className="w-full h-32 object-cover rounded-md mb-3" />
             <h3 className="text-lg text-center font-bold">{issue.type}</h3>
+            {/* <p>{issue._id}</p> */}
             <p className="text-sm truncate">{issue.summary}</p>
             <p className="text-xs italic text-right">by {issue.name} - {issue.date}</p>
           </div>
@@ -102,17 +123,18 @@ const IssuesPage = ({issuesData}) => {
           </button>
           <img src={selectedIssue.image} alt={selectedIssue.name} className="w-full h-40 object-cover rounded-md mt-4 mb-3" />
           <h2 className="text-xl font-bold">{selectedIssue.name}</h2>
+          <p>{selectedIssue._id}</p>
           <p className="text-gray-300">Type: {selectedIssue.type}</p>
           <p className="mt-2">{selectedIssue.summary}</p>
           <p className="mt-3">Comment:</p>
           <div className="text-area">
-          <textarea className="" >Enter your query</textarea>
+          <textarea value={comment} className="" placeholder="Enter your comment" onChange={(e)=>setComment(e.target.value)} ></textarea>
           </div>
           <br></br>
          <div className="leftbar-btns">
          
-         <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><i class="fa-solid fa-left-long"></i> Red</button>
-         <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Green <i class="fa-solid fa-right-long"></i></button>
+         <button type="button" onClick={()=>handleSubmit("rejected")} class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><i class="fa-solid fa-left-long"></i> Rejected</button>
+         <button type="button" onClick={()=>handleSubmit("resolved")} class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Resolved <i class="fa-solid fa-right-long"></i></button>
          </div>
         </div>
       )}
