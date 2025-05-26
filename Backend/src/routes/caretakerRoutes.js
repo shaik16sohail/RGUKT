@@ -1,6 +1,6 @@
 const express=require('express');
 const { auth } = require('../middleware/auth');
-const { getHomeData, getAllIssues, getAllOutpasses, getOneOutpass,updateOutpass } = require('../controllers/caretakerController');
+const { getHomeData, getAllIssues, getAllOutpasses, getOneOutpass,updateOutpass, updateIssue } = require('../controllers/caretakerController');
 const authorize = require('../middleware/authorize');
 const router=express.Router();
 
@@ -10,5 +10,6 @@ router.get('/outpasses',auth,authorize("caretaker"),getAllOutpasses);
 router.get('/issues',auth,authorize("caretaker"),getAllIssues);
 router.get("/outpasses/:id",auth,authorize("caretaker"),getOneOutpass);
 router.patch("/outpasses/:id",auth,authorize("caretaker"),updateOutpass);
+router.patch("/issues/:id",auth,authorize("caretaker"),updateIssue);
 
 module.exports=router;

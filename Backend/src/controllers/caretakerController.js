@@ -78,12 +78,11 @@ const getAllIssues=async(req,res)=>{
     //that hostel
     const userData=await User.findOne({_id:req.userId});
     const hostelName=userData.hostelName;
-    const iss=await Issue.find({hostelName})
+    const iss=await Issue.find({hostelName,status:"pending"})
       .populate('studentId','name email')
       .exec();
-    // console.log(iss);
-
     const transformData=iss.map(doc=>({
+      _id:doc._id,
       name:doc.studentId.name,
       id:doc.studentId.email.substring(0,1).toUpperCase()+doc.studentId.email.substring(2,8),
       type:doc.category,
@@ -91,15 +90,21 @@ const getAllIssues=async(req,res)=>{
       image:doc.photo,
       date:doc.createdAt,
     }));
-    console.log(transformData);
-    // const issuesData = Array.from({ length: 20 }, (_, i) => ({
-    //   id: i + 1,
-    //   name: `R20008${i + 1}`,
-    //   type: ["Maintenance", "Electricity", "Sanitation"][i % 3],
-    //   summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    //   image: "/one.png",
-    //   date: new Date(2024, 1, i + 1).toISOString().split("T")[0], // Random dates in Feb 2024
-    // }));
+    // console.log(transformData);
     res.status(200).json({issuesData:transformData});
 };
-module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass,updateOutpass};
+const updateIssue=async(req,res)=>{
+  const {status,comment}=req.body;
+  const {id}=req.params;
+  try{
+    const updated=await Issue.findByIdAndUpdate(id,{
+      status,comment
+    },{new:true});
+    console.log(updated);
+    res.status(200).json({message:"Updated Successfully"});
+  }catch(err){
+    console.log(err);
+    res.status(500).json({ error: "Failed to update issue" });
+  }
+};
+module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass,updateOutpass,updateIssue};
