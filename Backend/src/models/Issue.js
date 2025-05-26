@@ -11,8 +11,11 @@ const issueSchema = new mongoose.Schema({
   photo: { type: String }, // Store image URL if uploaded
   status: { 
     type: String, 
-    enum: ["pending", "in-progress", "resolved"], 
+    enum: ["pending", "rejected", "resolved"], 
     default: "pending" 
+  },
+  comment:{
+    type:String,
   },
   hostelName: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
