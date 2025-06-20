@@ -6,6 +6,7 @@ const app=express();
 const authRoutes = require("./src/routes/authRoutes");
 const studentRoutes=require('./src/routes/studentRoutes');
 const caretakerRoutes=require('./src/routes/caretakerRoutes');
+const paymentRoutes=require('./src/routes/payment');
 const port=process.env.PORT|| 8080;
 const cookieParser = require("cookie-parser");
 const connectDB = require("./src/config/db");
@@ -37,6 +38,7 @@ connectDB();
 app.use("/api/auth",authRoutes);
 app.use("/student",studentRoutes);
 app.use("/caretaker",caretakerRoutes);
+app.use("/api/payment",paymentRoutes);
 app.post("/api/scan/",async(req,res)=>{
   try{
     const {outpassId}=req.body;

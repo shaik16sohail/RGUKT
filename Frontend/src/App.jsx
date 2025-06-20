@@ -27,6 +27,7 @@ import Nope from './components/Nope';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import ScrollToTop from './utils/ScrollToTop';
+import StripeCheckoutButton from './components/StripeCheckoutButton';
 // import Header from './components/Header/Header'
 function App() {
   
@@ -36,7 +37,7 @@ function App() {
         <ScrollToTop/>
         <Routes>
           <Route path='/' element={<><LandingPage/><Footer/></>}></Route>
-        
+          <Route path='/stripe' element={<StripeCheckoutButton></StripeCheckoutButton>}></Route>
           <Route path='/login' element={<><Layout><LoginForm/></Layout></>}></Route>
           <Route path='/signup' element={<><Layout><SignupForm></SignupForm></Layout></>}></Route>
 
