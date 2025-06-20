@@ -22,7 +22,16 @@ const Home=()=>{
         };
         fetchData();
     },[]);
-
+    const cancelOutpass= async(id)=>{
+        try{
+            const response=await axios.delete(`http://localhost:8080/student/outpass/${id}`,{
+                withCredentials:true,
+            });
+            setOutpasses(prev => prev.filter(outpass => outpass.id !== id));
+        }catch(err){
+            console.log('error at outpass deletion',err);
+        }
+    }
     return(
         <div className='student-home'>
             <div className='student-outpasses overflow-x-auto'>
@@ -47,7 +56,7 @@ const Home=()=>{
                             <td className="py-3 px-6 text-center">{outpass.type}</td>
                             <td className="py-3 px-6 text-center">{outpass.status}</td>
                             <td className="py-3 px-6 text-center">{outpass.date}</td>
-                            <td className="py-3 px-6 text-center">{outpass.date}</td>
+                            <td className="py-3 px-6 text-center"><button onClick={()=> cancelOutpass(outpass.id)}>Cancel</button></td>
                         </tr>
                     );
                    })}

@@ -98,5 +98,19 @@ const addOutpass=async(req,res)=>{
         res.status(500).json({ message: "Server error while adding outpass" });
     }
 };
+const deleteOutpass=async(req,res)=>{
+    const {id}=req.params;
+    try{
+        const some=await Outpass.findOneAndDelete(id);
+        console.log(some);
+        res.status(201).json({ message: "Outpass deleted successfully"});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ message: "Server error while deleting outpass" });
+    }
+};
+const deleteIssue=async(req,res)=>{
 
-module.exports={getHomePage,addIssue,addOutpass};
+};
+
+module.exports={getHomePage,addIssue,addOutpass,deleteOutpass,deleteIssue};
