@@ -32,6 +32,20 @@ const Home=()=>{
             console.log('error at outpass deletion',err);
         }
     }
+    const cancelIssue=async(id)=>{
+        try{
+            const response=await axios.delete(`http://localhost:8080/student/issue/${id}`,{
+                withCredentials:true,
+            });
+            setIssues((prev)=>{
+                return (prev.filter((issue)=>{
+                    return (issue.id !== id);
+                }));
+            });
+        }catch(err){
+            console.log('error at deletion of Issue',err);
+        }
+    }
     return(
         <div className='student-home'>
             <div className='student-outpasses overflow-x-auto'>
@@ -85,7 +99,7 @@ const Home=()=>{
                             <td className="py-3 px-6 text-center">{outpass.type}</td>
                             <td className="py-3 px-6 text-center">{outpass.status}</td>
                             <td className="py-3 px-6 text-center">{outpass.date}</td>
-                            <td className="py-3 px-6 text-center">{outpass.date}</td>
+                            <td className="py-3 px-6 text-center"><button onClick={ ()=> cancelIssue(outpass.id)}>Cancel</button></td>
                         </tr>
                     );
                    })}

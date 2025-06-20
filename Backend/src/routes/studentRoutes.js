@@ -11,5 +11,5 @@ router.get('/home',auth,authorize("student"),getHomePage);
 router.post('/issue',auth,authorize("student"),pareserMiddleware,addIssue);
 router.post('/outpass',auth,authorize('student'),addOutpass);
 router.delete('/outpass/:id',auth,authorize('student'),deleteOutpass);
-router.delete('/outpass/:id',auth,authorize('student'),deleteIssue);
+router.delete('/issue/:id',auth,authorize('student'),deleteIssue);
 module.exports=router;

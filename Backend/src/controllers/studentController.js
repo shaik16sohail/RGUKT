@@ -110,7 +110,15 @@ const deleteOutpass=async(req,res)=>{
     }
 };
 const deleteIssue=async(req,res)=>{
-
+    const {id}=req.params;
+    try{
+        const some=await Issue.findOneAndDelete(id);
+        console.log(some);
+        res.status(201).json({ message: "Issue deleted successfully"});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ message: "Server error while deleting issue" });
+    }
 };
 
 module.exports={getHomePage,addIssue,addOutpass,deleteOutpass,deleteIssue};
