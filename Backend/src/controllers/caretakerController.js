@@ -18,6 +18,14 @@ const getAllOutpasses=async(req,res)=>{
     .exec();
   res.status(200).json({outpassesData});
 };
+const getAllCompletedOutpasses=async(req,res)=>{
+  const userData=await User.findOne({_id:req.userId});
+  const hostelName=userData.hostelName;
+  const outpassesData=await Outpass.find({hostelName,status:"completed"})
+  .populate('studentId','name email')
+  .exec();
+  res.status(200).json({outpassesData});
+};
 const getOneOutpass=async(req,res)=>{
   try{
     const {id}=req.params;
@@ -26,6 +34,19 @@ const getOneOutpass=async(req,res)=>{
   .populate('studentId', 'name email'); // Only fetch name and email from Student
 
 // console.log(outpassData);
+    res.status(200).json({message:"success",outpassData});
+  }catch(err){
+    console.log(err);
+    res.json(500).json({message:"server side error"});
+  }
+};
+const getOneCompletedOutpass=async(req,res)=>{
+  try{
+    const {id}=req.params;
+    console.log(id);
+    const outpassData = await Outpass.findOne({ _id: id })
+    .populate('studentId','name email');
+    // console.log(outpassData);
     res.status(200).json({message:"success",outpassData});
   }catch(err){
     console.log(err);
@@ -107,4 +128,4 @@ const updateIssue=async(req,res)=>{
     res.status(500).json({ error: "Failed to update issue" });
   }
 };
-module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass,updateOutpass,updateIssue};
+module.exports={getHomeData,getAllOutpasses,getAllIssues,getOneOutpass,updateOutpass,updateIssue,getAllCompletedOutpasses,getOneCompletedOutpass};
