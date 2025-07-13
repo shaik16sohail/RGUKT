@@ -11,7 +11,10 @@ const port=process.env.PORT|| 8080;
 const cookieParser = require("cookie-parser");
 const connectDB = require("./src/config/db");
 const mongoose=require('mongoose');
+const QRCode = require('qrcode');
+const jwt = require('jsonwebtoken');
 const Outpass = require("./src/models/Outpass");
+const transporter = require("./src/utils/transporter");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
@@ -39,22 +42,54 @@ app.use("/api/auth",authRoutes);
 app.use("/student",studentRoutes);
 app.use("/caretaker",caretakerRoutes);
 app.use("/api/payment",paymentRoutes);
+// Add to your main Express server file (e.g., app.js or index.js)
+app.get('/track', (req, res) => {
+  const { studentId, outpassId } = req.query;
+
+  if (!studentId || !outpassId) {
+    return res.status(400).send('Missing studentId or outpassId');
+  }
+
+  // Your app scheme (must match your app.json config)
+  const appLink = `myapp://track?studentId=${studentId}&outpassId=${outpassId}`;
+
+  // Redirect to your app
+  res.redirect(appLink);
+});
+
 app.post("/api/scan/",async(req,res)=>{
+  let mailOptions={
+      from:process.env.MAIL,
+      to:'shaik16sohail@gmail.com',
+      subject:'',
+      html:'',
+    };
   try{
     const {outpassId}=req.body;
     const objectId = new mongoose.Types.ObjectId(outpassId);
-    // console.log(objectId);
     const outpassData=await Outpass.findOne({_id:objectId});
-    // console.log(outpassData);
+    console.log(outpassData);
     if(outpassData && outpassData.status=='approved'){
-      // const some=await Outpass.findOneAndDelete({_id:objectId});
-      // console.log(some);
-       outpassData.status = "completed";
+      outpassData.status = "completed";
       outpassData.completedAt = new Date(); // Add this field in your schema
       await outpassData.save();
-      res.status(200).json({message:"success"});
-    }else{
-      res.status(201).json({message:"outpass is not approved"});
+
+      const tokenPayload={studentId:outpassData.studentId,outpassId:outpassData._id};
+      const token=jwt.sign(tokenPayload,process.env.JWT_SECRET,{expiresIn:'24h'});
+      const qrCodeDataURL=await QRCode.toDataURL(token);
+      const redirectLink = `https://9b6493760c9e.ngrok-free.app/track?studentId=${outpassData.studentId}&outpassId=${outpassId}`;
+      mailOptions.subject = 'Start Location Sharing';
+      mailOptions.html = `
+        <p>Please click the link below to start location sharing:</p>
+        <a href="${redirectLink}">${redirectLink}</a>
+      `;
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({message:"success",qrcode:qrCodeDataURL,token,});
+    }else if(outpassData && outpassData.status=='completed'){
+      // console.log(2);
+      res.status(201).json({message:"outpass is already used bro"});
+    }else {
+      res.status(404).json({ message: "outpass not found" });
     }
     
   }catch(err){
@@ -63,11 +98,28 @@ app.post("/api/scan/",async(req,res)=>{
   }
   
 });
-app.post("/api/location",(req,res)=>{
-   const { latitude, longitude } = req.body;
-  console.log(`📍 Received location - Latitude: ${latitude}, Longitude: ${longitude}`);
-  res.json({ message: 'Location received successfully' });
-})
+app.post("/api/location",async(req,res)=>{
+  try{
+    const {outpassId,latitude,longitude}=req.body;
+    if(!outpassId || !longitude ||!latitude)
+      return res.status(400).json({error:"Missing required fields"});
+    const outpass=await Outpass.findById(outpassId);
+    if(!outpass)
+      return res.status(404).json({error:"Outpass not found"});
+    const newLocation={
+      latitude,longitude,
+      timestamp:new Date(),
+    };
+    outpass.locations.push(newLocation);
+    await outpass.save();
+    console.log("Location saved for outpass",outpassId);
+    res.json({message:"Location stored in DB"});
+
+  }catch(err){
+    console.log("error",err);
+    res.status(500).json({error:"Internal server error"});
+  }
+});
 
 
 app.listen(port,()=>{
