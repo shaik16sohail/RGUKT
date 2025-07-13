@@ -28,6 +28,8 @@ import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import ScrollToTop from './utils/ScrollToTop';
 import StripeCheckoutButton from './components/StripeCheckoutButton';
+import CompletedOutpassesPage from './components/CareTaker/CompletedOutpassesPage';
+import CompletedOutpassDetails from './components/CareTaker/CompletedOutpassDetails';
 // import Header from './components/Header/Header'
 function App() {
   
@@ -44,6 +46,8 @@ function App() {
           {/* caretaker routes */}
           <Route path='/caretaker/home' element={<ProtectedRoute allowedRole="caretaker"><Layout><CareTakerHome></CareTakerHome></Layout></ProtectedRoute>}></Route>
           <Route path='/caretaker/outpasses' element={<ProtectedRoute allowedRole="caretaker"><Layout><Outpasses></Outpasses></Layout></ProtectedRoute>}></Route>
+          <Route path='/caretaker/outpasses/completed' element={<ProtectedRoute allowedRole="caretaker"><Layout><CompletedOutpassesPage/></Layout></ProtectedRoute>}></Route>
+          <Route path='/caretaker/outpasses/completed/:id' element={<ProtectedRoute allowedRole="caretaker"><Layout><CompletedOutpassDetails/></Layout></ProtectedRoute>}></Route>
           <Route path='/caretaker/outpasses/:id' element={<ProtectedRoute allowedRole="caretaker"><Layout><OutpassDetails></OutpassDetails></Layout></ProtectedRoute>}></Route>
           <Route path='/caretaker/issues' element={<ProtectedRoute allowedRole="caretaker"><Layout><Issues></Issues></Layout></ProtectedRoute>}></Route>
           {/* Student routes */}
