@@ -1,5 +1,10 @@
 const mongoose=require("mongoose");
 
+const locationSchema=new mongoose.Schema({
+    latitude:{type:Number,required:true},
+    longitude:{type:Number,required:true},
+    timestamp:{type:Date,default:Date.now},
+});
 const outpassSchema=new mongoose.Schema({
     studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", required: true },
     destination:{type:String,required:true},
@@ -12,6 +17,7 @@ const outpassSchema=new mongoose.Schema({
     status: { type: String, enum: ["pending", "approved", "rejected", "completed"], default: "pending" },
     raisedAt: { type: Date, default: Date.now },
     completedAt: { type: Date, default: null},
+    locations:[locationSchema],
 
 });
 
