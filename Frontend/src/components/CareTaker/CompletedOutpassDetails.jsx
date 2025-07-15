@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import MapComponent from "../MapComponent";
 
 const CompletedOutpassDetails = () => {
-  const { id } = useParams(); // id from URL
+  const { id } = useParams();
   const [outpass, setOutpass] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [addresses, setAddresses] = useState([]);
 
   useEffect(() => {
     fetchOutpassDetails();
@@ -13,14 +15,37 @@ const CompletedOutpassDetails = () => {
 
   const fetchOutpassDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/caretaker/outpasses/completed/${id}`,{
-        withCredentials:true,
+      const res = await axios.get(`http://localhost:8080/caretaker/outpasses/completed/${id}`, {
+        withCredentials: true,
       });
-      setOutpass(res.data.outpassData);
+      const outpassData = res.data.outpassData;
+      setOutpass(outpassData);
+
+      // Fetch addresses in bulk
+      if (outpassData?.locations?.length) {
+        const addressPromises = outpassData.locations.map(loc =>
+          getAddressFromCoordinates(loc.latitude, loc.longitude)
+        );
+        const addressesList = await Promise.all(addressPromises);
+        setAddresses(addressesList);
+      }
     } catch (err) {
       console.error("Error fetching outpass:", err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const getAddressFromCoordinates = async (latitude, longitude) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/reverse-geocode?lat=${latitude}&lon=${longitude}`, {
+        credentials: 'include'
+      });
+      const data = await response.json();
+      return data.address || "Unknown location";
+    } catch (error) {
+      console.error("Error fetching address:", error);
+      return "Unknown location";
     }
   };
 
@@ -47,6 +72,7 @@ const CompletedOutpassDetails = () => {
               <th>#</th>
               <th>Latitude</th>
               <th>Longitude</th>
+              <th>Place Name</th>
               <th>Timestamp</th>
             </tr>
           </thead>
@@ -56,6 +82,7 @@ const CompletedOutpassDetails = () => {
                 <td>{index + 1}</td>
                 <td>{loc.latitude}</td>
                 <td>{loc.longitude}</td>
+                <td>{addresses[index] || "Fetching..."}</td>
                 <td>{new Date(loc.timestamp).toLocaleString()}</td>
               </tr>
             ))}
@@ -64,6 +91,7 @@ const CompletedOutpassDetails = () => {
       ) : (
         <p>No location data available.</p>
       )}
+      <MapComponent latitude={outpass.locations[outpass.locations.length-1].latitude} longitude={outpass.locations[outpass.locations.length-1].longitude}/>
     </div>
   );
 };

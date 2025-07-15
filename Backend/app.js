@@ -12,6 +12,7 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./src/config/db");
 const mongoose=require('mongoose');
 const QRCode = require('qrcode');
+const axios=require('axios');
 const jwt = require('jsonwebtoken');
 const Outpass = require("./src/models/Outpass");
 const transporter = require("./src/utils/transporter");
@@ -57,6 +58,27 @@ app.get('/track', (req, res) => {
   res.redirect(appLink);
 });
 
+app.get('/api/reverse-geocode',async(req,res)=>{
+  const {lat,lon}=req.query;
+  if(!lat || !lon) return res.status(400).json({message:"lat and lon required"});
+  try{
+    const response=await axios.get(`https://nominatim.openstreetmap.org/reverse`, {
+      params: {
+        lat,
+        lon,
+        format: 'json'
+      },
+      headers: {
+        'User-Agent': 'YourAppName/1.0' // Nominatim requires this
+      }
+    });
+    res.json({address:response.data.display_name});
+  }catch(err){
+    console.error(err.message);
+    res.status(500).json({message:"Reverse geocoding failed"});
+  }
+});
+
 app.post("/api/scan/",async(req,res)=>{
   let mailOptions={
       from:process.env.MAIL,
@@ -80,8 +102,8 @@ app.post("/api/scan/",async(req,res)=>{
       const redirectLink = `https://9b6493760c9e.ngrok-free.app/track?studentId=${outpassData.studentId}&outpassId=${outpassId}`;
       mailOptions.subject = 'Start Location Sharing';
       mailOptions.html = `
-        <p>Please click the link below to start location sharing:</p>
-        <a href="${redirectLink}">${redirectLink}</a>
+        <p>studentId-${outpassData.studentId}</p>
+        <p>ObjectId-${outpassId}</p>
       `;
       await transporter.sendMail(mailOptions);
       res.status(200).json({message:"success",qrcode:qrCodeDataURL,token,});
