@@ -3,6 +3,7 @@ const express=require('express');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app=express();
+const Stripe = require('stripe');
 const authRoutes = require("./src/routes/authRoutes");
 const studentRoutes=require('./src/routes/studentRoutes');
 const caretakerRoutes=require('./src/routes/caretakerRoutes');
@@ -16,6 +17,10 @@ const axios=require('axios');
 const jwt = require('jsonwebtoken');
 const Outpass = require("./src/models/Outpass");
 const transporter = require("./src/utils/transporter");
+const tempFormData = require("./src/utils/tempFormData");
+const User = require("./src/models/User");
+const Student = require("./src/models/Student");
+app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
@@ -50,13 +55,67 @@ app.get('/track', (req, res) => {
   if (!studentId || !outpassId) {
     return res.status(400).send('Missing studentId or outpassId');
   }
-
-  // Your app scheme (must match your app.json config)
   const appLink = `myapp://track?studentId=${studentId}&outpassId=${outpassId}`;
-
-  // Redirect to your app
   res.redirect(appLink);
 });
+
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  let event;
+  try {
+    event = Stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.error('❌ Webhook error:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed'){
+    const session = event.data.object;
+    const formData = tempFormData[session.id];
+    const userId = session.metadata.userId;
+    console.log("formData in app.js",formData);
+    console.log(session.metadata);
+    try {
+      const userData = await User.findOne({ _id: userId });
+      // console.log(userId);
+      if (!userData) {
+        console.error("❌ User not found");
+        return;
+      }
+
+      const studentData = await Student.findOne({ email: userData.email });
+      if (!studentData) {
+        console.error("❌ Student not found");
+        return;
+      }
+
+      const { reason, destination, studentMobile, parentMobile} = formData;
+
+      const newOutpass = new Outpass({
+        studentId: studentData._id,
+        reason,
+        destination,
+        mobileNo: studentMobile,
+        parentMobileNo: parentMobile,
+        type: "emergency",
+        status: "approved",
+        hostelName: studentData.hostelName
+      });
+
+      await newOutpass.save();
+      console.log('✅ Outpass saved:', newOutpass);
+      delete tempFormData[session.id];
+
+    } catch (error) {
+      console.error("❌ Error saving Outpass:", error.message);
+    }
+  }
+  res.status(200).end();
+});
+
+
 
 app.get('/api/reverse-geocode',async(req,res)=>{
   const {lat,lon}=req.query;
