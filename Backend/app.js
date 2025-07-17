@@ -20,6 +20,7 @@ const transporter = require("./src/utils/transporter");
 const tempFormData = require("./src/utils/tempFormData");
 const User = require("./src/models/User");
 const Student = require("./src/models/Student");
+const generateQRCode = require("./src/utils/qrGenerator");
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -70,7 +71,12 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     console.error('❌ Webhook error:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
-
+  let mailOptions={
+      from:process.env.MAIL,
+      to:'shaik16sohail@gmail.com',
+      subject:'',
+      html:'',
+    };
   if (event.type === 'checkout.session.completed'){
     const session = event.data.object;
     const formData = tempFormData[session.id];
@@ -104,8 +110,21 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
         hostelName: studentData.hostelName
       });
 
-      await newOutpass.save();
+      const generatedOne= await newOutpass.save();
       console.log('✅ Outpass saved:', newOutpass);
+      const qrCodeUrl=await generateQRCode(generatedOne._id.toString());
+            console.log(qrCodeUrl);
+            const qrBuffer=await QRCode.toBuffer(generatedOne._id.toString());
+            mailOptions.subject='Your Outpass request is Approved Successfully';
+            mailOptions.html=`<p>Your Outpass QR Code:</p><img src="${qrCodeUrl}" alt="QR Code" />`;
+            mailOptions.attachments = [
+              {
+                filename: 'qrcode.png',
+                content: qrBuffer,
+                cid: 'qrcode'
+              }
+            ];
+            await transporter.sendMail(mailOptions);
       delete tempFormData[session.id];
 
     } catch (error) {
