@@ -22,6 +22,7 @@ const User = require("./src/models/User");
 const Student = require("./src/models/Student");
 const generateQRCode = require("./src/utils/qrGenerator");
 const Message = require("./src/models/Message");
+const pareserMiddleware = require("./src/middleware/parserMiddleware");
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -224,7 +225,11 @@ app.post("/api/location",async(req,res)=>{
     res.status(500).json({error:"Internal server error"});
   }
 });
-
+app.post("/api/upload",pareserMiddleware,(req,res)=>{
+  if(!req.file || !req.file.path)
+      return res.status(400).json({ message: 'Image upload failed'});
+  res.json({ imageUrl: req.file.path });
+});
 
 // app.listen(port,()=>{
 //     console.log("server is running lowde");

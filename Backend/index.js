@@ -18,8 +18,8 @@ io.on('connection',(socket)=>{
         console.log(`Joined hostel ${hostelName}`);
     });
 
-    socket.on('sendMessage',async({hostelName,senderName,message})=>{
-        const newMsg=await Message.create({hostelName,senderName,message});
+    socket.on('sendMessage',async({hostelName,senderName,message,isImage,imageUrl})=>{
+        const newMsg=await Message.create({hostelName,senderName,message,isImage,imageUrl});
         io.to(hostelName).emit('receiveMessage',newMsg);
     });
     socket.on('disconnect',()=>{
