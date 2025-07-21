@@ -31,6 +31,7 @@ import ScrollToTop from './utils/ScrollToTop';
 import StripeCheckoutButton from './components/StripeCheckoutButton';
 import CompletedOutpassesPage from './components/CareTaker/CompletedOutpassesPage';
 import CompletedOutpassDetails from './components/CareTaker/CompletedOutpassDetails';
+import ChatPage from './components/ChatPage';
 // import Header from './components/Header/Header'
 function App() {
   
@@ -58,6 +59,7 @@ function App() {
           <Route path='/student/emergency-outpass' element={<ProtectedRoute allowedRole='student'><Layout><EmergencyOutpass></EmergencyOutpass></Layout></ProtectedRoute>}></Route>
           <Route path='/student/issue' element={<><ProtectedRoute allowedRole='student'><Layout><RaiseIssue></RaiseIssue></Layout></ProtectedRoute></>}></Route>
           {/* warden routes */}
+          <Route path='/chats' element={<><Layout><ChatPage></ChatPage></Layout></>}></Route>
           <Route path='/warden/home' element={<ProtectedRoute allowedRole='warden'><Layout><WardenHome></WardenHome></Layout></ProtectedRoute>}></Route>
           
           <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>

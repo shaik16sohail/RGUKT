@@ -451,3 +451,7 @@ td {
   background-color: rgb(17, 16, 16);
   border-radius: 0.8rem;
 }
+
+.chat-container::-webkit-scrollbar {
+  display: none;
+}
