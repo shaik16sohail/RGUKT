@@ -21,6 +21,7 @@ const tempFormData = require("./src/utils/tempFormData");
 const User = require("./src/models/User");
 const Student = require("./src/models/Student");
 const generateQRCode = require("./src/utils/qrGenerator");
+const Message = require("./src/models/Message");
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -134,7 +135,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
   res.status(200).end();
 });
 
-
+app.get('/api/messages/:hostelName', async (req, res) => {
+    const messages = await Message.find({ hostelName: req.params.hostelName }).sort({ timestamp: 1 });
+    res.json(messages);
+});
 
 app.get('/api/reverse-geocode',async(req,res)=>{
   const {lat,lon}=req.query;
@@ -222,6 +226,8 @@ app.post("/api/location",async(req,res)=>{
 });
 
 
-app.listen(port,()=>{
-    console.log("server is running");
-})
+// app.listen(port,()=>{
+//     console.log("server is running lowde");
+// })
+
+module.exports=app;
