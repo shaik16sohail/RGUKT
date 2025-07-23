@@ -12,24 +12,22 @@ export default function ScrollingAnnouncements(){
     ]);
 
     return(
-        <div className="relative w-full bg-gradient-to-r from-black via-[rgb(137,24,26)] to-black overflow-hidden shadow-lg border-t border-b border-red-900/30">
+        <div className="relative w-full bg-black overflow-hidden shadow-lg border-t border-b border-gray-800/30">
             {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-900/10 to-transparent animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-900/10 to-transparent animate-pulse"></div>
             
             {/* Main scrolling content */}
             <div className="relative flex items-center py-3 px-4">
                 <div className="flex items-center space-x-3 mr-8 flex-shrink-0">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-red-400 font-bold text-sm tracking-wide uppercase">
-                        Live Updates
-                    </span>
+                    <div className="w-2 h-2 bg-[rgb(137,24,26)] rounded-full animate-pulse"></div>
+                    
                 </div>
                 
                 <div className="flex space-x-12 animate-scroll-smooth text-white">
                     {announcements.map((announcement, index) => (
                         <div key={index} className="flex items-center space-x-3 whitespace-nowrap">
-                            <span className="text-red-300 text-lg">•</span>
-                            <span className="font-medium text-sm md:text-base text-gray-100 hover:text-red-100 transition-colors duration-300">
+                            <span className="text-[rgb(137,24,26)] text-lg">•</span>
+                            <span className="font-medium text-sm md:text-base text-gray-100 hover:text-[rgb(137,24,26)] transition-colors duration-300">
                                 {announcement}
                             </span>
                         </div>
@@ -37,8 +35,8 @@ export default function ScrollingAnnouncements(){
                     {/* Duplicate for seamless loop */}
                     {announcements.map((announcement, index) => (
                         <div key={`duplicate-${index}`} className="flex items-center space-x-3 whitespace-nowrap">
-                            <span className="text-red-300 text-lg">•</span>
-                            <span className="font-medium text-sm md:text-base text-gray-100 hover:text-red-100 transition-colors duration-300">
+                            <span className="text-[rgb(137,24,26)] text-lg">•</span>
+                            <span className="font-medium text-sm md:text-base text-gray-100 hover:text-[rgb(137,24,26)] transition-colors duration-300">
                                 {announcement}
                             </span>
                         </div>
@@ -46,9 +44,9 @@ export default function ScrollingAnnouncements(){
                 </div>
             </div>
             
-            {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-purple-900 to-transparent pointer-events-none"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-indigo-900 to-transparent pointer-events-none"></div>
+            {/* Fade edges - now with black gradient */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
             
             <style jsx>{`
                 @keyframes scroll-smooth {
