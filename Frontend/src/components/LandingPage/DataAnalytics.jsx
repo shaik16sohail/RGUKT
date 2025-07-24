@@ -140,14 +140,14 @@ const DataAnalytics = () => {
             <span className="text-sm text-gray-400">Live Data</span>
           </div>
         </div>
-        <p className="text-gray-400 text-sm md:text-base">
+        {/* <p className="text-gray-400 text-sm md:text-base">
           Monthly comparison of outpass applications
-        </p>
+        </p> */}
       </div>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="bg-gradient-to-r from-red-600/20 to-red-700/20 backdrop-blur-sm rounded-xl p-4 border border-red-600/30">
+      {/* <div className="grid grid-cols-2 gap-4 mb-6"> */}
+        {/* <div className="bg-gradient-to-r from-red-600/20 to-red-700/20 backdrop-blur-sm rounded-xl p-4 border border-red-600/30">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-red-300 text-sm font-medium">Total Boys</p>
@@ -157,8 +157,8 @@ const DataAnalytics = () => {
               <span className="text-red-400 text-lg">👨</span>
             </div>
           </div>
-        </div>
-        <div className="bg-gradient-to-r from-pink-600/20 to-pink-700/20 backdrop-blur-sm rounded-xl p-4 border border-pink-600/30">
+        </div> */}
+        {/* <div className="bg-gradient-to-r from-pink-600/20 to-pink-700/20 backdrop-blur-sm rounded-xl p-4 border border-pink-600/30">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-pink-300 text-sm font-medium">Total Girls</p>
@@ -168,8 +168,8 @@ const DataAnalytics = () => {
               <span className="text-pink-400 text-lg">👩</span>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
 
       {/* Chart Container */}
       <div className="relative h-80 md:h-96 bg-gradient-to-br from-gray-800/30 to-gray-900/30 rounded-xl p-4 border border-gray-700/30">
