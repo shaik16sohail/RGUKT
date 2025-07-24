@@ -22,7 +22,7 @@ export default function Outpasses(){
         fetchData();
     },[]);
     return(
-        <div className='outpasses'>
+        <div className=''>
             {/* <div className='outpasses-table'> */}
                 <PaginatedTable outpasses={outpasses}/>
             {/* </div> */}
