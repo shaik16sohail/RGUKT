@@ -28,7 +28,19 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
   });
 
   const handleRowClick=(outpass)=>{
-    navigate(`${outpass._id}`);
+    if(outpass.type=="normal"){
+      if(outpass.status!="completed")
+        navigate(`${outpass._id}`);
+      else
+        navigate(`completed/${outpass._id}/`);
+
+    }else{
+      if(outpass.status=="completed")
+        navigate(`completed/${outpass._id}/`);
+    }
+        
+
+  
   };
 
   // Sorting Logic
@@ -57,6 +69,7 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
       case 'pending': return 'text-yellow-400';
       case 'approved': return 'text-green-400';
       case 'rejected': return 'text-red-400';
+      case 'completed':return 'text-green-400';
       default: return 'text-gray-400';
     }
   };
@@ -66,6 +79,7 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
       case 'pending': return 'bg-yellow-900/30 border-yellow-400/50';
       case 'approved': return 'bg-green-900/30 border-green-400/50';
       case 'rejected': return 'bg-red-900/30 border-red-400/50';
+      case 'completed':return 'bg-green-900/30 border-green-400/50';
       default: return 'bg-gray-900/30 border-gray-400/50';
     }
   };
@@ -132,6 +146,7 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
                 <option value="pending">Pending</option>
                 <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
+                <option value="completed">Completed</option>
               </select>
             </div>
 
