@@ -18,7 +18,8 @@ const issueSchema = new mongoose.Schema({
     type:String,
   },
   hostelName: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  caretakerId:{type:mongoose.Schema.Types.ObjectId,ref:"Caretaker"}
 });
 
 module.exports = mongoose.model("Issue", issueSchema);

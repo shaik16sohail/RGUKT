@@ -4,6 +4,7 @@ const Issue = require("../models/Issue");
 const QRCode = require('qrcode');
 const generateQRCode = require("../utils/qrGenerator");
 const  transporter  = require("../utils/transporter");
+const Caretaker = require("../models/Caretaker");
 const getHomeData=()=>{
 
 };
@@ -57,6 +58,10 @@ const updateOutpass=async(req,res)=>{
   try{
     const {id}=req.params;
     console.log(id);
+    const userData=await User.findOne({_id:req.userId});
+    const emailOfThat=userData.email;
+    const caretakerData=await Caretaker.findOne({email:emailOfThat});
+    const caretakerId=caretakerData._id;
     const {status}=req.body;
     let mailOptions={
       from:process.env.MAIL,
@@ -84,7 +89,8 @@ const updateOutpass=async(req,res)=>{
       mailOptions.html=`<p>Please Contact Warden Office or Raise new Outpass Request</p>`;
       await transporter.sendMail(mailOptions);
     }
-    const response=await Outpass.findByIdAndUpdate(id,{$set:{status:status}},{new:true});
+    await Caretaker.findByIdAndUpdate(caretakerId,{$set:{outpassesApproved:caretakerData.outpassesApproved+1}},{new:true});
+    const response=await Outpass.findByIdAndUpdate(id,{$set:{status:status,caretakerId:caretakerId}},{new:true});
     console.log(response);
     res.status(200).json({message:"success",response});
 
@@ -117,9 +123,16 @@ const getAllIssues=async(req,res)=>{
 const updateIssue=async(req,res)=>{
   const {status,comment}=req.body;
   const {id}=req.params;
+  const userData=await User.findOne({_id:req.userId});
+  const emailOfThat=userData.email;
+  const caretakerData=await Caretaker.findOne({email:emailOfThat});
+  const caretakerId=caretakerData._id;
+
   try{
+    if(status=="resolved")
+        await Caretaker.findByIdAndUpdate(caretakerId,{$set:{issuesResolved:caretakerData.issuesResolved+1}},{new:true});
     const updated=await Issue.findByIdAndUpdate(id,{
-      status,comment
+      status,comment,caretakerId
     },{new:true});
     console.log(updated);
     res.status(200).json({message:"Updated Successfully"});
