@@ -397,13 +397,14 @@ const Home = () => {
                                                 </span>
                                             </td>
                                             <td style={styles.tableCell}>
-                                                <button 
+                                                {outpass.status!="completed" && <button 
                                                     className='cancel-button'
                                                     style={styles.cancelButton}
                                                     onClick={() => cancelOutpass(outpass.id)}
                                                 >
                                                     Cancel
-                                                </button>
+                                                </button> }
+                                                
                                             </td>
                                         </tr>
                                     ))}
@@ -475,13 +476,14 @@ const Home = () => {
                                                 </span>
                                             </td>
                                             <td style={styles.tableCell}>
-                                                <button 
+                                                {issue.status=="pending" &&  <button 
                                                     className='cancel-button'
                                                     style={styles.cancelButton}
                                                     onClick={() => cancelIssue(issue.id)}
                                                 >
                                                     Cancel
-                                                </button>
+                                                </button> }
+                                               
                                             </td>
                                         </tr>
                                     ))}
