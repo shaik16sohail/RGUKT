@@ -129,7 +129,7 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
                 onChange={(e) => setSelectedType(e.target.value)}
               >
                 <option value="">All Types</option>
-                <option value="regular">Regular</option>
+                <option value="normal">Normal</option>
                 <option value="emergency">Emergency</option>
               </select>
             </div>
