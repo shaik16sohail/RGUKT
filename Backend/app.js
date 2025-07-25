@@ -7,6 +7,7 @@ const Stripe = require('stripe');
 const authRoutes = require("./src/routes/authRoutes");
 const studentRoutes=require('./src/routes/studentRoutes');
 const caretakerRoutes=require('./src/routes/caretakerRoutes');
+const wardenRoutes=require('./src/routes/wardenRoutes');
 const paymentRoutes=require('./src/routes/payment');
 const port=process.env.PORT|| 8080;
 const cookieParser = require("cookie-parser");
@@ -50,6 +51,7 @@ connectDB();
 app.use("/api/auth",authRoutes);
 app.use("/student",studentRoutes);
 app.use("/caretaker",caretakerRoutes);
+app.use("/warden",wardenRoutes);
 app.use("/api/payment",paymentRoutes);
 // Add to your main Express server file (e.g., app.js or index.js)
 app.get('/track', (req, res) => {
