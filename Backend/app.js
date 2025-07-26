@@ -24,6 +24,7 @@ const Student = require("./src/models/Student");
 const generateQRCode = require("./src/utils/qrGenerator");
 const Message = require("./src/models/Message");
 const pareserMiddleware = require("./src/middleware/parserMiddleware");
+const Caretaker = require("./src/models/Caretaker");
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -62,6 +63,36 @@ app.get('/track', (req, res) => {
   }
   const appLink = `myapp://track?studentId=${studentId}&outpassId=${outpassId}`;
   res.redirect(appLink);
+});
+
+app.post('/feedback/outpass',async(req,res)=>{
+  const { outpassId, rating } = req.body;
+  if (!outpassId || !rating) {
+    return res.status(400).json({ error: 'Missing outpassId or rating' });
+  }
+  try{
+    const OutpassData=await Outpass.findOne({_id:outpassId});
+    const caretakerId=OutpassData.caretakerId;
+
+    await Caretaker.findByIdAndUpdate(
+  caretakerId,
+  {
+    $inc: {
+      "feedbackRating.totalRating": rating,
+      "feedbackRating.ratingCount": 1
+    }
+  }
+  );
+  await Outpass.findByIdAndUpdate(outpassId,{$set:{feedbackGiven:true}});
+
+  console.log("success");
+  res.status(200).json({ message: "success" });
+  }catch(err){
+    console.log(err);
+    res.status(404).json({error:"something went wrong"});
+  }
+  
+
 });
 
 app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {

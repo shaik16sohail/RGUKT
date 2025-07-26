@@ -32,6 +32,7 @@ import StripeCheckoutButton from './components/StripeCheckoutButton';
 import CompletedOutpassesPage from './components/CareTaker/CompletedOutpassesPage';
 import CompletedOutpassDetails from './components/CareTaker/CompletedOutpassDetails';
 import ChatPage from './components/ChatPage';
+import OutpassFeedback from './components/Student/OutpassFeedback';
 // import Header from './components/Header/Header'
 function App() {
   
@@ -58,6 +59,7 @@ function App() {
           <Route path='/student/general-outpass' element={<ProtectedRoute allowedRole='student'><Layout><GeneralOutpass></GeneralOutpass></Layout></ProtectedRoute>}></Route>
           <Route path='/student/emergency-outpass' element={<ProtectedRoute allowedRole='student'><Layout><EmergencyOutpass></EmergencyOutpass></Layout></ProtectedRoute>}></Route>
           <Route path='/student/issue' element={<><ProtectedRoute allowedRole='student'><Layout><RaiseIssue></RaiseIssue></Layout></ProtectedRoute></>}></Route>
+          <Route path='/student/feedback/outpass/:outpassId' element={<><Layout><OutpassFeedback></OutpassFeedback></Layout></>}></Route>
           {/* warden routes */}
           <Route path='/chats' element={<><Layout><ChatPage></ChatPage></Layout></>}></Route>
           <Route path='/warden/home' element={<ProtectedRoute allowedRole='warden'><Layout><WardenHome></WardenHome></Layout></ProtectedRoute>}></Route>
