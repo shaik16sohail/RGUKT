@@ -53,7 +53,7 @@ const Home = () => {
 
   const pieChartData = caretakers.map((c) => ({
     name: c.name,
-    value: c.feedbackRating,
+    value: parseFloat(c.feedbackRating.toFixed(2)),
   }));
 
   const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'];
@@ -138,7 +138,7 @@ const Home = () => {
                     <span className="text-gray-200 text-sm font-medium">Rating</span>
                     <div className="flex items-center">
                       <span className="text-yellow-400 text-sm mr-1">⭐</span>
-                      <span className="text-white font-bold text-sm">{caretaker.feedbackRating}</span>
+                      <span className="text-white font-bold text-sm">{caretaker.feedbackRating.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
