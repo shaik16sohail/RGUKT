@@ -108,7 +108,13 @@ const OutpassDetails = () => {
                   </div>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Date</p>
-                    <p className="text-white text-lg font-semibold">{outpassData.date}</p>
+                    <p className="text-white text-lg font-semibold"><span style={{fontWeight:"500"}}>
+                      {new Date(outpassData.date).toLocaleDateString('en-IN', {
+                                                        year: 'numeric',
+                                                        month: 'short',
+                                                        day: 'numeric'
+                                                    })}
+                      </span></p>
                   </div>
                 </div>
 
@@ -131,7 +137,13 @@ const OutpassDetails = () => {
                 </div>
                 <div>
                   <p className="text-white/70 text-sm font-medium">Expected Return</p>
-                  <p className="text-white text-lg font-semibold">{outpassData.date}</p>
+                  <p className="text-white text-lg font-semibold"><span style={{fontWeight:"500"}}>
+                      {new Date(outpassData.expectedReturn).toLocaleDateString('en-IN', {
+                                                        year: 'numeric',
+                                                        month: 'short',
+                                                        day: 'numeric'
+                                                    })}
+                      </span></p>
                 </div>
               </div>
             </div>

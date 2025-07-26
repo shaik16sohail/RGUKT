@@ -222,12 +222,12 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
             <table className="w-full">
               <thead>
                 <tr className="bg-gradient-to-r from-gray-900/80 to-gray-800/80 border-b border-gray-700/50">
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">SNO</th>
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">Student ID</th>
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">Name</th>
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">Type</th>
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">Status</th>
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">Date</th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">SNO</th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">Student ID</th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">Name</th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">Type</th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">Status</th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-gray-300 uppercase tracking-wider">Date</th>
                 </tr>
               </thead>
               
@@ -269,7 +269,13 @@ const PaginatedTable = ({outpasses:outpassesData}) => {
                       </span>
                     </td>
                     <td className="px-4 py-4 text-sm text-gray-300 group-hover:text-white">
-                      {outpass.date}
+                      <span style={{fontWeight:"500"}}>
+                      {new Date(outpass.date).toLocaleDateString('en-IN', {
+                                                        year: 'numeric',
+                                                        month: 'short',
+                                                        day: 'numeric'
+                                                    })}
+                      </span>
                     </td>
                   </tr>
                 ))}
