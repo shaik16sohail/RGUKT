@@ -25,6 +25,7 @@ const generateQRCode = require("./src/utils/qrGenerator");
 const Message = require("./src/models/Message");
 const pareserMiddleware = require("./src/middleware/parserMiddleware");
 const Caretaker = require("./src/models/Caretaker");
+const Issue = require("./src/models/Issue");
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -84,6 +85,36 @@ app.post('/feedback/outpass',async(req,res)=>{
   }
   );
   await Outpass.findByIdAndUpdate(outpassId,{$set:{feedbackGiven:true}});
+
+  console.log("success");
+  res.status(200).json({ message: "success" });
+  }catch(err){
+    console.log(err);
+    res.status(404).json({error:"something went wrong"});
+  }
+  
+
+});
+
+app.post('/feedback/issue',async(req,res)=>{
+  const { issueId, rating } = req.body;
+  if (!issueId || !rating) {
+    return res.status(400).json({ error: 'Missing issueId or rating' });
+  }
+  try{
+    const issueData=await Issue.findOne({_id:issueId});
+    const caretakerId=issueData.caretakerId;
+
+    await Caretaker.findByIdAndUpdate(
+  caretakerId,
+  {
+    $inc: {
+      "feedbackRating.totalRating": rating,
+      "feedbackRating.ratingCount": 1
+    }
+  }
+  );
+  await Issue.findByIdAndUpdate(issueId,{$set:{feedbackGiven:true}});
 
   console.log("success");
   res.status(200).json({ message: "success" });

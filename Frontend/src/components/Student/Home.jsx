@@ -57,7 +57,9 @@ const Home = () => {
     const feedbackOutpass=(id) => {
         navigate(`/student/feedback/outpass/${id}`);
     }
-
+    const feedbackIssue=(id) =>{
+        navigate(`/student/feedback/issue/${id}`);
+    }
     const getStatusColor = (status) => {
         switch (status?.toLowerCase()) {
             case 'approved': return '#10B981'; // Green
@@ -493,13 +495,25 @@ const Home = () => {
                                                 </span>
                                             </td>
                                             <td style={styles.tableCell}>
-                                                {issue.status=="pending" &&  <button 
-                                                    className='cancel-button'
-                                                    style={styles.cancelButton}
-                                                    onClick={() => cancelIssue(issue.id)}
-                                                >
-                                                    Cancel
-                                                </button> }
+                                                {issue.status === "pending" ? (
+                                                    <button
+                                                        className="cancel-button"
+                                                        style={styles.cancelButton}
+                                                        onClick={() => cancelIssue(issue.id)}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    ) : (
+                                                    issue.feedbackGiven === false && (
+                                                        <button
+                                                        className="cancel-button"
+                                                        style={styles.cancelButton}
+                                                        onClick={() => feedbackIssue(issue.id)}
+                                                        >
+                                                        Feedback
+                                                        </button>
+                                                    )
+                                                )}
                                                
                                             </td>
                                         </tr>

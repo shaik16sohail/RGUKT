@@ -19,7 +19,8 @@ const issueSchema = new mongoose.Schema({
   },
   hostelName: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  caretakerId:{type:mongoose.Schema.Types.ObjectId,ref:"Caretaker"}
+  caretakerId:{type:mongoose.Schema.Types.ObjectId,ref:"Caretaker"},
+  feedbackGiven: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model("Issue", issueSchema);

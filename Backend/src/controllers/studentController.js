@@ -23,6 +23,7 @@ const getHomePage=async(req,res)=>{
             status:issue.status,
             date:issue.createdAt,
             id:issue._id,
+            feedbackGiven:issue.feedbackGiven,
         }));
     res.status(200).json({Outpasses,Issues});
     }catch(err){
