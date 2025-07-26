@@ -115,8 +115,9 @@ const deleteOutpass=async(req,res)=>{
 const deleteIssue=async(req,res)=>{
     const {id}=req.params;
     try{
-        const some=await Issue.findOneAndDelete(id);
+        const some=await Issue.findOneAndDelete({_id:id});
         console.log(some);
+        console.log("successful");
         res.status(201).json({ message: "Issue deleted successfully"});
     }catch(err){
         console.log(err);

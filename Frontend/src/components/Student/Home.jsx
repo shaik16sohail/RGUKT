@@ -44,11 +44,7 @@ const Home = () => {
             const response = await axios.delete(`http://localhost:8080/student/issue/${id}`, {
                 withCredentials: true,
             });
-            setIssues((prev) => {
-                return (prev.filter((issue) => {
-                    return (issue.id !== id);
-                }));
-            });
+            setIssues(prev => prev.filter(issue => issue.id!==id) );
         } catch (err) {
             console.log('error at deletion of Issue', err);
         }
