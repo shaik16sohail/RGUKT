@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import '../../style/student.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate=useNavigate();
     const [outpasses, setOutpasses] = useState([]);
     const [issues, setIssues] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -50,6 +52,10 @@ const Home = () => {
         } catch (err) {
             console.log('error at deletion of Issue', err);
         }
+    }
+
+    const feedbackOutpass=(id) => {
+        navigate(`/student/feedback/outpass/${id}`);
     }
 
     const getStatusColor = (status) => {
@@ -397,14 +403,25 @@ const Home = () => {
                                                 </span>
                                             </td>
                                             <td style={styles.tableCell}>
-                                                {outpass.status!="completed" && <button 
-                                                    className='cancel-button'
-                                                    style={styles.cancelButton}
-                                                    onClick={() => cancelOutpass(outpass.id)}
-                                                >
-                                                    Cancel
-                                                </button> }
-                                                
+                                                {outpass.status === "pending" ? (
+                                                    <button
+                                                        className="cancel-button"
+                                                        style={styles.cancelButton}
+                                                        onClick={() => cancelOutpass(outpass.id)}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    ) : (
+                                                    outpass.feedbackGiven === false && (
+                                                        <button
+                                                        className="cancel-button"
+                                                        style={styles.cancelButton}
+                                                        onClick={() => feedbackOutpass(outpass.id)}
+                                                        >
+                                                        Feedback
+                                                        </button>
+                                                    )
+                                                )}  
                                             </td>
                                         </tr>
                                     ))}

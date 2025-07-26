@@ -13,7 +13,8 @@ const getHomePage=async(req,res)=>{
             type:outpass.type,
             status:outpass.status,
             date:outpass.date,
-            id:outpass._id
+            id:outpass._id,
+            feedbackGiven:outpass.feedbackGiven,
         }));
         const issues=await Issue.find({studentId});
         // console.log(issues);
