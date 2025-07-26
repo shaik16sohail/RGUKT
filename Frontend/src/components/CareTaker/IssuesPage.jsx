@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../style/caretaker.css";
 import {useEffect} from 'react';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 const IssuesPage = ({issuesData,fetchData}) => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [issueType, setIssueType] = useState("");
@@ -42,14 +42,14 @@ const IssuesPage = ({issuesData,fetchData}) => {
       },{
         withCredentials:true,
       });
-      alert("Issue updated");
+      toast.success("Updated Successfully");
       setSelectedIssue(null);
       setComment("");
       if(fetchData)
           fetchData();
     }catch(err){
       console.log(err);
-      alert("Failed to update the issue");
+      toast.error("Failed to upload the issue")
 
     }
   }

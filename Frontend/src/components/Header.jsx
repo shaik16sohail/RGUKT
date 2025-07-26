@@ -3,7 +3,7 @@ import '../index.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-
+import { toast } from 'react-toastify';
 function Header () {
   const { isLoggedIn, user, logout } = useAuth()
   const navigate = useNavigate()
@@ -33,10 +33,12 @@ function Header () {
           withCredentials: true
         }
       )
-      logout()
+      logout();
+      toast.success("Successfully logged out");
       navigate('/login')
     } catch (err) {
-      console.log('logout failed', err)
+      console.log('logout failed', err);
+      toast.error("Something went wrong");
     }
   }
 

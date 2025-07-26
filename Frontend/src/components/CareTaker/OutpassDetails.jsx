@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { toast } from 'react-toastify';
 const OutpassDetails = () => {
   const navigate = useNavigate();
   const [outpassData, setOutpassData] = useState({});
@@ -15,9 +15,10 @@ const OutpassDetails = () => {
         });
         setOutpassData(response.data.outpassData);
         console.log(outpassData);
+        
       } catch (err) {
         console.log(err);
-        alert("chud gaye guru");
+        
       }
     };
     fetchData();
@@ -28,9 +29,11 @@ const OutpassDetails = () => {
       const response = await axios.patch(`http://localhost:8080/caretaker/outpasses/${id}`, { status: newStatus }, {
         withCredentials: true,
       });
+      toast.success("Updated Successfully");
       navigate('/caretaker/outpasses');
     } catch (err) {
       console.log(err);
+      toast.error("Chud gaye guru");
       alert("Failed to update");
     }
   }

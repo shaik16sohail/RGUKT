@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 const IssueFeedback = () => {
   const { issueId } = useParams();
   const navigate = useNavigate();
@@ -17,12 +17,14 @@ const IssueFeedback = () => {
         rating
       });
       setSubmitted(true);
+      toast.success("Feedback submitted successfully");
       // Navigate back after 2 seconds
       setTimeout(() => {
         navigate(-1);
       }, 2000);
     } catch (error) {
       console.error('Error submitting feedback:', error);
+      toast.error("Something went wrong");
     }
   };
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
-
+import { toast } from 'react-toastify';
 
 const stripePromise = loadStripe('pk_test_51Rc7SJQCTC4QpOeVYRbj31bGolWggB61enyV996vA5mAsCQsseo2C62O6xoVUxLgdhNX3VF4MPQD7uQxGkIwU4Ot00cB4vcFNW'); // your correct key
 
@@ -42,7 +42,7 @@ const EmergencyOutpass = () => {
 
     } catch (error) {
       console.error(error);
-      alert("Error initiating payment");
+      toast.error("something went wrong");
     }
   };
 

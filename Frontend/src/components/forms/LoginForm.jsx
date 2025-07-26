@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import { toast } from 'react-toastify';
 export default function LoginForm () {
   const {login,isLoggedIn,user}=useAuth();
   const navigate=useNavigate();
@@ -46,6 +46,7 @@ export default function LoginForm () {
           password:password
         }, { withCredentials: true });
         login(loginRes.data.user);
+        toast.success("Successfully logged in");
         navigate(`/${loginRes.data.user.userType}/home/`);
         // alert(loginRes.data);
         setEmail("");
@@ -58,7 +59,7 @@ export default function LoginForm () {
       // }
     } catch (err) {
       console.error(err)
-      alert(err);
+      toast.error("Something went wrong");
     }
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../style/student.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 const Home = () => {
     const navigate=useNavigate();
     const [outpasses, setOutpasses] = useState([]);
@@ -34,8 +34,10 @@ const Home = () => {
                 withCredentials: true,
             });
             setOutpasses(prev => prev.filter(outpass => outpass.id !== id));
+            toast.success("Outpass cancelled successfully");
         } catch (err) {
             console.log('error at outpass deletion', err);
+            toast.error("something went wrong");
         }
     }
     
@@ -45,8 +47,10 @@ const Home = () => {
                 withCredentials: true,
             });
             setIssues(prev => prev.filter(issue => issue.id!==id) );
+            toast.success("Issue cancelled successfully");
         } catch (err) {
             console.log('error at deletion of Issue', err);
+            toast.error("something went wrong");
         }
     }
 

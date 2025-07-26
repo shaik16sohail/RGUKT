@@ -2,6 +2,7 @@
 import axios from 'axios';
 import '../../style/student.css';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 const GeneralOutpass=()=>{
     const [isChecked, setIsChecked] = useState(false);
 
@@ -35,7 +36,8 @@ const GeneralOutpass=()=>{
             withCredentials:true,
           });
           console.log(response.data);
-        alert('Outpass request submitted successfully!');
+          toast.success('Outpass request submitted successfully!');
+        // alert();
         setFormData({destination: '',
           reason: '',
           mobileNo: '',
@@ -46,6 +48,7 @@ const GeneralOutpass=()=>{
           notes: '',});
         }catch(err){
           console.log(err);
+          toast.error("Something went wrong!!");
         }
         
       };

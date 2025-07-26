@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import '../../style/student.css';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const RaiseIssue=()=>{
     const [formData, setFormData] = useState({
         category: "",
@@ -38,7 +39,7 @@ const RaiseIssue=()=>{
       }
     );
 
-    alert('Form submitted successfully');
+    toast.success("Form submitted successfully");
     console.log(response.data);
 
     // Reset form
@@ -47,7 +48,7 @@ const RaiseIssue=()=>{
 
   } catch (err) {
     console.error('Error submitting form:', err);
-    alert('Failed to submit issue. Please try again.');
+    toast.error('Failed to submit issue. Please try again');
   }
 };
 
