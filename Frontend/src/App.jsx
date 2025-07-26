@@ -2,6 +2,8 @@ import { useState,useEffect } from 'react'
 import './App.css'
 import 'leaflet/dist/leaflet.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -68,7 +70,16 @@ function App() {
           
           <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>
         </Routes>
-        
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="dark"
+      />
       </BrowserRouter>
     </>
   )
