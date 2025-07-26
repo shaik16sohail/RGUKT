@@ -18,7 +18,8 @@ const outpassSchema=new mongoose.Schema({
     raisedAt: { type: Date, default: Date.now },
     completedAt: { type: Date, default: null},
     locations:[locationSchema],
-    caretakerId:{type:mongoose.Schema.Types.ObjectId,ref:"Caretaker"}
+    caretakerId:{type:mongoose.Schema.Types.ObjectId,ref:"Caretaker"},
+    feedbackGiven: { type: Boolean, default: false }
 
 });
 
