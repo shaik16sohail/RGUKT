@@ -13,6 +13,7 @@ const outpassSchema=new mongoose.Schema({
     parentMobileNo:{type:String,required:true},
     hostelName:{type:String},
     date: { type: Date},
+    expectedReturn:{type:Date},
     type: { type: String, enum: ["normal", "emergency"], required: true,default:"normal" },
     status: { type: String, enum: ["pending", "approved", "rejected", "completed"], default: "pending" },
     raisedAt: { type: Date, default: Date.now },

@@ -79,11 +79,12 @@ const addOutpass=async(req,res)=>{
         const studentUserId=studentData._id;
         if (!studentData) return res.status(404).json({ message: "Student not found" });
 
-        const {reason,destination,mobileNo,parentMobileNo,date,type}=req.body;
+        const {reason,destination,mobileNo,parentMobileNo,returnDate,date,type}=req.body;
         const hostelName=studentData.hostelName;
 
         const newOutpass=new Outpass({
             studentId:studentUserId,
+            expectedReturn:returnDate,
             reason,
             destination,
             mobileNo,
