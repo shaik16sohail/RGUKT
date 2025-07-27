@@ -36,6 +36,8 @@ import CompletedOutpassDetails from './components/CareTaker/CompletedOutpassDeta
 import ChatPage from './components/ChatPage';
 import OutpassFeedback from './components/Student/OutpassFeedback';
 import IssueFeedback from './components/Student/IssueFeedback';
+import Success from './components/pages/Success';
+import Cancel from './components/pages/Cancel';
 // import Header from './components/Header/Header'
 function App() {
   
@@ -67,6 +69,9 @@ function App() {
           {/* warden routes */}
           <Route path='/chats' element={<><Layout><ChatPage></ChatPage></Layout></>}></Route>
           <Route path='/warden/home' element={<ProtectedRoute allowedRole='warden'><Layout><WardenHome></WardenHome></Layout></ProtectedRoute>}></Route>
+
+          <Route path='/success' element={<><Layout><Success></Success></Layout></>}></Route>
+          <Route path='/cancel' element={<><Layout><Cancel></Cancel></Layout></>}></Route>
           
           <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>
         </Routes>
