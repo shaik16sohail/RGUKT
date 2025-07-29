@@ -38,6 +38,8 @@ import OutpassFeedback from './components/Student/OutpassFeedback';
 import IssueFeedback from './components/Student/IssueFeedback';
 import Success from './components/pages/Success';
 import Cancel from './components/pages/Cancel';
+import FaceRegister from './components/FaceRegister';
+import FaceVerify from './components/FaceVerify';
 // import Header from './components/Header/Header'
 function App() {
   
@@ -72,7 +74,9 @@ function App() {
 
           <Route path='/success' element={<><Layout><Success></Success></Layout></>}></Route>
           <Route path='/cancel' element={<><Layout><Cancel></Cancel></Layout></>}></Route>
-          
+          <Route path='/register' element={<><Layout><FaceRegister></FaceRegister></Layout></>}></Route>
+          {/* <Route path='/verify' element={<><Layout><</>}></Route> */}
+          <Route path='/verify' element={<><Layout><FaceVerify></FaceVerify></Layout></>}></Route>
           <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>
         </Routes>
         <ToastContainer
