@@ -3,7 +3,9 @@ import axios from 'axios';
 import '../../style/student.css';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const GeneralOutpass=()=>{
+    const navigate=useNavigate();
     const [isChecked, setIsChecked] = useState(false);
 
     const handleThat = () => setIsChecked(!isChecked);
@@ -46,6 +48,7 @@ const GeneralOutpass=()=>{
           type:'normal',
           returnDate: '',
           notes: '',});
+          navigate('/student/home');
         }catch(err){
           console.log(err);
           toast.error("Something went wrong!!");

@@ -2,7 +2,9 @@ import React,{useState} from 'react'
 import '../../style/student.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const RaiseIssue=()=>{
+    const navigate=useNavigate();
     const [formData, setFormData] = useState({
         category: "",
         description: "",
@@ -45,7 +47,7 @@ const RaiseIssue=()=>{
     // Reset form
     setFormData({ category: '', description: '', photo: null });
     e.target.reset(); // Optional: resets actual HTML form
-
+    navigate('/student/home');
   } catch (err) {
     console.error('Error submitting form:', err);
     toast.error('Failed to submit issue. Please try again');
