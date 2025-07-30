@@ -26,10 +26,13 @@ const Message = require("./src/models/Message");
 const pareserMiddleware = require("./src/middleware/parserMiddleware");
 const Caretaker = require("./src/models/Caretaker");
 const Issue = require("./src/models/Issue");
+const Face = require("./src/models/Face");
+const Outsider = require("./src/models/Outsider");
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
+// app.use(cors({ origin: true, credentials: true }));
 app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
@@ -238,8 +241,11 @@ app.post("/api/scan/",async(req,res)=>{
     const objectId = new mongoose.Types.ObjectId(outpassId);
     const outpassData=await Outpass.findOne({_id:objectId});
     console.log(outpassData);
+    const studentId=outpassData.studentId;
+    const studentData=await Student.findOne({_id:studentId});
     if(outpassData && outpassData.status=='approved'){
       outpassData.status = "completed";
+     
       outpassData.completedAt = new Date(); // Add this field in your schema
       await outpassData.save();
 
@@ -248,12 +254,13 @@ app.post("/api/scan/",async(req,res)=>{
       const qrCodeDataURL=await QRCode.toDataURL(token);
       const redirectLink = `https://9b6493760c9e.ngrok-free.app/track?studentId=${outpassData.studentId}&outpassId=${outpassId}`;
       mailOptions.subject = 'Start Location Sharing';
+      // mailOptions.to=studentData.email;
       mailOptions.html = `
         <p>studentId-${outpassData.studentId}</p>
         <p>ObjectId-${outpassId}</p>
       `;
       await transporter.sendMail(mailOptions);
-      res.status(200).json({message:"success",qrcode:qrCodeDataURL,token,});
+      res.status(200).json({message:"success",qrcode:qrCodeDataURL,token,id:studentData.id});
     }else if(outpassData && outpassData.status=='completed'){
       // console.log(2);
       res.status(201).json({message:"outpass is already used bro"});
@@ -299,4 +306,88 @@ app.post("/api/upload",pareserMiddleware,(req,res)=>{
 //     console.log("server is running lowde");
 // })
 
+// Register Face API
+app.post('/api/register-face', async (req, res) => {
+  console.log("vacchanu");
+  const { studentId, descriptor } = req.body;
+  const existing = await Face.findOne({ id:studentId });
+
+  if (existing) {
+    existing.faceDescriptor = descriptor;
+    await existing.save();
+  } else {
+    await Face.create({ id:studentId, faceDescriptor: descriptor });
+  }
+
+  res.json({ message: 'Face saved!' });
+});
+
+// Compare Face API
+app.post('/api/verify-face', async (req, res) => {
+  console.log("verifying..");
+  const { studentId, descriptor } = req.body;
+
+  const student = await Face.findOne({ id:studentId });
+  const studentData=await Student.findOne({id:studentId});
+  if (!student) return res.status(404).json({ match: false });
+
+  const stored = student.faceDescriptor;
+  const distance = euclideanDistance(stored, descriptor);
+
+  const threshold = 0.6;
+  console.log("almost done");
+  res.json({ match: distance < threshold,name:studentData.name });
+});
+
+function euclideanDistance(a, b) {
+  let sum = 0;
+  for (let i = 0; i < a.length; i++) {
+    sum += (a[i] - b[i]) ** 2;
+  }
+  return Math.sqrt(sum);
+}
+app.post("/api/enterdata",async(req,res)=>{
+  // console.log(req.body);
+  let mailOptions={
+    from:process.env.MAIL,
+    to:'shaik16sohail@gmail.com',
+    subject:'',
+    html:'',
+  };
+  try{
+    const response=await Outsider.create(req.body)
+    console.log("Document created",response);
+    const id=response._id;
+    const qrCodeUrl=await generateQRCode(id.toString());
+    // console.log(qrCodeUrl);
+    const qrBuffer=await QRCode.toBuffer(id.toString());
+    mailOptions.subject='Welcome to RGUKT-RKVALLEY';
+    mailOptions.html=`<p>Please show this qrcode to security at the time of leaving the campus</p>`;
+    mailOptions.attachments = [
+    {
+      filename: 'qrcode.png',
+      content: qrBuffer,
+      cid: 'qrcode'
+    }
+    ];
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({message:"success"});
+
+  }catch(err){
+    console.log(err);
+    res.status(400).json({message:"Something went wrong"});
+  }
+});
+app.post("/api/exitscan",async(req,res)=>{
+  const {outsiderId}=req.body;
+  console.log(outsiderId,"vacchanu sirrrr");
+  try{
+    const msg=await Outsider.deleteOne({_id:outsiderId});
+    console.log(msg);
+    res.status(200).json({message:"You can leave the campus now"});
+  }catch(err){
+    console.log(err);
+    res.status(400).json({message:"Something went wrong"});
+  }
+});
 module.exports=app;
