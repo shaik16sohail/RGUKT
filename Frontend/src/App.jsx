@@ -80,7 +80,7 @@ function App() {
           <Route path='*' element={<><Header></Header><Nope></Nope><Footer></Footer></>}></Route>
         </Routes>
         <ToastContainer
-          position="top-right"
+          position="bottom-right"
           autoClose={3000}
           hideProgressBar={false}
           newestOnTop
