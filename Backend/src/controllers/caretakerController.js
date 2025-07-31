@@ -5,8 +5,19 @@ const QRCode = require('qrcode');
 const generateQRCode = require("../utils/qrGenerator");
 const  transporter  = require("../utils/transporter");
 const Caretaker = require("../models/Caretaker");
-const getHomeData=()=>{
-
+const Student = require("../models/Student");
+const getHomeData=async(req,res)=>{
+    try{
+      const userData=await User.findOne({_id:req.userId});
+      const hostelName=userData.hostelName;
+      const outpassesData = await Outpass.find({ hostelName });
+      const issuesData=await Issue.find({hostelName,status:"pending"});
+      console.log("outpass",outpassesData);
+      res.status(200).json({outpass:outpassesData,issue:issuesData});
+    }catch(err){
+      console.log(err);
+      res.status(400).json({message:"something went wrong"});
+    }  
 };
 const getAllOutpasses=async(req,res)=>{
     //here we need to take the hostelName from user(req) and 
@@ -69,6 +80,10 @@ const updateOutpass=async(req,res)=>{
       subject:'',
       html:'',
     };
+    // const OutpassData=await Outpass.findOne({_id:id});
+    // const studentId=OutpassData.studentId;
+    // const studentData=await Student.findOne({_id:studentId});
+    // mailOptions.to=studentData.email;
     if(status=='approved'){
       const qrCodeUrl=await generateQRCode(id.toString());
       console.log(qrCodeUrl);
