@@ -291,7 +291,7 @@ function Header () {
                 style={{ fontSize: '1.2rem' }}
               ></i>
             </div>
-            <a href='#'>
+            <a href='/'>
               <img
                 src='/rguktLogo.png'
                 style={headerStyles.logoImage}
@@ -299,8 +299,13 @@ function Header () {
                 onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
                 onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
               />
+              
             </a>
-            <h1 style={headerStyles.logoTitle}>Stay Master</h1>
+            <a href='/'>
+              <h1 style={headerStyles.logoTitle}>Stay Master</h1>
+            </a>
+             
+           
           </div>
 
           {isDivVisible && (
