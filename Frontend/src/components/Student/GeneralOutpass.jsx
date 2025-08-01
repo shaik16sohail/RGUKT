@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const GeneralOutpass = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [isChecked, setIsChecked] = useState(false);
   const navigate=useNavigate();
   const handleThat = () => setIsChecked(!isChecked);
