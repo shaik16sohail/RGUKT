@@ -88,8 +88,6 @@ app.post('/feedback/outpass',async(req,res)=>{
   }
   );
   await Outpass.findByIdAndUpdate(outpassId,{$set:{feedbackGiven:true}});
-
-  console.log("success");
   res.status(200).json({ message: "success" });
   }catch(err){
     console.log(err);
@@ -118,8 +116,6 @@ app.post('/feedback/issue',async(req,res)=>{
   }
   );
   await Issue.findByIdAndUpdate(issueId,{$set:{feedbackGiven:true}});
-
-  console.log("success");
   res.status(200).json({ message: "success" });
   }catch(err){
     console.log(err);
@@ -182,7 +178,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       const generatedOne= await newOutpass.save();
       console.log('✅ Outpass saved:', newOutpass);
       const qrCodeUrl=await generateQRCode(generatedOne._id.toString());
-            console.log(qrCodeUrl);
             const qrBuffer=await QRCode.toBuffer(generatedOne._id.toString());
             mailOptions.subject='Your Outpass request is Approved Successfully';
             mailOptions.html=`<p>Your Outpass QR Code:</p><img src="${qrCodeUrl}" alt="QR Code" />`;
@@ -240,7 +235,6 @@ app.post("/api/scan/",async(req,res)=>{
     const {outpassId}=req.body;
     const objectId = new mongoose.Types.ObjectId(outpassId);
     const outpassData=await Outpass.findOne({_id:objectId});
-    console.log(outpassData);
     const studentId=outpassData.studentId;
     const studentData=await Student.findOne({_id:studentId});
     if(outpassData && outpassData.status=='approved'){
@@ -262,7 +256,6 @@ app.post("/api/scan/",async(req,res)=>{
       await transporter.sendMail(mailOptions);
       res.status(200).json({message:"success",qrcode:qrCodeDataURL,token,id:studentData.id});
     }else if(outpassData && outpassData.status=='completed'){
-      // console.log(2);
       res.status(201).json({message:"outpass is already used bro"});
     }else {
       res.status(404).json({ message: "outpass not found" });
@@ -302,13 +295,9 @@ app.post("/api/upload",pareserMiddleware,(req,res)=>{
   res.json({ imageUrl: req.file.path });
 });
 
-// app.listen(port,()=>{
-//     console.log("server is running lowde");
-// })
 
 // Register Face API
 app.post('/api/register-face', async (req, res) => {
-  console.log("vacchanu");
   const { studentId, descriptor } = req.body;
   const existing = await Face.findOne({ id:studentId });
 
@@ -347,7 +336,6 @@ function euclideanDistance(a, b) {
   return Math.sqrt(sum);
 }
 app.post("/api/enterdata",async(req,res)=>{
-  // console.log(req.body);
   let mailOptions={
     from:process.env.MAIL,
     to:'shaik16sohail@gmail.com',
@@ -356,10 +344,8 @@ app.post("/api/enterdata",async(req,res)=>{
   };
   try{
     const response=await Outsider.create(req.body)
-    console.log("Document created",response);
     const id=response._id;
     const qrCodeUrl=await generateQRCode(id.toString());
-    // console.log(qrCodeUrl);
     const qrBuffer=await QRCode.toBuffer(id.toString());
     mailOptions.subject='Welcome to RGUKT-RKVALLEY';
     mailOptions.html=`<p>Please show this qrcode to security at the time of leaving the campus</p>`;
@@ -380,10 +366,8 @@ app.post("/api/enterdata",async(req,res)=>{
 });
 app.post("/api/exitscan",async(req,res)=>{
   const {outsiderId}=req.body;
-  console.log(outsiderId,"vacchanu sirrrr");
   try{
     const msg=await Outsider.deleteOne({_id:outsiderId});
-    console.log(msg);
     res.status(200).json({message:"You can leave the campus now"});
   }catch(err){
     console.log(err);

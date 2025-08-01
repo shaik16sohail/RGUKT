@@ -12,7 +12,7 @@ const getHomeData=async(req,res)=>{
       const hostelName=userData.hostelName;
       const outpassesData = await Outpass.find({ hostelName });
       const issuesData=await Issue.find({hostelName,status:"pending"});
-      console.log("outpass",outpassesData);
+      // console.log("outpass",outpassesData);
       res.status(200).json({outpass:outpassesData,issue:issuesData});
     }catch(err){
       console.log(err);
@@ -41,7 +41,7 @@ const getAllCompletedOutpasses=async(req,res)=>{
 const getOneOutpass=async(req,res)=>{
   try{
     const {id}=req.params;
-    console.log(id);
+    // console.log(id);
     const outpassData = await Outpass.findOne({ _id: id })
   .populate('studentId', 'name email'); // Only fetch name and email from Student
 
@@ -55,7 +55,7 @@ const getOneOutpass=async(req,res)=>{
 const getOneCompletedOutpass=async(req,res)=>{
   try{
     const {id}=req.params;
-    console.log(id);
+    // console.log(id);
     const outpassData = await Outpass.findOne({ _id: id })
     .populate('studentId','name email');
     // console.log(outpassData);
@@ -68,7 +68,7 @@ const getOneCompletedOutpass=async(req,res)=>{
 const updateOutpass=async(req,res)=>{
   try{
     const {id}=req.params;
-    console.log(id);
+    // console.log(id);
     const userData=await User.findOne({_id:req.userId});
     const emailOfThat=userData.email;
     const caretakerData=await Caretaker.findOne({email:emailOfThat});
@@ -86,7 +86,7 @@ const updateOutpass=async(req,res)=>{
     // mailOptions.to=studentData.email;
     if(status=='approved'){
       const qrCodeUrl=await generateQRCode(id.toString());
-      console.log(qrCodeUrl);
+      // console.log(qrCodeUrl);
       const qrBuffer=await QRCode.toBuffer(id.toString());
       mailOptions.subject='Your Outpass request is Approved Successfully';
       mailOptions.html=`<p>Your Outpass QR Code:</p><img src="${qrCodeUrl}" alt="QR Code" />`;
@@ -106,7 +106,7 @@ const updateOutpass=async(req,res)=>{
     }
     await Caretaker.findByIdAndUpdate(caretakerId,{$set:{outpassesApproved:caretakerData.outpassesApproved+1}},{new:true});
     const response=await Outpass.findByIdAndUpdate(id,{$set:{status:status,caretakerId:caretakerId}},{new:true});
-    console.log(response);
+    // console.log(response);
     res.status(200).json({message:"success",response});
 
   }catch(err){
@@ -149,7 +149,7 @@ const updateIssue=async(req,res)=>{
     const updated=await Issue.findByIdAndUpdate(id,{
       status,comment,caretakerId
     },{new:true});
-    console.log(updated);
+    // console.log(updated);
     res.status(200).json({message:"Updated Successfully"});
   }catch(err){
     console.log(err);

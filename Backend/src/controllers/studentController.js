@@ -60,7 +60,7 @@ const addIssue=async(req,res)=>{
         });
 
         await newIssue.save();
-        console.log(newIssue);
+        // console.log(newIssue);
         res.status(201).json({ message: "Issue added successfully", issue: newIssue });
     }catch(err){
         console.log(err);
@@ -94,7 +94,7 @@ const addOutpass=async(req,res)=>{
             hostelName
         });
         await newOutpass.save();
-        console.log(newOutpass);
+        // console.log(newOutpass);
         res.status(201).json({ message: "Outpass added successfully", outpass: newOutpass });
     }catch(err){
         console.log(err);
@@ -104,8 +104,8 @@ const addOutpass=async(req,res)=>{
 const deleteOutpass=async(req,res)=>{
     const {id}=req.params;
     try{
-        const some=await Outpass.findOneAndDelete(id);
-        console.log(some);
+        const some=await Outpass.findOneAndDelete({_id:id});
+        // console.log(some);
         res.status(201).json({ message: "Outpass deleted successfully"});
     }catch(err){
         console.log(err);
@@ -116,8 +116,8 @@ const deleteIssue=async(req,res)=>{
     const {id}=req.params;
     try{
         const some=await Issue.findOneAndDelete({_id:id});
-        console.log(some);
-        console.log("successful");
+        // console.log(some);
+        // console.log("successful");
         res.status(201).json({ message: "Issue deleted successfully"});
     }catch(err){
         console.log(err);

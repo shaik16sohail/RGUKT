@@ -91,11 +91,11 @@ const register=async (req,res)=>{
 const loginUser = async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
-  console.log("user",user);
+  // console.log("user",user);
   if (!user) return res.status(404).json({ message: 'User not found' })
 
   const isMatch = await bcrypt.compare(password, user.password)
-  console.log(isMatch);
+  // console.log(isMatch);
   if (!isMatch) return res.status(401).json({ message: 'Incorrect password' })
   
     //Generate JWT
