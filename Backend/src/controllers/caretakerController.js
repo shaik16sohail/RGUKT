@@ -76,7 +76,7 @@ const updateOutpass=async(req,res)=>{
     const {status}=req.body;
     let mailOptions={
       from:process.env.MAIL,
-      to:'shaik16sohail@gmail.com',
+      to:process.env.TOMAIL,
       subject:'',
       html:'',
     };

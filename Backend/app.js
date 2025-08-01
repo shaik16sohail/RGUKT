@@ -138,7 +138,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
   }
   let mailOptions={
       from:process.env.MAIL,
-      to:'shaik16sohail@gmail.com',
+      to:process.env.TOMAIL,
       subject:'',
       html:'',
     };
@@ -227,7 +227,7 @@ app.get('/api/reverse-geocode',async(req,res)=>{
 app.post("/api/scan/",async(req,res)=>{
   let mailOptions={
       from:process.env.MAIL,
-      to:'shaik16sohail@gmail.com',
+      to:process.env.TOMAIL,
       subject:'',
       html:'',
     };
