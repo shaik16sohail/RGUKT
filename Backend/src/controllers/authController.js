@@ -104,7 +104,8 @@ const loginUser = async (req, res) => {
     //set Cookie
     res.cookie('authToken',token,{
       httpOnly:true,
-      sameSite:'Lax',
+      sameSite: 'None',
+      secure: true,
       maxAge:7*24*60*60*1000
     });
 
@@ -116,7 +117,8 @@ const loginUser = async (req, res) => {
 const logoutUser=async(req,res)=>{
   res.clearCookie('authToken',{
     httpOnly:true,
-    sameSite:'Lax',
+    sameSite: 'None',
+    secure: true,
   });
   res.status(200).json({ message: 'Logout successful'});
 
