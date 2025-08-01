@@ -25,8 +25,8 @@ router.post('/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:5174/success',
-      cancel_url: 'http://localhost:5174/cancel',
+      success_url: 'https://staymaster-xi.vercel.app/success',
+      cancel_url: 'https://staymaster-xi.vercel.app/cancel',
       metadata: {
         userId,
         studentMobile: formData.studentMobile,
