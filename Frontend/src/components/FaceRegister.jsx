@@ -3,6 +3,7 @@ import * as faceapi from 'face-api.js';
 import axios from 'axios';
 
 const FaceRegister = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const videoRef = useRef();
   const [studentId, setStudentId] = useState('');
   const [message, setMessage] = useState('');
@@ -43,7 +44,7 @@ const FaceRegister = () => {
     const faceDescriptor = Array.from(detections.descriptor); // Convert Float32Array to regular array
 
     try {
-      await axios.post('http://localhost:8080/api/register-face', {
+      await axios.post(`${backendUrl}/api/register-face`, {
         studentId,
         descriptor: faceDescriptor,
       });

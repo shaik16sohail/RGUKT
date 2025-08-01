@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 const OutpassFeedback = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { outpassId } = useParams();
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
@@ -12,7 +13,7 @@ const OutpassFeedback = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/feedback/outpass', {
+      await axios.post(`${backendUrl}/feedback/outpass`, {
         outpassId,
         rating
       });

@@ -3,8 +3,8 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { Send, Image, MessageCircle } from 'lucide-react';
-
-const SOCKET_SERVER_URL = 'http://localhost:8080';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const SOCKET_SERVER_URL = backendUrl;
 
 const ChatPage = () => {
     const { user } = useAuth();

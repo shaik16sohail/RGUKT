@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 const IssueFeedback = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { issueId } = useParams();
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
@@ -12,7 +13,7 @@ const IssueFeedback = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/feedback/issue', {
+      await axios.post(`${backendUrl}/feedback/issue`, {
         issueId,
         rating
       });

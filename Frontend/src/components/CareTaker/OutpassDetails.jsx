@@ -6,11 +6,11 @@ const OutpassDetails = () => {
   const navigate = useNavigate();
   const [outpassData, setOutpassData] = useState({});
   const { id } = useParams();
-
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/caretaker/outpasses/${id}`, {
+        const response = await axios.get(`${backendUrl}/caretaker/outpasses/${id}`, {
           withCredentials: true
         });
         setOutpassData(response.data.outpassData);
@@ -26,7 +26,7 @@ const OutpassDetails = () => {
 
   const handleStatusUpdate = async (newStatus) => {
     try {
-      const response = await axios.patch(`http://localhost:8080/caretaker/outpasses/${id}`, { status: newStatus }, {
+      const response = await axios.patch(`${backendUrl}/caretaker/outpasses/${id}`, { status: newStatus }, {
         withCredentials: true,
       });
       toast.success("Updated Successfully");

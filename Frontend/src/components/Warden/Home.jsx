@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../style/warden.css';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
+
 import {
   BarChart,
   Bar,
@@ -17,13 +18,14 @@ import {
 } from 'recharts';
 
 const Home = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { user } = useAuth();
   const [registeredStudents, setRegisteredStudents] = useState(0);
   const [caretakers, setCaretakers] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/warden/home', {
+      const response = await axios.get(`${backendUrl}/warden/home`, {
         withCredentials: true,
       });
 

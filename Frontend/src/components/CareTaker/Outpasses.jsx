@@ -5,11 +5,12 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 export default function Outpasses(){
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [outpasses,setOutpasses]=useState([]);
     useEffect(()=>{
         const fetchData=async()=>{
             try{
-                const response=await axios.get('http://localhost:8080/caretaker/outpasses',{
+                const response=await axios.get(`${backendUrl}/caretaker/outpasses`,{
                     withCredentials: true // Important if cookies are involved
                 });
                 const data=response.data;

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 export default function LoginForm () {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const {login,isLoggedIn,user}=useAuth();
   const navigate=useNavigate();
   const [email, setEmail] = useState('')
@@ -22,7 +23,7 @@ export default function LoginForm () {
 
   const sendOtp = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/send-otp', { email })
+      const response = await axios.post(`${backendUrl}/api/auth/send-otp`, { email })
       alert(response.data.message)
       setOtpEnabled(true)
     } catch (err) {
@@ -41,7 +42,7 @@ export default function LoginForm () {
       // console.log(verifyRes.data);
       // if (verifyRes.data.message=="Otp Verified") {
         // Now login
-        const loginRes = await axios.post('http://localhost:8080/api/auth/login', {
+        const loginRes = await axios.post(`${backendUrl}/api/auth/login`, {
           email:email,
           password:password
         }, { withCredentials: true });

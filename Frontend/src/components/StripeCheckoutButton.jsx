@@ -5,10 +5,11 @@ import axios from 'axios';
 const stripePromise = loadStripe('pk_test_51Rc7SJQCTC4QpOeVYRbj31bGolWggB61enyV996vA5mAsCQsseo2C62O6xoVUxLgdhNX3VF4MPQD7uQxGkIwU4Ot00cB4vcFNW');
 
 const StripeCheckoutButton = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const handleClick = async () => {
     const stripe = await stripePromise;
 
-    const { data } = await axios.post('http://localhost:8080/api/payment/create-checkout-session', {
+    const { data } = await axios.post(`${backendUrl}/api/payment/create-checkout-session`, {
       amount: 500, // in USD cents (i.e., $5.00)
     });
 

@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext'
 import { toast } from 'react-toastify';
 
 function Header () {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { isLoggedIn, user, logout } = useAuth()
   const navigate = useNavigate()
   const [activeLink, setActiveLink] = useState('') // Track the active link
@@ -28,7 +29,7 @@ function Header () {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'http://localhost:8080/api/auth/logout',
+        `${backendUrl}/api/auth/logout`,
         {},
         {
           withCredentials: true

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const RaiseIssue = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate=useNavigate();
   const [formData, setFormData] = useState({
     category: "",
@@ -31,7 +32,7 @@ const RaiseIssue = () => {
         data.append('image', formData.photo);
       }
 
-      const response = await axios.post('http://localhost:8080/student/issue', data,{
+      const response = await axios.post(`${backendUrl}/student/issue`, data,{
         withCredentials: true,
       });
 

@@ -3,6 +3,7 @@ import * as faceapi from 'face-api.js';
 import axios from 'axios';
 
 const FaceVerify = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const videoRef = useRef();
   const [studentId, setStudentId] = useState('');
   const [result, setResult] = useState('');
@@ -43,7 +44,7 @@ const FaceVerify = () => {
 
     const descriptor = Array.from(detection.descriptor);
 
-    const res = await axios.post('http://localhost:8080/api/verify-face', {
+    const res = await axios.post(`${backendUrl}/api/verify-face`, {
       studentId,
       descriptor,
     });

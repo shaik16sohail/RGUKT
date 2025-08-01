@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const Home = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const navigate=useNavigate();
     const [outpasses, setOutpasses] = useState([]);
     const [issues, setIssues] = useState([]);
@@ -12,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/student/home', {
+                const response = await axios.get(`${backendUrl}/student/home`, {
                     withCredentials: true // Important if cookies are involved
                 });
                 const data = response.data;
@@ -30,7 +31,7 @@ const Home = () => {
     
     const cancelOutpass = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:8080/student/outpass/${id}`, {
+            const response = await axios.delete(`${backendUrl}/student/outpass/${id}`, {
                 withCredentials: true,
             });
             setOutpasses(prev => prev.filter(outpass => outpass.id !== id));
@@ -43,7 +44,7 @@ const Home = () => {
     
     const cancelIssue = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:8080/student/issue/${id}`, {
+            const response = await axios.delete(`${backendUrl}/student/issue/${id}`, {
                 withCredentials: true,
             });
             setIssues(prev => prev.filter(issue => issue.id!==id) );

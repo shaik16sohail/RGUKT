@@ -39,6 +39,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 export default function SignupForm() {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -82,7 +83,7 @@ export default function SignupForm() {
   
   const handleOtpSend = async () => {
     try {
-      await axios.post('http://localhost:8080/api/auth/send-otp',{ 
+      await axios.post(`${backendUrl}/api/auth/send-otp`,{ 
         email: formData.email,
         
          });
@@ -97,7 +98,7 @@ export default function SignupForm() {
   };
   
   const verifyOtp = async () => {
-    await axios.post('http://localhost:8080/api/auth/verify-otp', {
+    await axios.post(`${backendUrl}/api/auth/verify-otp`, {
     email: formData.email,
     otp: formData.otp
 });
@@ -123,7 +124,7 @@ setTimer(0);
       return;
     }
     try {
-      await axios.post('http://localhost:8080/api/auth/register', { 
+      await axios.post(`${backendUrl}/api/auth/register`, { 
         email: formData.email,
         password:formData.password,
         name:formData.name

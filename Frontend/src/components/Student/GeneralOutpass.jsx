@@ -35,7 +35,7 @@ const GeneralOutpass = () => {
     e.preventDefault();
     try {
       // Your original axios code would go here
-      const response = await axios.post("http://localhost:8080/student/outpass", formData, {
+      const response = await axios.post(`${backendUrl}/student/outpass`, formData, {
         withCredentials: true,
       });
       console.log(response.data);

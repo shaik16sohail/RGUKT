@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const stripePromise = loadStripe('pk_test_51Rc7SJQCTC4QpOeVYRbj31bGolWggB61enyV996vA5mAsCQsseo2C62O6xoVUxLgdhNX3VF4MPQD7uQxGkIwU4Ot00cB4vcFNW'); // your correct key
 
 const EmergencyOutpass = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { user } = useAuth();
   const userId = user?.id;
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const EmergencyOutpass = () => {
     const stripe = await stripePromise;
     console.log(userId);
     try {
-      const { data } = await axios.post('https://2d9747f5bb55.ngrok-free.app/api/payment/create-checkout-session', {
+      const { data } = await axios.post(`${backendUrl}/api/payment/create-checkout-session`, {
         formData, // ✅ send full form data
         userId
       });

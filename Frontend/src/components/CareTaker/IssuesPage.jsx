@@ -4,6 +4,7 @@ import {useEffect} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 const IssuesPage = ({issuesData,fetchData}) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [issueType, setIssueType] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
@@ -37,7 +38,7 @@ const IssuesPage = ({issuesData,fetchData}) => {
     if(!selectedIssue)
       return;
     try{
-      const response=await axios.patch(`http://localhost:8080/caretaker/issues/${selectedIssue._id}`,{
+      const response=await axios.patch(`${backendUrl}/caretaker/issues/${selectedIssue._id}`,{
         status,comment
       },{
         withCredentials:true,

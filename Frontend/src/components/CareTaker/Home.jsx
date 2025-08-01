@@ -11,14 +11,14 @@ Chart.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Lege
 export default function Home () {
   const [outpasses, setOutpasses] = useState([])
   const [issues, setIssues] = useState([])
-  
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     fetchData()
   }, [])
   
   const fetchData = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/caretaker/home', {
+      const res = await axios.get(`${backendUrl}/caretaker/home`, {
         withCredentials: true
       })
       console.log(res.data)

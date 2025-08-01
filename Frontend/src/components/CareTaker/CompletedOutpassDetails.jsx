@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import MapComponent from "../MapComponent";
 
 const CompletedOutpassDetails = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { id } = useParams();
   const [outpass, setOutpass] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ const CompletedOutpassDetails = () => {
 
   const fetchOutpassDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/caretaker/outpasses/completed/${id}`, {
+      const res = await axios.get(`${backendUrl}/caretaker/outpasses/completed/${id}`, {
         withCredentials: true,
       });
       const outpassData = res.data.outpassData;
@@ -38,7 +39,7 @@ const CompletedOutpassDetails = () => {
 
   const getAddressFromCoordinates = async (latitude, longitude) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/reverse-geocode?lat=${latitude}&lon=${longitude}`, {
+      const response = await fetch(`${backendUrl}/api/reverse-geocode?lat=${latitude}&lon=${longitude}`, {
         credentials: 'include'
       });
       const data = await response.json();
