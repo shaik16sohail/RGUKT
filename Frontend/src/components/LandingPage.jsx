@@ -14,7 +14,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-[rgb(137,24,26)]">
       {/* Scrolling Announcements */}
-      <ScrollingAnnouncements/>
+      {/* <ScrollingAnnouncements/> */}
       
       {/* Hero Section with Background Image */}
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -34,17 +34,10 @@ const LandingPage = () => {
         </div>
         
         {/* Welcome Text Overlay */}
-        <div className="absolute top-16 md:top-20 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="relative">
-            {/* <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-transparent bg-clip-text bg-gradient-to-r from-[rgb(137,24,26)] to-red-300 tracking-wider animate-pulse text-center">
-              Welcome to StayMaster
-            </h2> */}
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gradient-to-r from-transparent via-[rgb(137,24,26)] to-transparent"></div>
-          </div>
-        </div>
+        
         
         {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-6">
           {/* Logo and Title Section */}
           <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12 mb-8 sm:mb-12">
             <div className="flex-shrink-0 relative group">

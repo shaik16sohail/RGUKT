@@ -105,7 +105,7 @@ export default function Gallery(){
             </div>
 
             {/* Bottom CTA Section */}
-            <div className='max-w-4xl mx-auto mt-20 text-center  rounded-3xl p-12 shadow-2xl bg-black'>
+            {/* <div className='max-w-4xl mx-auto mt-20 text-center  rounded-3xl p-12 shadow-2xl bg-black'>
                 <h3 className='text-3xl md:text-4xl font-bold text-white mb-4'>
                     Ready to Explore More?
                 </h3>
@@ -115,7 +115,7 @@ export default function Gallery(){
                 <button className='bg-white text-[rgb(137,24,26)] font-bold py-4 px-8 rounded-xl hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg'>
                     Schedule Tour
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }
