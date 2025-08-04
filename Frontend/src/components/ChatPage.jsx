@@ -110,6 +110,7 @@ const ChatPage = () => {
                     color: white;
                     position: relative;
                     z-index: 2;
+                    flex-shrink: 0;
                 }
 
                 .chat-header-icon {
@@ -146,7 +147,7 @@ const ChatPage = () => {
                 .messages-container {
                     flex: 1;
                     overflow-y: auto;
-                    padding: 30px 20px;
+                    padding: 30px 20px 120px 20px;
                     display: flex;
                     flex-direction: column;
                     gap: 20px;
@@ -154,6 +155,7 @@ const ChatPage = () => {
                     z-index: 1;
                     scrollbar-width: thin;
                     scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+                    min-height: 0;
                 }
 
                 .messages-container::-webkit-scrollbar {
@@ -248,8 +250,12 @@ const ChatPage = () => {
                     display: flex;
                     gap: 15px;
                     align-items: center;
-                    position: relative;
-                    z-index: 2;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 3;
+                    flex-shrink: 0;
                 }
 
                 .message-input {
@@ -330,14 +336,15 @@ const ChatPage = () => {
                 }
 
                 .image-preview {
-                    position: absolute;
-                    bottom: 100px;
+                    position: fixed;
+                    bottom: 120px;
                     right: 25px;
                     background: rgba(0, 0, 0, 0.8);
                     backdrop-filter: blur(10px);
                     padding: 10px;
                     border-radius: 12px;
                     border: 1px solid rgba(255, 255, 255, 0.2);
+                    z-index: 4;
                 }
 
                 .image-preview img {
@@ -368,7 +375,7 @@ const ChatPage = () => {
                     }
                     
                     .messages-container {
-                        padding: 20px 15px;
+                        padding: 20px 15px 100px 15px;
                         gap: 15px;
                     }
                     
@@ -390,6 +397,11 @@ const ChatPage = () => {
                     .input-button {
                         width: 45px;
                         height: 45px;
+                    }
+
+                    .image-preview {
+                        bottom: 100px;
+                        right: 15px;
                     }
                 }
 

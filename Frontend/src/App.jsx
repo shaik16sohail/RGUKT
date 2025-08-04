@@ -69,7 +69,7 @@ function App() {
           <Route path='/student/feedback/outpass/:outpassId' element={<><Layout><OutpassFeedback></OutpassFeedback></Layout></>}></Route>
           <Route path='/student/feedback/issue/:issueId' element={<><Layout><IssueFeedback></IssueFeedback></Layout></>}></Route>
           {/* warden routes */}
-          <Route path='/chats' element={<><Layout><ChatPage></ChatPage></Layout></>}></Route>
+          <Route path='/chats' element={<><Header></Header><ChatPage></ChatPage></>}></Route>
           <Route path='/warden/home' element={<ProtectedRoute allowedRole='warden'><Layout><WardenHome></WardenHome></Layout></ProtectedRoute>}></Route>
 
           <Route path='/success' element={<><Layout><Success></Success></Layout></>}></Route>
