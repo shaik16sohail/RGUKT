@@ -4,7 +4,7 @@ export default function Gallery(){
     const galleryItems = [
         {
             id: 1,
-            image: '/one.png',
+            image: '/seven.jpeg',
             title: 'Hostels For Men',
             description: 'There are 14 blocks allotted for Men of capacity varying from 200 to 1000 students in each block. The total capacity for Men\'s hostel is about 7500.',
             capacity: '7500',
@@ -13,7 +13,7 @@ export default function Gallery(){
         },
         {
             id: 2,
-            image: '/one.png',
+            image: '/five.jpeg',
             title: 'Hostels For Women',
             description: 'Modern accommodation facilities designed specifically for women students with enhanced security features and comfortable living spaces.',
             capacity: '5200',
@@ -22,7 +22,7 @@ export default function Gallery(){
         },
         {
             id: 3,
-            image: '/one.png',
+            image: '/six.jpeg',
             title: 'Academic Facilities',
             description: 'State-of-the-art academic buildings equipped with modern technology, laboratories, and research facilities for comprehensive learning.',
             capacity: '12000',
@@ -53,7 +53,7 @@ export default function Gallery(){
                             <div className='aspect-w-16 aspect-h-12 bg-gradient-to-br from-gray-200 to-gray-300'>
                                 <img 
                                     src={item.image} 
-                                    alt={item.title}
+                                    alt={item.title} style={{height:"250px"}}
                                     className='w-full h-54 object-cover group-hover:scale-110 transition-transform duration-700'
                                 />
                                 {/* Overlay */}

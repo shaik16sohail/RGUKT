@@ -43,7 +43,7 @@ export default function RightFeature() {
                             </div>
                             
                             <img 
-                                src="/one.png" 
+                                src="/four.jpeg" 
                                 alt="Hostel Management Interface"
                                 className="w-full h-64 object-cover rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
                             />
