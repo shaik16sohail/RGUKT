@@ -314,7 +314,7 @@ app.post('/api/register-face', async (req, res) => {
   } else {
     await Face.create({ id:studentId, faceDescriptor: descriptor });
   }
-
+  console.log("saved");
   res.json({ message: 'Face saved!' });
 });
 
@@ -332,6 +332,7 @@ app.post('/api/verify-face', async (req, res) => {
 
   const threshold = 0.6;
   console.log("almost done");
+  console.log(studentData);
   res.json({ match: distance < threshold,name:studentData.name });
 });
 
