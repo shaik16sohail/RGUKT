@@ -49,12 +49,12 @@ export default function LeftFeature() {
                             </div>
                             
                             <h2 className="text-3xl lg:text-4xl font-black bg-gradient-to-r from-white via-gray-200 to-red-300 bg-clip-text text-transparent leading-tight">
-                                Manage Hostel
-                                <span className="block text-red-400">Master Data</span>
+                                Hostel
+                                <span className="block text-red-400">Management System</span>
                             </h2>
                             
                             <p className="text-lg text-gray-300 leading-relaxed max-w-lg">
-                                Digiicampus Hostel Management System is purpose-built for higher education institutions. 
+                                StayMaster is a smart hostel management system that streamlines outpass requests and issue reporting for students.
                                 <span className="text-red-300 font-medium"> An integrated solution</span> to manage campus operations while saving your time!
                             </p>
                         </div>
@@ -62,9 +62,9 @@ export default function LeftFeature() {
                         {/* Features List */}
                         <div className="space-y-3">
                             {[
-                                { icon: Building2, text: "Create Hostel Buildings with Unique IDs", color: "text-blue-400" },
-                                { icon: Users, text: "Allocate Rooms Individually or in Bulk", color: "text-green-400" },
-                                { icon: CreditCard, text: "Collect Fees Online with Dues Management", color: "text-yellow-400" }
+                                { icon: Building2, text: "Raise Outpass Requests", color: "text-blue-400" },
+                                { icon: Users, text: "Issue Reporting System", color: "text-green-400" },
+                                { icon: CreditCard, text: "Caretaker Approval Workflow", color: "text-yellow-400" }
                             ].map((feature, index) => (
                                 <div key={index} className="group flex items-center space-x-3 p-3 rounded-2xl bg-gradient-to-r from-white/5 to-transparent hover:from-red-600/10 hover:to-transparent transition-all duration-300 border border-transparent hover:border-red-500/20">
                                     <div className="flex-shrink-0">

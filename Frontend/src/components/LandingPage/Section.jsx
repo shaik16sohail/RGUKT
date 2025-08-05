@@ -11,7 +11,7 @@ export default function Section() {
 
   const sections = [
     {
-      title: "Boys Hostel-I",
+      title: "Boys Hostel-II-Front",
       icon: "👨‍🎓",
       color: "from-red-600/20 to-red-700/20",
       borderColor: "border-red-600/30",
@@ -31,22 +31,22 @@ export default function Section() {
       ],
     },
     {
-      title: "Boys Hostel-II",
+      title: "Boys Hostel-II Back",
       icon: "🏢",
       color: "from-red-600/20 to-red-700/20",
       borderColor: "border-red-600/30",
       details: [
         {
-          role: "Director, Men's Hostel",
-          name: "Dr. Mohanasundaram R",
-          email: "director.mh@vit.ac.in",
-          phone: "0416 – 220 2520",
+          role: "Caretaker",
+          name: "Mahesh",
+          email:"Mahesh@rguktrkv.ac.in",
+          phone: "9381453347",
         },
         {
-          role: "Chief Warden, Men's Hostel",
-          name: "Dr. Sathiavelu A",
-          email: "cw.mh@vit.ac.in",
-          phone: "0416 – 220 2521",
+          role: "Caretaker",
+          name: "Prasad",
+          email: "Prasad@rguktrkv.ac.in",
+          phone: "7780759841",
         },
       ],
     },

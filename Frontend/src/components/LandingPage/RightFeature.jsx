@@ -69,17 +69,17 @@ export default function RightFeature() {
                             
                             <h2 className="text-3xl lg:text-4xl font-black leading-tight">
                                 <span className="bg-gradient-to-r from-red-400 via-red-300 to-white bg-clip-text text-transparent">
-                                    Manage Hostel
+                                   Advanced Security & 
                                 </span>
                                 <span className="block bg-gradient-to-r from-white via-gray-200 to-red-200 bg-clip-text text-transparent">
-                                    Master Data
+                                    Smart Monitoring
                                 </span>
                             </h2>
                             
                             <div className="relative">
                                 <p className="text-lg text-gray-300 leading-relaxed max-w-2xl">
-                                    Digiicampus Hostel Management System is purpose-built for 
-                                    <span className="text-red-300 font-semibold"> higher education institutions</span>. 
+                                    StayMaster enhances hostel safety and monitoring through
+                                    <span className="text-red-300 font-semibold"> smart, technology-driven solutions.</span>. 
                                     It is an integrated solution to manage campus operations while 
                                     <span className="text-white font-medium"> saving your time!</span>
                                 </p>
@@ -89,29 +89,29 @@ export default function RightFeature() {
 
                         {/* Enhanced Features List */}
                         <div className="space-y-4">
-                            <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                            {/* <h3 className="text-xl font-bold text-white mb-4 flex items-center">
                                 <span className="w-8 h-0.5 bg-red-500 mr-3 rounded-full"></span>
                                 Key Features
-                            </h3>
+                            </h3> */}
                             
                             {[
                                 { 
                                     icon: Building2, 
-                                    text: "Create Hostel Buildings with Unique IDs", 
+                                    text: "Real-Time Student Tracking", 
                                     gradient: "from-blue-500 to-blue-600",
-                                    description: "Streamlined building management" 
+                                    description: "Track students for 24 hours after they leave campus to ensure safety and compliance" 
                                 },
                                 { 
                                     icon: Users, 
-                                    text: "Allocate Rooms Individually or in Bulk", 
+                                    text: "QR Code-Based Gate Pass Verification", 
                                     gradient: "from-green-500 to-green-600",
-                                    description: "Flexible room assignment" 
+                                    description: "Scan student outpass QR codes at the gate for fast and secure campus exits." 
                                 },
                                 { 
                                     icon: CreditCard, 
-                                    text: "Collect Fees Online with Dues Management", 
+                                    text: "AI-Powered Face Recognition", 
                                     gradient: "from-yellow-500 to-yellow-600",
-                                    description: "Automated payment processing" 
+                                    description: "Ensure student identity with face recognition during outpass verification." 
                                 }
                             ].map((feature, index) => (
                                 <div key={index} className="group relative">

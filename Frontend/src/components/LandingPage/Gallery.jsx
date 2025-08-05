@@ -5,8 +5,8 @@ export default function Gallery(){
         {
             id: 1,
             image: '/seven.jpeg',
-            title: 'Hostels For Men',
-            description: 'There are 14 blocks allotted for Men of capacity varying from 200 to 1000 students in each block. The total capacity for Men\'s hostel is about 7500.',
+            title: 'Engg Departments',
+            description: 'Seven departments cater to core engineering branches like CSE, ECE, MME, EEE, Civil, Mech, and Chemical.',
             capacity: '7500',
             blocks: '14',
             icon: '🏢'
@@ -14,8 +14,8 @@ export default function Gallery(){
         {
             id: 2,
             image: '/five.jpeg',
-            title: 'Hostels For Women',
-            description: 'Modern accommodation facilities designed specifically for women students with enhanced security features and comfortable living spaces.',
+            title: 'Academic Blocks',
+            description: 'Two academic blocks (AB-1 and AB-2) host lectures, labs, and academic activities for all students.',
             capacity: '5200',
             blocks: '10',
             icon: '🏛️'
@@ -23,8 +23,8 @@ export default function Gallery(){
         {
             id: 3,
             image: '/six.jpeg',
-            title: 'Academic Facilities',
-            description: 'State-of-the-art academic buildings equipped with modern technology, laboratories, and research facilities for comprehensive learning.',
+            title: 'Hostels',
+            description: 'Campus has 4 hostels — 2 for boys (Papagni, Penna) and 2 for girls (Kundu, Chitravathi).',
             capacity: '12000',
             blocks: '8',
             icon: '🎓'
@@ -39,7 +39,7 @@ export default function Gallery(){
                     Campus <span className='text-red-300'>Gallery</span>
                 </h2>
                 <p className='text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed'>
-                    Explore our world-class facilities and infrastructure designed to provide the best educational experience
+                    Explore vibrant glimpses of campus life, infrastructure, events, and everyday student moments.
                 </p>
                 <div className='mt-8 w-24 h-1 bg-gradient-to-r from-red-300 to-red-500 mx-auto rounded-full'></div>
             </div>
