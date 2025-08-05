@@ -200,7 +200,7 @@ const OutpassDetails = () => {
                 type="button" 
                 onClick={() => handleStatusUpdate("approved")} 
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 text-white font-bold py-2 px-4 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center"
-                style={{width:"1rem"}}
+                // style={{width:"1rem"}}
               >
                 Approve
                 <i className="fa-solid fa-check ml-3 text-xl"></i>
