@@ -189,6 +189,11 @@
       width: 70%;
     }
   }
+  @media only screen and (max-width: 550px) {
+    .issues-leftbar{
+      width: 100%;
+    }
+  }
   .issue-card{
     background-color: #111010;
     /* border: 2px solid none;
@@ -364,7 +369,7 @@
 @media (max-width: 1200px) {
     .chart-container {
         width: 100%;
-        min-width: 300px;
+        min-width: 369px;
     }
     
     .home-charts {
@@ -381,7 +386,7 @@
     
     .home-outpasses-first {
         width: 100%;
-        height: 200px;
+        height: 250px;
     }
     
     .stat-content h1 {
@@ -389,7 +394,7 @@
     }
     
     .stat-icon {
-        font-size: 2rem;
+        font-size: 1.3rem;
     }
     
     .chart-container {

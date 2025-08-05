@@ -190,9 +190,7 @@ const IssuesPage = ({issuesData,fetchData}) => {
                     <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors duration-200">
                       {issue.type}
                     </h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getIssueTypeColor(issue.type)} bg-gray-800/50`}>
-                      {issue.type}
-                    </span>
+              
                   </div>
                   
                   <p className="text-sm text-gray-300 mb-3 line-clamp-2 leading-relaxed">
@@ -226,7 +224,7 @@ const IssuesPage = ({issuesData,fetchData}) => {
           ></div>
           
           {/* Sidebar */}
-          <div className="issues-leftbar bg-black/95 backdrop-blur-md text-white p-6 shadow-2xl fixed left-0 top-0 h-full w-full max-w-lg overflow-y-auto transition-all duration-300 transform translate-x-0 z-[9999] border-r border-gray-700/50">
+          <div className="issues-leftbar bg-black/95 backdrop-blur-md text-white p-6 shadow-2xl fixed left-0 top-0 h-full w-full max-w-full sm:max-w-lg overflow-y-auto transition-all duration-300 transform translate-x-0 z-[9999] border-r border-gray-700/50">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold flex items-center">
                 <i className={`fa-solid ${getIssueTypeIcon(selectedIssue.type)} mr-3 ${getIssueTypeColor(selectedIssue.type)}`}></i>
@@ -255,15 +253,16 @@ const IssuesPage = ({issuesData,fetchData}) => {
               <div className="bg-gray-900/50 rounded-2xl p-6 space-y-4">
                 <div>
                   <h3 className="text-xl font-bold text-white mb-2">{selectedIssue.name}</h3>
-                  <div className="flex items-center space-x-4 text-sm text-gray-400">
-                    <span className="flex items-center">
-                      <i className="fa-solid fa-hashtag mr-1"></i>
-                      {selectedIssue._id}
+                  <div className=" space-x-4 text-sm text-gray-400">
+                    <span className="flex items-center"> By &nbsp;
+                      {/* <i className="fa-solid fa-hashtag mr-1"></i> */}
+                      {selectedIssue.id}
                     </span>
-                    <span className={`flex items-center ${getIssueTypeColor(selectedIssue.type)}`}>
-                      <i className={`fa-solid ${getIssueTypeIcon(selectedIssue.type)} mr-1`}></i>
+                    {/* <br></br> */}
+                    {/* <span className={`flex items-center`}> */}
+                      {/* <i className={`fa-solid ${getIssueTypeIcon(selectedIssue.type)} mr-1`}></i> */}
                       {selectedIssue.type}
-                    </span>
+                    {/* </span> */}
                   </div>
                 </div>
 
