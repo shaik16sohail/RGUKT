@@ -595,7 +595,7 @@ function Header () {
 
               <div className='profile' onClick={handleDivClick}>
                 <img
-                  src='/virat kohli.jpg'
+                  src='/profile.png'
                   alt='Profile Icon'
                   style={headerStyles.profileImage}
                   onMouseEnter={(e) => {

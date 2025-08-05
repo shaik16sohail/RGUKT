@@ -88,11 +88,11 @@ export default function LoginForm () {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <br />
-          <div className='text-sm form-buttons'>
+          {/* <br /> */}
+          {/* <div className='text-sm form-buttons'>
             <button>Send Otp</button>
             <button>forgot Password</button>
-          </div>
+          </div> */}
           <br />
           {/* <input
             type='number'
