@@ -366,10 +366,10 @@
 }
 
 /* Responsive design */
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .chart-container {
         width: 100%;
-        min-width: 369px;
+        min-width: 370px;
     }
     
     .home-charts {
@@ -377,6 +377,15 @@
         align-items: center;
     }
 }
+@media (max-width: 489px) {
+    .chart-container {
+        width: 100%;
+        min-width: 250px;
+    }
+    
+    
+}
+
 
 @media (max-width: 768px) {
     .home-outpasses {

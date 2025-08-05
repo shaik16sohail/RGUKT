@@ -114,7 +114,7 @@ function Header () {
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
-      fontSize: '2rem',
+      fontSize: '2.3rem',
       fontWeight: '900',
       textShadow: '0 0 30px rgba(137, 24, 26, 0.4)',
       margin: 0,
@@ -353,7 +353,7 @@ function Header () {
         display: block !important;
       }
       .header-logo h1 {
-        font-size: 1.4rem !important;
+        font-size: 2rem !important;
       }
       .header-logo img {
         width: 42px !important;
@@ -396,7 +396,7 @@ function Header () {
         gap: 0.6rem !important;
       }
       .header-logo h1 {
-        font-size: 1.2rem !important;
+        font-size: 1.7rem !important;
         letter-spacing: -0.02em !important;
       }
       .header-logo img {
@@ -428,7 +428,7 @@ function Header () {
         min-height: 65px !important;
       }
       .header-logo h1 {
-        font-size: 1rem !important;
+        font-size: 1.6rem !important;
       }
       .header-logo img {
         width: 35px !important;
