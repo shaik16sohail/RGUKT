@@ -104,12 +104,12 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center justify-center">
             <div className="group transform hover:scale-105 transition-all duration-500 hover:shadow-[0_0_30px_rgba(137,24,26,0.3)] rounded-2xl">
               <div className="bg-gradient-to-br from-gray-800/30 to-[rgb(137,24,26)]/10 backdrop-blur-sm rounded-2xl border border-[rgb(137,24,26)]/20 hover:border-[rgb(137,24,26)]/40 transition-all duration-300 overflow-hidden">
-                <DataAnalytics/>
+                <DataAnalytics mainHeading={"Outpasses By Gender"} secondHeading={"Monthly outpasses details"}/>
               </div>
             </div>
             <div className="group transform hover:scale-105 transition-all duration-500 hover:shadow-[0_0_30px_rgba(137,24,26,0.3)] rounded-2xl">
               <div className="bg-gradient-to-bl from-gray-800/30 to-[rgb(137,24,26)]/10 backdrop-blur-sm rounded-2xl border border-[rgb(137,24,26)]/20 hover:border-[rgb(137,24,26)]/40 transition-all duration-300 overflow-hidden">
-                <DataAnalytics/>
+                <DataAnalytics mainHeading={"Issues By Gender"} secondHeading={"Monthly issues details"}/>
               </div>
             </div>
           </div>
