@@ -19,7 +19,7 @@ const Nope = () => {
 
                     {/* Main Heading */}
                     <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-8 sm:mb-12 leading-tight">
-                        <span className="text-red-400">Chud Gaye</span>
+                        <span className="text-red-400">Ch*d Gaye</span>
                         <br className="sm:hidden" />
                         <span className="sm:ml-4">Guru</span>
                     </h1>
