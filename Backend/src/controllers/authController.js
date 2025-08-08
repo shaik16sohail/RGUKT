@@ -5,8 +5,7 @@ const jwt=require('jsonwebtoken');
 const Student = require("../models/Student");
 const Warden = require("../models/Warden");
 const Caretaker = require("../models/Caretaker");
-const { transporter } = require("../utils/transporter");
-
+const transporter = require("../utils/transporter");
 
 
 const sendOtp=async (req,res)=>{
@@ -25,6 +24,7 @@ const sendOtp=async (req,res)=>{
 
     res.status(200).json({ message: "OTP sent successfully" });
   }catch(err){
+    console.log(err);
     res.status(500).json({ error: "Failed to send OTP" });
   }
 };
@@ -43,39 +43,54 @@ const verifyOtp=async (req,res)=>{
 
 const register=async (req,res)=>{
   try {
-  const { name, email, password } = req.body;
+    console.log(req.body);
+  const { name, email, password,phone,hostelName,role,id } = req.body;
 
   const existing = await User.findOne({ email });
   if (existing) {
     return res.status(400).json({ error: "User already exists" });
   }
-  const data={
-    phone:'',
-    userType:'admin',
-    hostelName:'',
-  };
-  const student=await Student.findOne({email});
-  const warden=await Warden.findOne({email});
-  const caretaker=await Caretaker.findOne({email});
-  if(student){
-    data.phone=student.phone;
-    data.userType="student";
-    data.hostelName=student.hostelName;
-  }else if(warden){
-    data.phone=warden.phone;
-    data.userType="warden";
-    data.hostelName=warden.hostelName;
-  }else if(caretaker){
-    data.phone=caretaker.phone;
-    data.userType="caretaker";
-    data.hostelName=caretaker.hostelName;
-  }else{
-    let a=5;
+  if(role=='student'){
+    const studentData=new Student({
+      name,email,id,phone,hostelName
+    });
+    const savedStudent=await studentData.save();
+    console.log("StudentData",savedStudent);
+
+  }else if(role=='caretaker'){
+    const caretakerData=new Caretaker({
+      name,email,phone,hostelName
+    });
+    const savedCaretaker=await caretakerData.save();
+    console.log("CaretakerData",savedCaretaker);
   }
+  // const data={
+  //   phone:'',
+  //   userType:'admin',
+  //   hostelName:'',
+  // };
+  // const student=await Student.findOne({email});
+  // const warden=await Warden.findOne({email});
+  // const caretaker=await Caretaker.findOne({email});
+  // if(student){
+  //   data.phone=student.phone;
+  //   data.userType="student";
+  //   data.hostelName=student.hostelName;
+  // }else if(warden){
+  //   data.phone=warden.phone;
+  //   data.userType="warden";
+  //   data.hostelName=warden.hostelName;
+  // }else if(caretaker){
+  //   data.phone=caretaker.phone;
+  //   data.userType="caretaker";
+  //   data.hostelName=caretaker.hostelName;
+  // }else{
+  //   let a=5;
+  // }
 
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({ name, email, password: hashedPassword ,...data});
+  const newUser = await User.create({ name, email, password: hashedPassword,phone,userType:role,hostelName});
 
   console.log("User created:", newUser);
   res.status(201).json({ message: "User created successfully" });
