@@ -113,44 +113,44 @@ export default function SignupForm() {
 
   return (
     <div 
-      className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 lg:p-8"
+      className="min-h-screen w-full flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8"
       style={{
         background: 'linear-gradient(90deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 100%)'
       }}
     >
       <div 
-        className="w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm border border-gray-600"
+        className="w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-10 backdrop-blur-sm"
         style={{ backgroundColor: '#1b1b1b93' }}
       >
-        <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Create Account</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-orange-600 mx-auto rounded-full"></div>
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">Create Account</h2>
+          <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-red-500 to-orange-600 mx-auto rounded-full"></div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Name */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-200">Full Name</label>
+          <div className="space-y-1 sm:space-y-2">
+            <label className="block text-xs sm:text-sm font-semibold text-gray-200">Full Name</label>
             <input
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
               placeholder="Enter your full name"
               required
             />
           </div>
 
           {/* Email + OTP */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-200">Email Address</label>
+          <div className="space-y-1 sm:space-y-2">
+            <label className="block text-xs sm:text-sm font-semibold text-gray-200">Email Address</label>
             <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-r-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+                className="flex-1 px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-r-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                 placeholder="your@email.com"
                 disabled={otpSent}
                 required
@@ -159,7 +159,7 @@ export default function SignupForm() {
                 type="button"
                 onClick={handleOtpSend}
                 disabled={otpSent && timer > 0}
-                className={`px-4 py-3 rounded-lg sm:rounded-l-none font-medium transition-all duration-300 ${
+                className={`px-3 py-2 sm:py-2.5 rounded-lg sm:rounded-l-none font-medium text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
                   otpSent && timer > 0 
                     ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
                     : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-red-500/25'
@@ -172,14 +172,14 @@ export default function SignupForm() {
 
           {/* OTP Verification */}
           {otpSent && (
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-gray-200">Enter OTP</label>
+            <div className="space-y-1 sm:space-y-2">
+              <label className="block text-xs sm:text-sm font-semibold text-gray-200">Enter OTP</label>
               <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   name="otp"
                   value={formData.otp}
                   onChange={handleChange}
-                  className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-r-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-r-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                   placeholder="Enter 6-digit OTP"
                   disabled={otpVerified}
                   required
@@ -188,7 +188,7 @@ export default function SignupForm() {
                   type="button"
                   onClick={verifyOtp}
                   disabled={otpVerified || formData.otp.length !== 6}
-                  className={`px-4 py-3 rounded-lg sm:rounded-l-none font-medium transition-all duration-300 ${
+                  className={`px-3 py-2 sm:py-2.5 rounded-lg sm:rounded-l-none font-medium text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
                     otpVerified
                       ? 'bg-gradient-to-r from-green-500 to-green-600 text-white'
                       : formData.otp.length !== 6
@@ -200,8 +200,8 @@ export default function SignupForm() {
                 </button>
               </div>
               {otpVerified && (
-                <div className="flex items-center gap-2 text-green-400 text-sm">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 text-green-400 text-xs sm:text-sm">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Email verified successfully!
@@ -214,75 +214,75 @@ export default function SignupForm() {
           {otpVerified && (
             <>
               {/* Phone */}
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-200">Phone Number</label>
+              <div className="space-y-1 sm:space-y-2">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-200">Phone Number</label>
                 <input
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
-                  placeholder="9876543210"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
+                  placeholder="Enter your phone number"
                   required
                 />
               </div>
 
               {/* Hostel Name */}
-              <div className="space-y-3">
-                <label className="block text-sm font-semibold text-gray-200">Select Hostel</label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="space-y-2 sm:space-y-3">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-200">Select Hostel</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2">
                   {hostelOptions.map((hostel) => (
-                    <label key={hostel} className="flex items-center gap-2 p-3 bg-gray-800/30 rounded-lg border border-gray-600 hover:border-red-500 cursor-pointer transition-all duration-300 group">
+                    <label key={hostel} className="flex items-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 bg-gray-800/30 rounded-lg border border-gray-600 hover:border-red-500 cursor-pointer transition-all duration-300 group">
                       <input
                         type="radio"
                         name="hostelName"
                         value={hostel}
                         checked={formData.hostelName === hostel}
                         onChange={handleChange}
-                        className="text-red-500 focus:ring-red-500 focus:ring-2"
+                        className="text-red-500 focus:ring-red-500 focus:ring-2 w-3 h-3 sm:w-4 sm:h-4"
                         required
                       />
-                      <span className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors duration-300">{hostel}</span>
+                      <span className="text-gray-200 text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300">{hostel}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               {/* Role */}
-              <div className="space-y-3">
-                <label className="block text-sm font-semibold text-gray-200">Select Role</label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <label className="flex items-center gap-3 p-4 bg-gray-800/30 rounded-lg border border-gray-600 hover:border-red-500 cursor-pointer transition-all duration-300 group">
+              <div className="space-y-2 sm:space-y-3">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-200">Select Role</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
+                  <label className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30 rounded-lg border border-gray-600 hover:border-red-500 cursor-pointer transition-all duration-300 group">
                     <input
                       type="radio"
                       name="role"
                       value="student"
                       checked={formData.role === 'student'}
                       onChange={handleChange}
-                      className="text-red-500 focus:ring-red-500 focus:ring-2"
+                      className="text-red-500 focus:ring-red-500 focus:ring-2 w-3 h-3 sm:w-4 sm:h-4"
                       required
                     />
-                    <div className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                       </svg>
-                      <span className="text-gray-200 font-medium group-hover:text-white transition-colors duration-300">Student</span>
+                      <span className="text-gray-200 text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300">Student</span>
                     </div>
                   </label>
-                  <label className="flex items-center gap-3 p-4 bg-gray-800/30 rounded-lg border border-gray-600 hover:border-red-500 cursor-pointer transition-all duration-300 group">
+                  <label className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30 rounded-lg border border-gray-600 hover:border-red-500 cursor-pointer transition-all duration-300 group">
                     <input
                       type="radio"
                       name="role"
                       value="caretaker"
                       checked={formData.role === 'caretaker'}
                       onChange={handleChange}
-                      className="text-red-500 focus:ring-red-500 focus:ring-2"
+                      className="text-red-500 focus:ring-red-500 focus:ring-2 w-3 h-3 sm:w-4 sm:h-4"
                       required
                     />
-                    <div className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-gray-200 font-medium group-hover:text-white transition-colors duration-300">Caretaker</span>
+                      <span className="text-gray-200 text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300">Caretaker</span>
                     </div>
                   </label>
                 </div>
@@ -290,13 +290,13 @@ export default function SignupForm() {
 
               {/* Student ID */}
               {formData.role === 'student' && (
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-200">Student ID</label>
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-semibold text-gray-200">Student ID</label>
                   <input
                     name="studentId"
                     value={formData.studentId}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                     placeholder="Enter Student ID"
                     required
                   />
@@ -304,34 +304,34 @@ export default function SignupForm() {
               )}
 
               {/* Password */}
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-200">Password</label>
+              <div className="space-y-1 sm:space-y-2">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-200">Password</label>
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                   placeholder="Enter a strong password"
                   required
                 />
               </div>
 
               {/* Confirm Password */}
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-200">Confirm Password</label>
+              <div className="space-y-1 sm:space-y-2">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-200">Confirm Password</label>
                 <input
                   type="password"
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                   placeholder="Confirm your password"
                   required
                 />
                 {!passwordMatch && (
-                  <div className="flex items-center gap-2 text-red-400 text-sm">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-red-400 text-xs sm:text-sm">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
                     Passwords do not match
@@ -342,27 +342,27 @@ export default function SignupForm() {
           )}
 
           {/* Submit Button */}
-          <div className="pt-4">
+          <div className="pt-3 sm:pt-4">
             <button
               type="submit"
               disabled={!otpVerified}
-              className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 transform ${
+              className={`w-full py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 transform ${
                 otpVerified
                   ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-red-500/25 hover:scale-[1.02] active:scale-[0.98]'
                   : 'bg-gray-600 text-gray-400 cursor-not-allowed'
               }`}
             >
-              {otpVerified ? '🚀 Create Account' : '🔒 Verify Email First'}
+              {otpVerified ? 'Create Account' : 'Verify Email First'}
             </button>
           </div>
 
-          <div className="text-center pt-4">
-            <p className="text-gray-400 text-sm">
+          <div className="text-center pt-3 sm:pt-4">
+            <p className="text-gray-400 text-xs sm:text-sm">
               Already have an account?{' '}
               <button
                 type="button"
                 onClick={() => navigate('/login')}
-                className="text-red-400 hover:text-red-300 font-medium transition-colors duration-300"
+                className="text-red-400 hover:text-red-300 font-medium transition-colors duration-300 text-xs sm:text-sm"
               >
                 Sign in here
               </button>
