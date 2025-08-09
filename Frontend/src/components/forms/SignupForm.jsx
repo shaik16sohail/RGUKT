@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 export default function SignupForm() {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
@@ -53,11 +53,13 @@ export default function SignupForm() {
   const handleOtpSend = async () => {
     try {
       await axios.post(`${backendUrl}/api/auth/send-otp`, { email: formData.email });
-      alert('OTP sent to your email.');
+      // alert('OTP sent to your email.');
+      toast.success("OTP sent to your email");
       setOtpSent(true);
       setTimer(60);
     } catch {
-      alert('Failed to send OTP.');
+      // alert('Failed to send OTP.');
+      toast.error('Failed to send OTP.');
     }
   };
 
@@ -70,7 +72,8 @@ export default function SignupForm() {
       setOtpVerified(true);
       setTimer(0);
     } catch {
-      alert('OTP verification failed');
+      // alert('OTP verification failed');
+      toast.error('OTP verification failed');
     }
   };
 
@@ -78,17 +81,20 @@ export default function SignupForm() {
     e.preventDefault();
 
     if (!otpVerified) {
-      alert('Please verify your email with OTP first.');
+      // alert('Please verify your email with OTP first.');
+      toast.error('Please verify your email with OTP first.');
       return;
     }
 
     if (!passwordMatch) {
-      alert('Passwords do not match.');
+      // alert('Passwords do not match.');
+      toast.error('Passwords do not match.');
       return;
     }
 
     if (formData.password.length < 6) {
-      alert('Password should be at least 6 characters long.');
+      // alert('Password should be at least 6 characters long.');
+      toast.error('Password should be at least 6 characters long.');
       return;
     }
 
@@ -103,11 +109,13 @@ export default function SignupForm() {
         password: formData.password
       });
 
-      alert('Signup successful!');
+      // alert('Signup successful!');
+      toast.success("Signup successful");
       navigate('/login');
     } catch (err) {
       console.error(err);
-      alert('Failed to register.');
+      // alert('Failed to register.');
+      toast.error("Failed to register");
     }
   };
 
